@@ -38,7 +38,6 @@ commander.version(version, '-v, --version')
             console.log(chalk.red(`The ${projectName} project template already exist`));
           } else {
             exec(`rm -rf ${projectName}/.git`, function (err, out) { }); // 删除 .git
-            console.log('clear git')
             console.log(chalk.green(`The ${projectName} project template successfully create(项目模版创建成功)`));
           }
         });

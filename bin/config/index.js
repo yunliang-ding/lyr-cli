@@ -1,6 +1,5 @@
 /*
   @dest: 使用配置文件
-  @Author: tree
  */
 module.exports = {
   npmUrl: 'https://registry.npmjs.org/shc-cli/latest',
@@ -11,15 +10,15 @@ module.exports = {
     choices: [{
       name: 'mobile',
       value: {
-        url: 'https://github.com/littleTreeme/vue-web-template.git',
-        gitName: 'vue-web-template',
+        url: 'https://github.com/yunliang-ding/react-mobile-template.git',
+        gitName: 'react-mobile-template',
         val: '移动端模版'
       }
     }, {
       name: 'pc',
       value: {
-        url: 'https://github.com/littleTreeme/vue-web-template.git',
-        gitName: 'vue-web-template',
+        url: 'https://github.com/yunliang-ding/react-pc-template.git',
+        gitName: 'react-pc-template',
         val: 'PC端模版'
       }
     }]
