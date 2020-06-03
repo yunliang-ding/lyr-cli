@@ -5,10 +5,10 @@ const path = require('path');
 const chalk = require('chalk');
 const commander = require('commander');
 const inquirer = require('inquirer');
-const checkDire = require('./utils');
+const checkDire = require('./bin/utils');
 const { exec } = require('child_process');
-const { version } = require('../package.json');
-const { projectList } = require('./config');
+const { version } = require('./package.json');
+const { projectList } = require('./bin/config');
 
 //version 版本号
 commander.version(version, '-v, --version')
@@ -37,7 +37,8 @@ commander.version(version, '-v, --version')
             exec('rm -rf ' + gitName, function (err, out) { });
             console.log(chalk.red(`The ${projectName} project template already exist`));
           } else {
-            exec('rm -rf .git', function (err, out) { }); // 删除 .git
+            exec(`rm -rf ${projectName}/.git`, function (err, out) { }); // 删除 .git
+            console.log('clear git')
             console.log(chalk.green(`The ${projectName} project template successfully create(项目模版创建成功)`));
           }
         });

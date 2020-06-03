@@ -1,11 +1,11 @@
 {
   "name": "dyl-cli",
-  "version": "0.0.1",
+  "version": "0.0.5",
   "main": "index.js",
   "author": "dyl",
   "private": false,
   "bin": {
-    "dyl-cli": "./bin/index.js"
+    "dyl-cli": "./index.js"
   },
   "dependencies": {
     "chalk": "^4.0.0",
