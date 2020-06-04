@@ -39,6 +39,11 @@ commander.version(version, '-v, --version')
           } else {
             exec(`rm -rf ${projectName}/.git`, function (err, out) { }); // 删除 .git
             console.log(chalk.green(`The ${projectName} project template successfully create(项目模版创建成功)`));
+            console.log(chalk.green('enter path:'))
+            console.log(chalk.green(`$ cd ${projectName}`))
+            console.log(chalk.green('$ npm install'))
+            console.log(chalk.green('run the app:'))
+            console.log(chalk.green('$ npm start'))
           }
         });
       });
