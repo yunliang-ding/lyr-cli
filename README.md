@@ -23,7 +23,7 @@ dyl-cli -v
 # git仓库
 ```
 4.添加远程仓库
-git remote add origin https://gitee.com/jianan/learnGit.git
+git remote add origin https://XXX.git
 
 5.本地仓库也远程仓库关联
 git branch --set-upstream-to=origin/master master
