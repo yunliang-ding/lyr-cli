@@ -26,6 +26,9 @@ dyl-cli -v
 git remote add origin https://XXX.git
 
 5.本地仓库也远程仓库关联
+git fetch // 拉取远程分之
+git checkout -b master
+git checkout master // 切换到master分支
 git branch --set-upstream-to=origin/master master
 
 6.拉取远程仓库内容到本地
