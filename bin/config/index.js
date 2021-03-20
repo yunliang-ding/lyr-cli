@@ -12,16 +12,16 @@ module.exports = {
         {
           name: "react-base",
           value: {
-            url: "https://github.com/yunliang-ding/react-mobx-template.git",
-            gitName: "react-mobx-template",
+            url: "https://github.com/yunliang-ding/react-base-template.git",
+            gitName: "react-base-template",
             val: "react-base",
           },
         },
         {
           name: "react-mobx",
           value: {
-            url: "https://github.com/yunliang-ding/react-base-template.git",
-            gitName: "react-base-template",
+            url: "https://github.com/yunliang-ding/react-mobx-template.git",
+            gitName: "react-mobx-template",
             val: "react-mobx",
           },
         },
