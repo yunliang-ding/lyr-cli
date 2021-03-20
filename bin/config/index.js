@@ -10,7 +10,7 @@ module.exports = {
       name: "type",
       choices: [
         {
-          name: "pc",
+          name: "react-base",
           value: {
             url: "https://github.com/yunliang-ding/react-mobx-template.git",
             gitName: "react-mobx-template",
@@ -18,7 +18,7 @@ module.exports = {
           },
         },
         {
-          name: "pc",
+          name: "react-mobx",
           value: {
             url: "https://github.com/yunliang-ding/react-base-template.git",
             gitName: "react-base-template",
