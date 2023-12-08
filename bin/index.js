@@ -3,10 +3,8 @@
 const fse = require("fs-extra");
 const path = require("path");
 const chalk = require("chalk");
-const { runDev } = require('./webpack.dev')
-const { runProd } = require('./webpack.prod')
-
-const rootPath = '/home/lighthouse/local/react-core-form-admin'
+const { runDev } = require("./webpack.dev");
+const { runProd } = require("./webpack.prod");
 
 const commond = {
   dev: "dev",
@@ -22,27 +20,23 @@ if (!env) {
 }
 
 /** 开始运行 */
-const configPath = path.resolve(
-  __dirname,
-  "../../react-core-form-admin/lyr.json"
-);
+const rootPath = path.resolve(__dirname, "../../../");
 
-if (!fse.pathExists(configPath)) {
+exports.rootPath = rootPath;
+
+if (!fse.pathExists(`${rootPath}/lyr.json`)) {
   return console.log(chalk.redBright("缺少配置文件: lyr.json"));
 }
 
 // 获取配置文件
-const config = require(configPath);
+const config = require(`${rootPath}/lyr.json`);
 
 // 运行
-if(env === 'dev'){
+if (env === "dev") {
   return runDev({
     ...config,
-    entry: path.resolve(
-      __dirname,
-      "../../react-core-form-admin/src/app.tsx"
-    ),
+    entry: path.resolve(rootPath, config.entry),
   });
 }
 
-runProd(config);
+// runProd(config);

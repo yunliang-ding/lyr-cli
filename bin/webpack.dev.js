@@ -6,6 +6,8 @@ const FriendlyErrorsWebpackPlugin = require("friendly-errors-webpack-plugin");
 const webpack = require("webpack");
 const chalk = require("chalk");
 
+const rootPath = path.resolve(__dirname, "../../../");
+
 exports.runDev = (userConfig) => {
   const compiler = webpack(
     merge(
@@ -13,10 +15,7 @@ exports.runDev = (userConfig) => {
       {
         mode: "development",
         output: {
-          path: path.resolve(
-            __dirname,
-            "/home/lighthouse/local/react-core-form-admin/app/www/dev"
-          ),
+          path: path.resolve(rootPath, "../app/www/dev"),
           filename: "app.js",
         },
         stats: "errors-only",
@@ -37,9 +36,9 @@ exports.runDev = (userConfig) => {
     },
     () => {
       console.log(
-        chalk.green('构建完成'),
-        chalk.bgMagenta(' WAIT '),
-        chalk.green('Compiling...'),
+        chalk.green("构建完成"),
+        chalk.bgMagenta(" WAIT "),
+        chalk.green("Compiling...")
       );
     }
   );
