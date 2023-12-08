@@ -5,10 +5,10 @@ const path = require('path');
 const chalk = require('chalk');
 const commander = require('commander');
 const inquirer = require('inquirer');
-const checkDire = require('./bin/utils');
+const checkDire = require('./utils');
+const { projectList } = require('./config');
 const { exec } = require('child_process');
-const { version } = require('./package.json');
-const { projectList } = require('./bin/config');
+const { version } = require('../package.json');
 
 //version 版本号
 commander.version(version, '-v, --version')

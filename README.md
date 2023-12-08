@@ -1,21 +1,21 @@
-dyl-cli 
+## yld-cli
+
 > 前端脚手架命令工具
 
-如何安装
-```
-npm install dyl-cli -g
+## 安装
+
+```shell
+npm install yld-cli -g
 ```
 
-初始化命令
-```
-dyl-cli init <projectName>
-// 选择 mobile 或者 pc 的模版
+## 初始化命令
 
-或者
-dyl-cli  i <projectName>
+```shell
+yld-cli init <projectName> 或者 yld-cli i <projectName>
 ```
 
-版本号查看
-```
-dyl-cli -v
+## 版本号查看
+
+```shell
+yld-cli -v
 ```
