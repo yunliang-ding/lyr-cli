@@ -3,11 +3,10 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const WebpackBar = require('webpackbar');
-const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer")
+// const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer")
 const CompressionPlugin = require('compression-webpack-plugin');
 
-module.exports = {
-  entry: './src/app.tsx',
+module.exports = (rootPath) => ({
   performance: false, // 去掉性能上的警告
   externals: {
     axios: 'axios',
@@ -22,7 +21,8 @@ module.exports = {
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx'],
     alias: {
-      '@': path.resolve(__dirname, '../src'),
+      '@': path.resolve(rootPath, './src'),
+      'lyr': path.resolve(rootPath, './src/.lyr'),
     },
   },
   module: {
@@ -65,9 +65,8 @@ module.exports = {
     ],
   },
   plugins: [
-    new BundleAnalyzerPlugin({
-      analyzerHost: '10.0.28.2'
-    }),
+    // new BundleAnalyzerPlugin({
+    // }),
     new MiniCssExtractPlugin({
       filename: 'css/[name].css',
     }),
@@ -77,4 +76,4 @@ module.exports = {
     }),
     new CompressionPlugin(), // 开发资源开启gzip
   ],
-};
+})

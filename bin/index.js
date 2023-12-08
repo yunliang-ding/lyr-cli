@@ -33,10 +33,8 @@ const config = require(`${rootPath}/lyr.json`);
 
 // 运行
 if (env === "dev") {
-  return runDev({
-    ...config,
-    entry: path.resolve(rootPath, config.entry),
-  });
+  return runDev(config);
 }
 
-// runProd(config);
+// 打包
+runProd(config);

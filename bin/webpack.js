@@ -8,19 +8,19 @@ const chalk = require("chalk");
 
 const rootPath = path.resolve(__dirname, "../../../");
 
+/** 编译 */
 exports.runDev = (userConfig) => {
   const compiler = webpack(
     merge(
-      common,
+      common(rootPath),
       {
         mode: "development",
         output: {
-          path: path.resolve(rootPath, "../app/www/dev"),
+          path: path.resolve(rootPath, "./app/www/dev"),
           filename: "app.js",
         },
         stats: "errors-only",
         plugins: [
-          // new webpack.HotModuleReplacementPlugin(),
           new FriendlyErrorsWebpackPlugin(),
           new FileRouterPlugin({
             ignorePaths: ["schema-", "component/", "components/"],
@@ -34,12 +34,34 @@ exports.runDev = (userConfig) => {
     {
       ignored: /node_modules/,
     },
-    () => {
+    (err, result) => {
       console.log(
         chalk.green("构建完成"),
-        chalk.bgMagenta(" WAIT "),
-        chalk.green("Compiling...")
+        chalk.gray(String(result).split('\n')[0]),
+        chalk.bgMagenta(" Wait "),
+        chalk.green("⌛️ Compiling...")
       );
     }
   );
+};
+
+/** 打包 */
+exports.runProd = (userConfig) => {
+  const compiler = webpack(
+    merge(
+      common(rootPath),
+      {
+        mode: "production",
+        output: {
+          path: path.resolve(rootPath, "./app/www/build"),
+          filename: "app.js",
+        },
+      },
+      userConfig
+    )
+  );
+  compiler.run((err, result) => {
+    console.log(chalk.green("👏 打包完成..."));
+    console.log(chalk.gray(String(result)))
+  });
 };
