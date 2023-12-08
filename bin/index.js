@@ -3,8 +3,7 @@
 const fse = require("fs-extra");
 const path = require("path");
 const chalk = require("chalk");
-const { runDev } = require("./webpack.dev");
-const { runProd } = require("./webpack.prod");
+const { runDev, runProd } = require("./webpack");
 
 const commond = {
   dev: "dev",
