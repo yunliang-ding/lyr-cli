@@ -1,35 +1,42 @@
-import fse from 'fs-extra';
-import path from 'path';
-import chalk from 'chalk';
-import { runDev, runProd } from './core';
+import { transform } from '@babel/core';
 import { ConfigProps } from './type';
+import { resolve } from 'path';
+import { readFileSync } from 'fs-extra';
+import { runDev, runProd } from './webpack';
 
-const commond = {
-  dev: 'dev',
-  build: 'build',
+export const rootPath = '/home/lighthouse/local/react-core-form-admin';
+
+const defineConfig = (props: ConfigProps) => {
+  return props;
 };
 
-const type: any = process.argv.pop();
-
-const env = commond[type];
-
-const rootPath = path.resolve(__dirname, '../../../');
-
-export const defineConfig = (props: ConfigProps) => {
-  console.log(props);
-  if (!env) {
-    return console.log(chalk.redBright(`命令不存在: ${type}`));
+// 解析配置文件
+const parseDefineConfig = () => {
+  const configPath = resolve(rootPath, './src/lyr.config.ts');
+  const content = readFileSync(configPath);
+  const result = transform(content.toString(), {
+    presets: ['env'],
+  });
+  if (result.code) {
+    return eval(`(require, exports) => {
+      ${result.code};
+    }`);
   }
-  if (!fse.pathExists(`${rootPath}/lyr.json`)) {
-    console.log(chalk.redBright('缺少配置文件: lyr.json'));
-    return;
-  }
-  // 获取配置文件
-  const config = require(`${rootPath}/lyr.json`);
-  // 运行
-  if (env === 'dev') {
-    return runDev(config);
-  }
-  // 打包
-  runProd(config);
 };
+
+// 运行，类似反编译，最终的目的是获取用户在 defineConfig函数中 定义的参数
+const run = () => {
+  const _exports = {};
+  const _require = (key: string) => {
+    if (key === 'lyr-cli') {
+      return {
+        defineConfig,
+      };
+    }
+  };
+  const fn = parseDefineConfig();
+  fn(_require, _exports);
+  return _exports;
+};
+
+export { defineConfig, run, runDev, runProd };

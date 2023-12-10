@@ -1,28 +1,26 @@
 // @ts-ignore
-import path from 'path';
+import { resolve } from 'path';
 import { merge } from 'webpack-merge';
-import common from './config';
+import common from './webpack.common';
 import webpack from 'webpack';
 import chalk from 'chalk';
 import FriendlyErrorsWebpackPlugin from 'friendly-errors-webpack-plugin';
-
-const rootPath = path.resolve(__dirname, '../../../');
+import { rootPath } from './index';
 
 /** 编译 */
 export const runDev = (userConfig) => {
   const compiler = webpack(
     merge(
-      common(rootPath),
       {
         mode: 'development',
         output: {
-          path: path.resolve(rootPath, './app/www/dev'),
+          path: resolve(rootPath, './app/www/dev'),
           filename: 'app.js',
         },
         stats: 'errors-only',
         plugins: [new FriendlyErrorsWebpackPlugin()],
       },
-      userConfig,
+      common(userConfig) as any,
     ),
   );
   compiler.watch(
@@ -44,15 +42,14 @@ export const runDev = (userConfig) => {
 export const runProd = (userConfig) => {
   const compiler = webpack(
     merge(
-      common(rootPath),
       {
         mode: 'production',
         output: {
-          path: path.resolve(rootPath, './app/www/build'),
+          path: resolve(rootPath, './app/www/build'),
           filename: 'app.js',
         },
       },
-      userConfig,
+      common(userConfig) as any,
     ),
   );
   compiler.run((err, result) => {
@@ -60,4 +57,3 @@ export const runProd = (userConfig) => {
     console.log(chalk.gray(String(result)));
   });
 };
-

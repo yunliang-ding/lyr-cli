@@ -1,13 +1,13 @@
-/* eslint-disable @typescript-eslint/restrict-plus-operands */
-/* eslint-disable prefer-template */
-import path from 'path';
+import { resolve } from 'path';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import WebpackBar from 'webpackbar';
 // import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import FileRouterPlugin from './file-router-plugin';
 import CompressionPlugin from 'compression-webpack-plugin';
+import { rootPath } from '.';
+import { ConfigProps } from './type';
 
-export default (rootPath) => ({
+export default (config: ConfigProps) => ({
   entry: './src/app.tsx',
   performance: false, // 去掉性能上的警告
   externals: {
@@ -23,8 +23,8 @@ export default (rootPath) => ({
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx'],
     alias: {
-      '@': path.resolve(rootPath, './src'),
-      lyr: path.resolve(rootPath, './src/.lyr'),
+      '@': resolve(rootPath, './src'),
+      lyr: resolve(rootPath, './src/.lyr'),
     },
   },
   module: {
@@ -84,3 +84,4 @@ export default (rootPath) => ({
     }),
   ],
 });
+

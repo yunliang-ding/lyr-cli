@@ -1,10 +1,9 @@
-import path from 'path';
+import { resolve } from 'path';
 import fs from "fs-extra";
 import glob from "glob";
 import chokidar from "chokidar";
 import tempCode from "./template/code";
-
-const rootPath = path.resolve(__dirname, "../../../../");
+import { rootPath } from '..';
 
 const encodeStr = (str) => {
   return `#_#${str}#_#`;
@@ -14,12 +13,12 @@ const decodeStr = (str) => {
 };
 let initialFlag = false;
 /** 创建文件路由 */
-const folder = path.resolve(__dirname, `${rootPath}/src/pages/**/*.tsx`);
-const output = path.resolve(__dirname, `${rootPath}/src/.lyr`);
+const folder = resolve(__dirname, `${rootPath}/src/pages/**/*.tsx`);
+const output = resolve(__dirname, `${rootPath}/src/.lyr`);
 /** 创建主体文件 */
 const createTemplateCode = () => {
-  fs.outputFile(path.resolve(`${output}/index.tsx`), tempCode.index);
-  fs.outputFile(path.resolve(`${output}/auth.tsx`), tempCode.auth);
+  fs.outputFile(resolve(`${output}/index.tsx`), tempCode.index);
+  fs.outputFile(resolve(`${output}/auth.tsx`), tempCode.auth);
 };
 /** 创建路由 */
 const createFileRouter = async (
@@ -66,7 +65,7 @@ const createFileRouter = async (
     });
   const routerConfig = `export default ${decodeStr(JSON.stringify(routes, null, 2))}`;
   const content = `${importArr.join("\n")}\n\n${routerConfig}`;
-  const outputFilePath = path.resolve(`${output}/router.tsx`);
+  const outputFilePath = resolve(`${output}/router.tsx`);
   // 为了处理文件重命名的问题，采用了先删除 -> 延迟 -> 创建的兜底方案
   fs.removeSync(outputFilePath);
   if (sleep) {
