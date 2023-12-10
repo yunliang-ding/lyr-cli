@@ -1,7 +1,7 @@
 import { resolve } from 'path';
-import fs from "fs-extra";
-import glob from "glob";
-import chokidar from "chokidar";
+import * as fs from "fs-extra";
+import * as glob from "glob";
+import * as chokidar from "chokidar";
 import tempCode from "./template/code";
 import { rootPath } from '..';
 

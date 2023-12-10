@@ -4,7 +4,7 @@ import { resolve } from 'path';
 import { readFileSync } from 'fs-extra';
 import { runDev, runProd } from './webpack';
 
-export const rootPath = '/home/lighthouse/local/react-core-form-admin';
+export const rootPath = './';
 
 const defineConfig = (props: ConfigProps) => {
   return props;

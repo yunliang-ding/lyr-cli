@@ -2,9 +2,9 @@
 import { resolve } from 'path';
 import { merge } from 'webpack-merge';
 import common from './webpack.common';
-import webpack from 'webpack';
-import chalk from 'chalk';
-import FriendlyErrorsWebpackPlugin from 'friendly-errors-webpack-plugin';
+import * as webpack from 'webpack';
+import * as chalk from 'chalk';
+import * as FriendlyErrorsWebpackPlugin from 'friendly-errors-webpack-plugin';
 import { rootPath } from './index';
 
 /** 编译 */

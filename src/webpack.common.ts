@@ -1,11 +1,13 @@
 import { resolve } from 'path';
-import MiniCssExtractPlugin from 'mini-css-extract-plugin';
-import WebpackBar from 'webpackbar';
+import * as MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import * as WebpackBar from 'webpackbar';
 // import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import FileRouterPlugin from './file-router-plugin';
-import CompressionPlugin from 'compression-webpack-plugin';
+import * as CompressionPlugin from 'compression-webpack-plugin';
 import { rootPath } from '.';
 import { ConfigProps } from './type';
+
+const _WebpackBar: any = WebpackBar;
 
 export default (config: ConfigProps) => ({
   entry: './src/app.tsx',
@@ -72,7 +74,7 @@ export default (config: ConfigProps) => ({
     new MiniCssExtractPlugin({
       filename: 'css/[name].css',
     }),
-    new WebpackBar({
+    new _WebpackBar({
       basic: false, // 默认true，启用一个简单的日志报告器
       profile: false, // 默认false，启用探查器。
     }),
@@ -84,4 +86,3 @@ export default (config: ConfigProps) => ({
     }),
   ],
 });
-
