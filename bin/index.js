@@ -12,9 +12,9 @@ if (!env) {
 }
 const userConfig = run(); // 获取用户的配置文件 ./src/lry.config.ts
 
-console.log('解析配置文件-->', userConfig.defualt);
+console.log('解析配置文件-->', userConfig.default);
 
 if (env === 'dev') {
-  return runDev(userConfig.defualt);
+  return runDev(userConfig.default);
 }
-runProd(userConfig.defualt); // 打包
+runProd(userConfig.default); // 打包

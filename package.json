@@ -1,7 +1,7 @@
 {
   "private": false,
   "name": "lyr-cli",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "author": "yunliang-ding",
   "main": "./dist/index.js",
   "repository": {

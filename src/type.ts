@@ -7,10 +7,8 @@ export interface ConfigProps {
   bundleAnalyzer?: {
     host?: string
   },
-  /** 开发环境 cdn */
-  devCdn?: string[];
-  /** 生产环境 cdn */
-  buildCdn?: string[];
+  /** cdn */
+  cdn?: (mode: 'dev' | 'build') => string[];
   /** oss 配置 */
   ossConfig?: {
     bucket: string;
