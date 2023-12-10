@@ -2,14 +2,19 @@
   "private": false,
   "name": "lyr-cli",
   "version": "0.0.4",
-  "main": "index.js",
   "author": "yunliang-ding",
+  "main": "./dist/index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/yunliang-ding/yld-cli"
   },
   "bin": {
     "lyr": "./bin/index.js"
+  },
+  "scripts": {
+    "start": "dumi dev",
+    "docs:build": "dumi build",
+    "build": "tsc --outDir dist -d ./src/index.ts error"
   },
   "dependencies": {
     "chalk": "^4.0.0",
@@ -33,5 +38,14 @@
     "compression-webpack-plugin": "10.0.0",
     "friendly-errors-webpack-plugin": "1.7.0"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "dumi": "^1.0.14",
+    "prettier": "^2.2.1",
+    "typescript": "5.3.3"
+  },
+  "license": "MIT",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  }
 }

@@ -1,12 +1,14 @@
 /* eslint-disable @typescript-eslint/restrict-plus-operands */
 /* eslint-disable prefer-template */
-const path = require('path');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const WebpackBar = require('webpackbar');
-// const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer")
-const CompressionPlugin = require('compression-webpack-plugin');
+import path from 'path';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import WebpackBar from 'webpackbar';
+// import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
+import FileRouterPlugin from './file-router-plugin';
+import CompressionPlugin from 'compression-webpack-plugin';
 
-module.exports = (rootPath) => ({
+export default (rootPath) => ({
+  entry: './src/app.tsx',
   performance: false, // 去掉性能上的警告
   externals: {
     axios: 'axios',
@@ -22,7 +24,7 @@ module.exports = (rootPath) => ({
     extensions: ['.ts', '.tsx', '.js', '.jsx'],
     alias: {
       '@': path.resolve(rootPath, './src'),
-      'lyr': path.resolve(rootPath, './src/.lyr'),
+      lyr: path.resolve(rootPath, './src/.lyr'),
     },
   },
   module: {
@@ -35,7 +37,7 @@ module.exports = (rootPath) => ({
           loader: 'esbuild-loader', // 构建时间缩短一半
           options: {
             // target: 'es2015'
-          }
+          },
         },
       },
       {
@@ -74,6 +76,11 @@ module.exports = (rootPath) => ({
       basic: false, // 默认true，启用一个简单的日志报告器
       profile: false, // 默认false，启用探查器。
     }),
-    new CompressionPlugin(), // 开发资源开启gzip
+    // 资源开启gzip
+    new CompressionPlugin(),
+    // 文件路由
+    new FileRouterPlugin({
+      ignorePaths: ['schema-', 'component/', 'components/'],
+    }),
   ],
-})
+});

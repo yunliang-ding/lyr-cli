@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   index: `import { ReactElement } from 'react';
 import ReactDom from 'react-dom';
 import { createHashRouter, RouterProvider } from 'react-router-dom';

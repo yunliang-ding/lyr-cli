@@ -1,13 +1,11 @@
 #!/usr/bin/env node
 
-const fse = require("fs-extra");
+const webpack = require("webpack");
 const path = require("path");
-const chalk = require("chalk");
-const { runDev, runProd } = require("./webpack");
 
 const commond = {
-  dev: "dev",
-  build: "build",
+  dev: 'dev',
+  build: 'build',
 };
 
 const type = process.argv.pop();
@@ -18,22 +16,23 @@ if (!env) {
   return console.log(chalk.redBright(`命令不存在: ${type}`));
 }
 
-/** 开始运行 */
-const rootPath = path.resolve(__dirname, "../../../");
+const rootPath = path.resolve(__dirname, '../../../');
 
-exports.rootPath = rootPath;
-
-if (!fse.pathExists(`${rootPath}/lyr.json`)) {
-  return console.log(chalk.redBright("缺少配置文件: lyr.json"));
-}
-
-// 获取配置文件
-const config = require(`${rootPath}/lyr.json`);
-
+console.log(path.resolve(rootPath, './src/lyr.config.ts'));
 // 运行
-if (env === "dev") {
-  return runDev(config);
-}
-
-// 打包
-runProd(config);
+webpack({
+  entry: path.resolve(rootPath, './src/lyr.config.ts'),
+  module: {
+    rules: [
+      {
+        test: /\.[jt]sx?$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'esbuild-loader'
+        },
+      },
+    ]
+  }
+}).run(() => {
+  console.log('开启二次编译')
+})

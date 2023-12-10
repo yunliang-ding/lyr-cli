@@ -1,8 +1,8 @@
-const path = require("path");
-const fs = require("fs-extra");
-const glob = require("glob");
-const chokidar = require("chokidar");
-const tempCode = require("./template/code");
+import path from 'path';
+import fs from "fs-extra";
+import glob from "glob";
+import chokidar from "chokidar";
+import tempCode from "./template/code";
 
 const rootPath = path.resolve(__dirname, "../../../../");
 
@@ -27,14 +27,14 @@ const createFileRouter = async (
   sleep = true // 是否等待
 ) => {
   const files = glob.sync(folder);
-  const importArr = [];
+  const importArr: any = [];
   const routes = files
     .filter((file) => {
       return !ignorePaths.some((i) => file.includes(i));
     })
     .map((file) => {
-      let filePath = file.split("/src/pages")[1];
-      let CompName = [];
+      let filePath: any = file.split("/src/pages")[1];
+      let CompName: any = [];
       let path = "";
       filePath = filePath.substring(0, filePath.lastIndexOf("."));
       if (filePath === "/index") {
@@ -64,7 +64,7 @@ const createFileRouter = async (
         component: encodeStr(`<${CompName.join("")} />`),
       };
     });
-  routerConfig = `export default ${decodeStr(JSON.stringify(routes, null, 2))}`;
+  const routerConfig = `export default ${decodeStr(JSON.stringify(routes, null, 2))}`;
   const content = `${importArr.join("\n")}\n\n${routerConfig}`;
   const outputFilePath = path.resolve(`${output}/router.tsx`);
   // 为了处理文件重命名的问题，采用了先删除 -> 延迟 -> 创建的兜底方案
@@ -76,6 +76,7 @@ const createFileRouter = async (
 };
 
 class FileRouterPlugin {
+  private options: any;
   constructor(options) {
     this.options = options;
   }
@@ -101,4 +102,4 @@ class FileRouterPlugin {
   }
 }
 
-module.exports = FileRouterPlugin;
+export default FileRouterPlugin;
