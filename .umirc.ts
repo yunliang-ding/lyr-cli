@@ -2,7 +2,7 @@ import { defineConfig } from 'dumi';
 
 export default defineConfig({
   mode: 'site',
-  title: 'lry-cli',
+  title: 'lyr-cli',
   outputPath: 'docs-dist',
   favicon:
     'https://unpkg.byted-static.com/latest/byted/arco-config/assets/favicon.ico',

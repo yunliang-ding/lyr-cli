@@ -97,6 +97,16 @@ runApp({
 });
 ```
 
+## 业务使用
+
+```jsx | pure
+import { auth } from 'lyr'; // 获取 auth
+
+import { initData } from 'lyr'; // 获取 initData
+
+import { request } from 'lyr'; // 获取 request
+```
+
 ## 配置
 
 - 配置文件 src/lyr-config.ts
@@ -128,7 +138,7 @@ export default defineConfig({
           'https://react-core-form.oss-cn-beijing.aliyuncs.com/cdn/react-core-form.min.css',
         ];
   },
-  /** 部署的时候直接同步到 oss */
+  /** 部署的时候直接同步一份到 oss */
   ossConfig: {
     bucket: 'xxx',
     region: 'xxx',
@@ -145,6 +155,18 @@ export default defineConfig({
 });
 ```
 
+## tsconfig.json
+
+```json
+{
+  "compilerOptions": {
+    "path": {
+      "lyr": ["./src/.lyr"]
+    }
+  }
+}
+```
+
 ## package.json
 
 ```json
@@ -152,7 +174,7 @@ export default defineConfig({
   "scripts": {
     "start": "lyr dev",
     "build": "lyr build"
-  },
+  }
 }
 ```
 
@@ -161,6 +183,7 @@ export default defineConfig({
 ```shell
 npm start
 ```
+
 ![dev](http://react-core-form.oss-cn-beijing.aliyuncs.com/assets/dev.png)
 
 - 持续监听
@@ -180,7 +203,7 @@ npm run build
 
 ![dev](http://react-core-form.oss-cn-beijing.aliyuncs.com/assets/build.png)
 
-- 会输出如下结构的资源文件到 
+- 会输出如下结构的资源文件到
 
 ```jsx | pure
 
