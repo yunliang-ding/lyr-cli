@@ -31,25 +31,6 @@ nav:
 yarn install lyr-cli -D
 ```
 
-## 约定式路由
+## 路由
 
-- 默认开启约定式路由，如过配置了 src/router.tsx 则会按照配置的方式
-
-## 默认安装依赖
-
-```json
-{
-  "dependencies": {
-    "axios": "1.6.2",
-    "react": "17.0.2",
-    "react-dom": "17.0.2",
-    "react-router-dom": "6.20.0",
-    "@arco-design/web-react": "2.56.0",
-    "react-core-form": "2.1.0",
-    "react-core-form-store": "^0.0.2",
-    "react-fast-marquee": "1.3.2",
-    "nprogress": "^0.2.0",
-    "react-color": "2.19.3"
-  },
-}
-```
+- 使用约定式路由

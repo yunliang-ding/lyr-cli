@@ -4,6 +4,7 @@
   "version": "0.0.5",
   "author": "yunliang-ding",
   "main": "./dist/index.js",
+  "description": "Raact开发框架",
   "repository": {
     "type": "git",
     "url": "https://github.com/yunliang-ding/yld-cli"
