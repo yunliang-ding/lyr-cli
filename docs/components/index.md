@@ -27,8 +27,10 @@ nav:
 
 ## 快速开始
 
+- 在终端执行以下命令
+
 ```shell
-yarn install lyr-cli -D
+yarn create lyr-cli my-app
 ```
 
 ## 约定规范
