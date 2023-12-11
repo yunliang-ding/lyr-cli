@@ -100,10 +100,7 @@ runApp({
 ## 业务使用
 
 ```jsx | pure
-import { auth } from 'lyr'; // 获取 auth
-
 import { initData } from 'lyr'; // 获取 initData
-
 import { request } from 'lyr'; // 获取 request
 ```
 

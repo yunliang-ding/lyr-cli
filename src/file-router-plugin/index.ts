@@ -2,6 +2,7 @@ import { resolve } from 'path';
 import * as fs from "fs-extra";
 import * as glob from "glob";
 import * as chokidar from "chokidar";
+import * as chalk from 'chalk';
 import tempCode from "./template/code";
 import { rootPath } from '..';
 
@@ -82,6 +83,7 @@ class FileRouterPlugin {
   apply(compiler) {
     compiler.hooks.environment.tap("FileRouterPlugin", () => {
       if (initialFlag === false) {
+        console.log(chalk.green('---开启文件路由---'));
         // 首次编译创建
         createTemplateCode();
         createFileRouter(this.options.ignorePaths, false);
