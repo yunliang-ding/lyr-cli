@@ -7,7 +7,8 @@ import * as glob from "glob";
 import * as chokidar from "chokidar";
 import * as chalk from 'chalk';
 import tempCode from "./template/code";
-import { rootPath } from '..';
+
+const rootPath = '../../../../';
 
 const encodeStr = (str) => {
   return `#_#${str}#_#`;

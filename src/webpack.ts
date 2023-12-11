@@ -5,7 +5,8 @@ import common from './webpack.common';
 import * as webpack from 'webpack';
 import * as chalk from 'chalk';
 import * as FriendlyErrorsWebpackPlugin from 'friendly-errors-webpack-plugin';
-import { rootPath } from './index';
+
+const rootPath = '../../../';
 
 /** 编译 */
 export const runDev = (userConfig) => {

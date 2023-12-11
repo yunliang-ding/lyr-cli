@@ -5,8 +5,9 @@ import * as WebpackBar from 'webpackbar';
 import FileRouterPlugin from './file-router-plugin';
 import InsertCdnPlugin from './insert-cdn-plugin';
 import * as CompressionPlugin from 'compression-webpack-plugin';
-import { rootPath } from '.';
 import { ConfigProps } from './type';
+
+const rootPath = '../../../';
 
 const _WebpackBar: any = WebpackBar;
 

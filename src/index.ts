@@ -4,15 +4,13 @@ import { resolve } from 'path';
 import { readFileSync } from 'fs-extra';
 import { runDev, runProd } from './webpack';
 
-export const rootPath = './';
-
 const defineConfig = (props: ConfigProps) => {
   return props;
 };
 
 // 解析配置文件
 const parseDefineConfig = () => {
-  const configPath = resolve(rootPath, './src/lyr.config.ts');
+  const configPath = resolve('./', './src/lyr.config.ts');
   const content = readFileSync(configPath);
   const result = transform(content.toString(), {
     presets: ['env'],

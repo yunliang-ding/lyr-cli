@@ -30,7 +30,7 @@ nav:
 - 在终端执行以下命令
 
 ```shell
-yarn create lyr-cli my-app
+yarn create lyr-cli new my-app
 ```
 
 ## 约定规范
@@ -152,29 +152,6 @@ export default defineConfig({
     },
   }),
 });
-```
-
-## tsconfig.json
-
-```json
-{
-  "compilerOptions": {
-    "path": {
-      "lyr": ["./src/.lyr"]
-    }
-  }
-}
-```
-
-## package.json
-
-```json
-{
-  "scripts": {
-    "start": "lyr dev",
-    "build": "lyr build"
-  }
-}
 ```
 
 ## 开发环境
