@@ -36,7 +36,7 @@ yarn install lyr-cli -D
 ### 路由
 
 ```jsx | pure
-src/layouts.tsx // 页面壳子
+src/layouts // 页面壳子
 
 src/pages/**/*.tsx // 路由文件
 

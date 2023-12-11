@@ -26,7 +26,7 @@ export default defineConfig({
     null, // null 值代表保留约定式生成的导航，只做增量配置
     {
       title: 'GitHub',
-      path: 'https://github.com/yunliang-ding/react-core-form',
+      path: 'https://github.com/yunliang-ding/lyr-cli',
     },
   ],
   apiParser: {
