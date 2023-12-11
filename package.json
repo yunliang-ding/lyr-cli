@@ -19,8 +19,6 @@
   },
   "dependencies": {
     "chalk": "^4.0.0",
-    "commander": "^5.0.0",
-    "inquirer": "^7.1.0",
     "glob": "10.3.10",
     "chokidar": "3.5.3",
     "fs-extra": "11.2.0",
