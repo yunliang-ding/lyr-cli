@@ -47,6 +47,10 @@ export default (config: ConfigProps) => ({
         use: [MiniCssExtractPlugin.loader, 'css-loader', 'less-loader'],
       },
       {
+        test: /\.css$/,
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'less-loader'],
+      },
+      {
         test: /\.(svg|png|jpe?g|gif)$/,
         use: {
           loader: 'url-loader',
