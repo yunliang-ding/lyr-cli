@@ -33,6 +33,15 @@ nav:
 yarn create lyr-cli new my-app
 ```
 
+- 选择 base 模版
+
+![demo](http://react-core-form.oss-cn-beijing.aliyuncs.com/assets/base1.png)
+
+
+- 按照 README.md 启动服务如下
+
+![demo](http://react-core-form.oss-cn-beijing.aliyuncs.com/assets/base2.png)
+
 ## 约定规范
 
 ### 路由
