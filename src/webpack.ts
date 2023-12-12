@@ -6,8 +6,6 @@ import * as webpack from 'webpack';
 import * as chalk from 'chalk';
 import * as FriendlyErrorsWebpackPlugin from 'friendly-errors-webpack-plugin';
 
-const rootPath = '../../../';
-
 /** 编译 */
 export const runDev = (userConfig) => {
   const compiler = webpack(
@@ -15,7 +13,7 @@ export const runDev = (userConfig) => {
       {
         mode: 'development',
         output: {
-          path: resolve(rootPath, './app/www/dev'),
+          path: resolve('./', './app/www/dev'),
           filename: 'app.js',
         },
         stats: 'errors-only',
@@ -46,7 +44,7 @@ export const runProd = (userConfig) => {
       {
         mode: 'production',
         output: {
-          path: resolve(rootPath, './app/www/build'),
+          path: resolve('./', './app/www/build'),
           filename: 'app.js',
         },
       },
