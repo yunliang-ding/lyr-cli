@@ -53,6 +53,6 @@ export const runProd = (userConfig) => {
   );
   compiler.run((err, result) => {
     console.log(chalk.green('👏 打包完成...'));
-    console.log(chalk.gray(String(result)));
+    console.log(chalk.green(String(result)));
   });
 };
