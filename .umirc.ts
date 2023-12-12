@@ -28,6 +28,10 @@ export default defineConfig({
       title: 'GitHub',
       path: 'https://github.com/yunliang-ding/lyr-cli',
     },
+    {
+      title: '🔥 react-core-form 2.x',
+      path: 'http://dev-ops.yunliang.cloud/website/react-core-form',
+    },
   ],
   apiParser: {
     // 自定义属性过滤配置，也可以是一个函数，用法参考：https://github.com/styleguidist/react-docgen-typescript/#propfilter

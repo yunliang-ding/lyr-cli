@@ -23,7 +23,7 @@ nav:
 
 - 提供一个高效的 `React` 开发框架，轻量化为主
 
-- 实现一个更加适合自己开发习惯的一款定制化 `React` 框架
+- 实现一个更加适合团队开发习惯的一款定制化 `React` 框架
 
 ## 快速开始
 
@@ -73,6 +73,10 @@ Page.auth = '/admin/list'; // 配置了 auth 则表示需要做鉴权，具体 a
 
 export default Page;
 ```
+
+### 样式
+
+- 默认引入 src/global.less
 
 ### 入口
 
