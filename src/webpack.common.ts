@@ -7,8 +7,6 @@ import InsertCdnPlugin from './insert-cdn-plugin';
 import * as CompressionPlugin from 'compression-webpack-plugin';
 import { ConfigProps } from './type';
 
-const rootPath = '../../../';
-
 const _WebpackBar: any = WebpackBar;
 
 export default (config: ConfigProps) => ({
@@ -27,8 +25,8 @@ export default (config: ConfigProps) => ({
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx'],
     alias: {
-      '@': resolve(rootPath, './src'),
-      lyr: resolve(rootPath, './src/.lyr'),
+      '@': resolve('./', './src'),
+      lyr: resolve('./', './src/.lyr'),
     },
   },
   module: {
