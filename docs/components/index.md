@@ -38,9 +38,11 @@ yarn create lyr-cli new my-app
 ![demo](http://react-core-form.oss-cn-beijing.aliyuncs.com/assets/base1.png)
 
 
-- 按照 README.md 启动服务如下
+- 按照 README.md 启动服务如下、支持暗黑主题和主题切换
 
 ![demo](http://react-core-form.oss-cn-beijing.aliyuncs.com/assets/base2.png)
+
+![demo](http://react-core-form.oss-cn-beijing.aliyuncs.com/assets/base3.png)
 
 ## 约定规范
 
