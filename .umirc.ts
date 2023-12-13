@@ -25,12 +25,12 @@ export default defineConfig({
   navs: [
     null, // null 值代表保留约定式生成的导航，只做增量配置
     {
-      title: 'GitHub',
-      path: 'https://github.com/yunliang-ding/lyr-cli',
-    },
-    {
       title: '🔥 react-core-form 2.x',
       path: 'http://dev-ops.yunliang.cloud/website/react-core-form',
+    },
+    {
+      title: 'GitHub',
+      path: 'https://github.com/yunliang-ding/lyr-cli',
     },
   ],
   apiParser: {
