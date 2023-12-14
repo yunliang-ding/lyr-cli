@@ -30,6 +30,12 @@ features:
     padding: 8px 12px;
     display: inline-block;
     color: #fff;
+    font-size: 12px;">统一登录管理</span></h4>
+  <img src="http://react-core-form.oss-cn-beijing.aliyuncs.com/assets/my-ulp.png" />
+  <h4 style="text-align: center;margin: 0;"><span style="background: #2362ef;
+    padding: 8px 12px;
+    display: inline-block;
+    color: #fff;
     font-size: 12px;">My-Dev-Ops</span></h4>
   <img src="http://react-core-form.oss-cn-beijing.aliyuncs.com/assets/my-dev-ops.png" />
   <h4 style="text-align: center;margin: 0;"><span style="background: #2362ef;
