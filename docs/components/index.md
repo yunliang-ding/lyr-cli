@@ -125,48 +125,37 @@ import { request } from 'lyr'; // 获取 request
 
 - 配置文件 src/lyr-config.ts
 
-```jsx | pure
+```ts | pure
 import { defineConfig } from 'lyr-cli';
 
-export default defineConfig({
-  router: {
-    ignore: ['schema-'],
-  },
+export default defineConfig({});
+```
+
+- 类型如下
+
+```ts
+interface ConfigProps {
+  /** 文件路由配置 */
+  fileRouter?: {
+    use?: boolean, // 是否启用
+    ignore?: string[];
+  };
   /** 是否开启资源包分析 */
-  bundleAnalyzer: {
-    // host: '',
+  bundleAnalyzer?: {
+    host?: string
   },
-  // cdn 资源
-  cdn: (mode) => {
-    return mode === 'dev'
-      ? [
-          'https://react-core-form.oss-cn-beijing.aliyuncs.com/cdn/react.development.min.js',
-          'https://react-core-form.oss-cn-beijing.aliyuncs.com/cdn/react-dom.development.min.js',
-          'https://react-core-form.oss-cn-beijing.aliyuncs.com/cdn/arco.min.css',
-          'https://react-core-form.oss-cn-beijing.aliyuncs.com/cdn/react-core-form.min.css',
-        ]
-      : [
-          'https://react-core-form.oss-cn-beijing.aliyuncs.com/cdn/react.production.min.js',
-          'https://react-core-form.oss-cn-beijing.aliyuncs.com/cdn/react-dom.production.min.js',
-          'https://react-core-form.oss-cn-beijing.aliyuncs.com/cdn/arco.min.css',
-          'https://react-core-form.oss-cn-beijing.aliyuncs.com/cdn/react-core-form.min.css',
-        ];
-  },
-  /** 部署的时候直接同步一份到 oss */
-  ossConfig: {
-    bucket: 'xxx',
-    region: 'xxx',
-    accessKeyId: 'xxx',
-    accessKeySecret: 'xxx',
-  },
-  /** merge webpack 配置 */
-  webpackConfig: (mode) => ({
-    externals: {
-      react: 'React',
-      'react-dom': 'reactDOM',
-    },
-  }),
-});
+  /** cdn */
+  cdn?: (mode: 'dev' | 'build') => string[];
+  /** oss 配置 */
+  ossConfig?: {
+    bucket: string;
+    region: string;
+    accessKeyId: string;
+    accessKeySecret: string;
+  };
+  /** webpack 配置 */
+  webpackConfig?: (mode: 'dev' | 'build') => Configuration;
+}
 ```
 
 ## 开发环境
