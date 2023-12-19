@@ -38,10 +38,10 @@ class HtmlTemplatePlugin {
           const link = [...this.options.link];
           const mode = this.options.mode === 'development' ? 'dev' : 'build';
           if (isThinkjs) {
-            this.options.link.push(`/${mode}/css/main.css`);
+            link.push(`/${mode}/app.css`);
             script.push(`/${mode}/app.js`);
           } else {
-            this.options.link.push(`./css/main.css`);
+            link.push(`./app.css`);
             script.push(`./app.js`);
           }
           return getHtmlContent({

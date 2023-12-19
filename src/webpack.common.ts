@@ -76,7 +76,7 @@ export default (config: ConfigProps) => ({
     // new BundleAnalyzer.BundleAnalyzerPlugin({
     // }),
     new MiniCssExtractPlugin({
-      filename: 'css/[name].css',
+      filename: 'app.css',
     }),
     new _WebpackBar({
       basic: false, // 默认true，启用一个简单的日志报告器

@@ -178,8 +178,9 @@ npm start
 ```jsx | pure
 ./app/www/dev // 输出位置
 
-css/min.css
+app.css
 app.js
+index.html
 ```
 
 ## 部署发布
@@ -196,6 +197,7 @@ npm run build
 
 ./app/www/build // 输出位置
 
-css/min.css
+app.css
 app.js
+index.html
 ```
