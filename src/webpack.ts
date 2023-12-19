@@ -19,7 +19,10 @@ export const runDev = (userConfig) => {
         stats: 'errors-only',
         plugins: [new FriendlyErrorsWebpackPlugin()],
       },
-      common(userConfig) as any,
+      common({
+        ...userConfig,
+        mode: 'development',
+      }) as any,
     ),
   );
   compiler.watch(
@@ -48,11 +51,14 @@ export const runProd = (userConfig) => {
           filename: 'app.js',
         },
       },
-      common(userConfig) as any,
+      common({
+        ...userConfig,
+        mode: 'production',
+      }) as any,
     ),
   );
   compiler.run((err, result) => {
-    console.log(chalk.green('👏 打包完成...'));
-    console.log(chalk.green(String(result)));
+    console.log(chalk.green('👏 👏 👏 打包完成...'));
+    console.log(chalk.gray(String(result)));
   });
 };

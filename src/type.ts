@@ -1,17 +1,25 @@
 import { Configuration } from 'webpack';
 
 export interface ConfigProps {
+  /** 标题 */
+  title?: string;
+  /** icon */
+  favicon?: string;
+  /** 开发环境 script */
+  devScript?: string[];
+  /** 生产环境 script */
+  buildScript?: string[];
+  /** css */
+  link?: string[];
   /** 文件路由配置 */
   fileRouter?: {
-    use?: boolean, // 是否启用
+    use?: boolean; // 是否启用
     ignore?: string[];
   };
   /** 是否开启资源包分析 */
   bundleAnalyzer?: {
-    host?: string
-  },
-  /** cdn */
-  cdn?: (mode: 'dev' | 'build') => string[];
+    host?: string;
+  };
   /** oss 配置 */
   ossConfig?: {
     bucket: string;

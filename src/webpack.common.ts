@@ -3,7 +3,7 @@ import * as MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import * as WebpackBar from 'webpackbar';
 import * as BundleAnalyzer from 'webpack-bundle-analyzer';
 import FileRouterPlugin from './file-router-plugin';
-import InjectCdnPlugin from './inject-cdn-plugin';
+import HtmlTemplatePlugin from './html-template-plugin';
 import * as CompressionPlugin from 'compression-webpack-plugin';
 import { ConfigProps } from './type';
 
@@ -86,11 +86,9 @@ export default (config: ConfigProps) => ({
     new CompressionPlugin(),
     // 文件路由
     new FileRouterPlugin({
-      ignorePaths: ['schema-', 'component/', 'components/'],
+      ignorePaths: config.fileRouter?.ignore || ['schema-', 'component/', 'components/'],
     }),
     // 插入 cdn
-    // new InjectCdnPlugin({
-    //   cdn: config.cdn?.() || [],
-    // }),
+    new HtmlTemplatePlugin(config),
   ],
 });
