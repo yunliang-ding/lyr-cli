@@ -1,9 +1,9 @@
 import { resolve } from 'path';
 import * as MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import * as WebpackBar from 'webpackbar';
-// import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
+import * as BundleAnalyzer from 'webpack-bundle-analyzer';
 import FileRouterPlugin from './file-router-plugin';
-import InsertCdnPlugin from './insert-cdn-plugin';
+import InjectCdnPlugin from './inject-cdn-plugin';
 import * as CompressionPlugin from 'compression-webpack-plugin';
 import { ConfigProps } from './type';
 
@@ -16,7 +16,7 @@ export default (config: ConfigProps) => ({
     axios: 'axios',
     react: 'React',
     'react-dom': 'ReactDOM',
-    // 'react-router-dom': 'ReactRouterDOM',
+    'react-router-dom': 'ReactRouterDOM',
     'react-core-form': 'ReactCoreForm',
     '@arco-design/web-react': 'arco',
     '@arco-design/web-react/icon': 'arcoicon',
@@ -73,7 +73,7 @@ export default (config: ConfigProps) => ({
     ],
   },
   plugins: [
-    // new BundleAnalyzerPlugin({
+    // new BundleAnalyzer.BundleAnalyzerPlugin({
     // }),
     new MiniCssExtractPlugin({
       filename: 'css/[name].css',
@@ -89,13 +89,8 @@ export default (config: ConfigProps) => ({
       ignorePaths: ['schema-', 'component/', 'components/'],
     }),
     // 插入 cdn
-    new InsertCdnPlugin({
-      cdn: [
-        'https://react-core-form.oss-cn-beijing.aliyuncs.com/cdn/react.development.min.js',
-        'https://react-core-form.oss-cn-beijing.aliyuncs.com/cdn/react-dom.development.min.js',
-        'https://react-core-form.oss-cn-beijing.aliyuncs.com/cdn/arco.min.css',
-        'https://react-core-form.oss-cn-beijing.aliyuncs.com/cdn/react-core-form.min.css',
-      ],
-    }),
+    // new InjectCdnPlugin({
+    //   cdn: config.cdn?.() || [],
+    // }),
   ],
 });
