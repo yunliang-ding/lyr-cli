@@ -53,6 +53,7 @@ const createFileRouter = async (
           .replaceAll("/", "")
           .replaceAll("$", "")
           .replaceAll("-", "")
+          .replaceAll(".", "")
           .replaceAll(" ", "")}`.split("");
         // 字母开头
         if (/[a-zA-Z]/.test(CompName[0])) {
