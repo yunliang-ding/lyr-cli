@@ -88,7 +88,7 @@ class FileRouterPlugin {
   apply(compiler) {
     compiler.hooks.environment.tap("FileRouterPlugin", () => {
       if (initialFlag === false) {
-        console.log(chalk.green('---开启文件路由---'));
+        console.log(chalk.green('=> 开启文件路由'));
         // 首次编译创建
         createTemplateCode();
         createFileRouter(this.options.ignorePaths, false);

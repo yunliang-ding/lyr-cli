@@ -1,7 +1,7 @@
 {
   "private": false,
   "name": "lyr-cli",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "author": "yunliang-ding",
   "main": "./dist/index.js",
   "description": "Raact开发框架",
@@ -43,7 +43,8 @@
     "dumi": "^1.0.14",
     "prettier": "^2.2.1",
     "typescript": "5.3.3",
-    "@types/fs-extra": "11.0.4"
+    "@types/fs-extra": "11.0.4",
+    "@types/friendly-errors-webpack-plugin": "0.1.7"
   },
   "license": "MIT"
 }

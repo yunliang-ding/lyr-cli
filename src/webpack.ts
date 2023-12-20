@@ -57,8 +57,27 @@ export const runProd = (userConfig) => {
       }) as any,
     ),
   );
-  compiler.run((err, result) => {
-    console.log(chalk.green('👏 👏 👏 打包完成...'));
-    console.log(chalk.gray(String(result)));
+  compiler.run((err, stats: any) => {
+    if (!err && !stats?.hasErrors()) {
+      // 构建成功，手动结束进程
+      console.log(chalk.green('👏 👏 👏 打包完成...'));
+      Object.keys(stats.compilation.assets).forEach((key) => {
+        if (key === 'app.js' || key === 'app.css') {
+          console.log(
+            chalk.gray(
+              `${key}: ${Number(
+                stats.compilation.assets[key].size() / 1024,
+              ).toFixed(1)}k`,
+            ),
+          );
+        }
+      });
+      process.exit(0); // 退出
+    } else {
+      // 构建失败，输出错误信息
+      console.log(chalk.red(String(stats?.compilation.errors)));
+      // 以非零状态码结束进程
+      process.exit(1);
+    }
   });
 };

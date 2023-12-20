@@ -13,7 +13,7 @@ if (!env) {
 }
 const userConfig = run(); // 获取用户的配置文件 ./src/lry.config.ts
 console.log(chalk.green(`lyr ${version}`));
-console.log('解析配置文件 =>', userConfig.default);
+console.log(chalk.green('=> 解析配置文件'));
 if (env === 'dev') {
   return runDev(userConfig.default);
 }
