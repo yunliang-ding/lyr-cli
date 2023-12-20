@@ -25,6 +25,10 @@ export const runDev = (userConfig) => {
       userConfig.webpackConfig?.(mode), // 合并 webpack
     ),
   );
+  console.log(
+    chalk.green('=> externals'),
+    chalk.gray(JSON.stringify(compiler.options.externals, null, 2)),
+  );
   compiler.watch(
     {
       ignored: /node_modules/,
@@ -68,7 +72,10 @@ export const runProd = (userConfig) => {
       userConfig.webpackConfig?.(mode), // 合并 webpack
     ),
   );
-  console.log(compiler.options.externals);
+  console.log(
+    chalk.green('=> externals'),
+    chalk.gray(JSON.stringify(compiler.options.externals, null, 2)),
+  );
   compiler.run((err, stats: any) => {
     if (!err && !stats?.hasErrors()) {
       // 构建成功，手动结束进程
