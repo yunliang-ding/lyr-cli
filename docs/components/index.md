@@ -133,6 +133,9 @@ export default defineConfig({});
 - 类型如下
 
 ```ts | pure
+import { Configuration } from 'webpack';
+import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
+
 export interface ConfigProps {
   /** 标题 */
   title?: string;
@@ -149,10 +152,8 @@ export interface ConfigProps {
     use?: boolean; // 是否启用
     ignore?: string[];
   };
-  /** 是否开启资源包分析 */
-  bundleAnalyzer?: {
-    host?: string;
-  };
+  /** 资源包分析配置，仅开发模式启用 */
+  bundleAnalyzer?: BundleAnalyzerPlugin.Options;
   /** oss 配置 */
   ossConfig?: {
     bucket: string;
@@ -161,7 +162,7 @@ export interface ConfigProps {
     accessKeySecret: string;
   };
   /** webpack 配置 */
-  webpackConfig?: (mode: 'dev' | 'build') => Configuration;
+  webpackConfig?: (mode: 'development' | 'production') => Configuration;
 }
 ```
 

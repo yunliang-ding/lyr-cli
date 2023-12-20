@@ -8,10 +8,12 @@ import * as FriendlyErrorsWebpackPlugin from 'friendly-errors-webpack-plugin';
 
 /** 编译 */
 export const runDev = (userConfig) => {
+  const mode = 'development';
+  userConfig.mode = mode;
   const compiler = webpack(
     merge(
       {
-        mode: 'development',
+        mode,
         output: {
           path: resolve('./', './app/www/dev'),
           filename: 'app.js',
@@ -19,10 +21,8 @@ export const runDev = (userConfig) => {
         stats: 'errors-only',
         plugins: [new FriendlyErrorsWebpackPlugin()],
       },
-      common({
-        ...userConfig,
-        mode: 'development',
-      }) as any,
+      common(userConfig),
+      userConfig.webpackConfig?.(mode), // 合并 webpack
     ),
   );
   compiler.watch(
@@ -30,7 +30,7 @@ export const runDev = (userConfig) => {
       ignored: /node_modules/,
     },
     (err, result: any) => {
-      let fileInfo = "";
+      let fileInfo = '';
       Object.keys(result.compilation.assets).forEach(function (key) {
         if (key === 'app.js') {
           fileInfo = `${key}: ${Number(
@@ -50,10 +50,12 @@ export const runDev = (userConfig) => {
 
 /** 打包 */
 export const runProd = (userConfig) => {
+  const mode = 'production';
+  userConfig.mode = mode;
   const compiler = webpack(
     merge(
       {
-        mode: 'production',
+        mode,
         output: {
           path: resolve('./', './app/www/build'),
           filename: 'app.js',
@@ -62,9 +64,11 @@ export const runProd = (userConfig) => {
       common({
         ...userConfig,
         mode: 'production',
-      }) as any,
+      }),
+      userConfig.webpackConfig?.(mode), // 合并 webpack
     ),
   );
+  console.log(compiler.options.externals);
   compiler.run((err, stats: any) => {
     if (!err && !stats?.hasErrors()) {
       // 构建成功，手动结束进程

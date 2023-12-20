@@ -73,8 +73,9 @@ export default (config: ConfigProps) => ({
     ],
   },
   plugins: [
-    // new BundleAnalyzer.BundleAnalyzerPlugin({
-    // }),
+    config.bundleAnalyzer && config.mode === 'development'
+      ? new BundleAnalyzer.BundleAnalyzerPlugin(config.bundleAnalyzer)
+      : undefined,
     new MiniCssExtractPlugin({
       filename: 'app.css',
     }),
@@ -86,7 +87,11 @@ export default (config: ConfigProps) => ({
     new CompressionPlugin(),
     // 文件路由
     new FileRouterPlugin({
-      ignorePaths: config.fileRouter?.ignore || ['schema-', 'component/', 'components/'],
+      ignorePaths: config.fileRouter?.ignore || [
+        'schema-',
+        'component/',
+        'components/',
+      ],
     }),
     // 插入 cdn
     new HtmlTemplatePlugin(config),

@@ -1,4 +1,5 @@
 import { Configuration } from 'webpack';
+import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 
 export interface ConfigProps {
   /** 标题 */
@@ -17,9 +18,7 @@ export interface ConfigProps {
     ignore?: string[];
   };
   /** 是否开启资源包分析 */
-  bundleAnalyzer?: {
-    host?: string;
-  };
+  bundleAnalyzer?: BundleAnalyzerPlugin.Options;
   /** oss 配置 */
   ossConfig?: {
     bucket: string;
@@ -28,5 +27,6 @@ export interface ConfigProps {
     accessKeySecret: string;
   };
   /** webpack 配置 */
-  webpackConfig?: (mode: 'dev' | 'build') => Configuration;
+  webpackConfig?: (mode: 'development' | 'production') => Configuration;
+  mode?: 'development' | 'production'
 }
