@@ -22,7 +22,7 @@ export const runDev = (userConfig) => {
         plugins: [new FriendlyErrorsWebpackPlugin()],
       },
       common(userConfig),
-      userConfig.webpackConfig?.(mode), // 合并 webpack
+      userConfig.webpackConfig?.(mode) || {}, // 合并 webpack
     ),
   );
   console.log(
@@ -69,7 +69,7 @@ export const runProd = (userConfig) => {
         ...userConfig,
         mode: 'production',
       }),
-      userConfig.webpackConfig?.(mode), // 合并 webpack
+      userConfig.webpackConfig?.(mode) || {}, // 合并 webpack
     ),
   );
   console.log(
