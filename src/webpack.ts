@@ -29,10 +29,18 @@ export const runDev = (userConfig) => {
     {
       ignored: /node_modules/,
     },
-    (err, result) => {
+    (err, result: any) => {
+      let fileInfo = "";
+      Object.keys(result.compilation.assets).forEach(function (key) {
+        if (key === 'app.js') {
+          fileInfo = `${key}: ${Number(
+            result.compilation.assets[key].size() / 1024,
+          ).toFixed(1)} kb`;
+        }
+      });
       console.log(
         chalk.green('构建完成'),
-        chalk.gray(String(result).split('\n')[0]),
+        chalk.gray(fileInfo),
         chalk.bgMagenta(' Wait '),
         chalk.green('⌛️ Compiling...'),
       );
@@ -67,7 +75,7 @@ export const runProd = (userConfig) => {
             chalk.gray(
               `${key}: ${Number(
                 stats.compilation.assets[key].size() / 1024,
-              ).toFixed(1)}k`,
+              ).toFixed(1)} kb`,
             ),
           );
         }
