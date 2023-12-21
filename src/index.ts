@@ -10,7 +10,7 @@ const defineConfig = (props: ConfigProps) => {
 
 // 解析配置文件
 const parseDefineConfig = () => {
-  const configPath = resolve('./', './src/lyr.config.ts');
+  const configPath = resolve('./', './lyr.config.ts');
   const content = readFileSync(configPath);
   const result = transform(content.toString(), {
     presets: ['env'],
@@ -26,7 +26,7 @@ const parseDefineConfig = () => {
 const run = () => {
   const _exports = {};
   const _require = (key: string) => {
-    if (key === 'lyr-cli') {
+    if (key === 'lyr') {
       return {
         defineConfig,
       };

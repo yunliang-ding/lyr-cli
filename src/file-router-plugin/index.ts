@@ -6,7 +6,6 @@ import * as fs from "fs-extra";
 import * as glob from "glob";
 import * as chokidar from "chokidar";
 import * as chalk from 'chalk';
-import tempCode from "./template/code";
 
 const rootPath = '../../../../';
 
@@ -20,11 +19,6 @@ let initialFlag = false;
 /** 创建文件路由 */
 const folder = resolve(__dirname, `${rootPath}/src/pages/**/*.tsx`);
 const output = resolve(__dirname, `${rootPath}/src/.lyr`);
-/** 创建主体文件 */
-const createTemplateCode = () => {
-  fs.outputFile(resolve(`${output}/index.tsx`), tempCode.index);
-  fs.outputFile(resolve(`${output}/auth.tsx`), tempCode.auth);
-};
 /** 创建路由 */
 const createFileRouter = async (
   ignorePaths = ["component/", "components/"],
@@ -88,11 +82,9 @@ class FileRouterPlugin {
   apply(compiler) {
     compiler.hooks.environment.tap("FileRouterPlugin", () => {
       if (initialFlag === false) {
-        console.log(chalk.green('=> 开启文件路由'));
-        // 首次编译创建
-        createTemplateCode();
+        console.log(chalk.green('=> open file router done.'));
         createFileRouter(this.options.ignorePaths, false);
-        const watcher = chokidar.watch("src/pages", {
+        const watcher = chokidar.watch(folder, {
           ignored: /node_modules/,
           ignoreInitial: true,
         });

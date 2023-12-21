@@ -125,7 +125,7 @@ import { request } from 'lyr'; // 获取 request
 - 配置文件 src/lyr-config.ts
 
 ```ts | pure
-import { defineConfig } from 'lyr-cli';
+import { defineConfig } from 'lyr/app';
 
 export default defineConfig({});
 ```

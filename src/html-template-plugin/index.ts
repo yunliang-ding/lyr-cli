@@ -30,7 +30,7 @@ class HtmlTemplatePlugin {
   }
   apply(compiler) {
     compiler.hooks.environment.tap('HtmlTemplatePlugin', function () {
-      console.log(chalk.green('=> 创建 index.html'));
+      console.log(chalk.green('=> create index.html done.'));
     });
     compiler.hooks.emit.tapAsync('HtmlTemplatePlugin', (compilation, cb) => {
       const script =

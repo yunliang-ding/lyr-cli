@@ -1,11 +1,11 @@
-export default {
-  index: `import { ReactElement } from 'react';
+exports.index = `import { ReactElement } from 'react';
 import ReactDom from 'react-dom';
 import { createHashRouter, RouterProvider } from 'react-router-dom';
 import Layout from '@/layouts/index';
 import ErrorBoundary from '@/pages/error-boundary';
 import router from './router';
 import AuthRouter from './auth';
+import ConfigProps from './type';
 import axios, { AxiosRequestConfig } from 'axios';
 import '@/global.less';
 
@@ -71,8 +71,14 @@ export const runApp = async ({
   Object.assign(store.initData, await getInitData()); // 覆盖下
   ReactDom.render(<App />, document.querySelector(element));
 };
-`,
-  auth: `import NoMatch from '@/pages/404';
+
+export const defineConfig = (props: ConfigProps) => {
+  return props;
+};
+
+`;
+
+exports.auth = `import NoMatch from '@/pages/404';
 import NoAuthority from '@/pages/403';
 import { initData } from './index';
 
@@ -83,16 +89,49 @@ export default ({ path, component }: { path: string; component: any }) => {
       element: <NoMatch />,
     };
   }
+  const hasAuth =
+    initData.auth.includes(component.type.auth) ||
+    component.type.auth === undefined;
   return {
     path,
-    element:
-      initData.auth.includes(component.type.auth) ||
-      component.type.auth === undefined ? (
-        component
-      ) : (
-        <NoAuthority />
-      ),
+    element: hasAuth ? component : <NoAuthority />,
   };
 };
-`,
-};
+`;
+
+exports.type = `import { Configuration } from 'webpack';
+import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
+
+export default interface ConfigProps {
+  /** 标题 */
+  title?: string;
+  /** icon */
+  favicon?: string;
+  /** 开发环境 script */
+  devScript?: string[];
+  /** 生产环境 script */
+  buildScript?: string[];
+  /** css */
+  link?: string[];
+  /** 文件路由配置 */
+  fileRouter?: {
+    use?: boolean; // 是否启用
+    ignore?: string[];
+  };
+  /** 是否开启资源包分析 */
+  bundleAnalyzer?: BundleAnalyzerPlugin.Options;
+  /** oss 配置 */
+  ossConfig?: {
+    bucket: string;
+    region: string;
+    accessKeyId: string;
+    accessKeySecret: string;
+  };
+  /** webpack 配置 */
+  webpackConfig?: (mode: 'development' | 'production') => Configuration;
+  mode?: 'development' | 'production'
+}
+
+`;
+
+exports.router = `export default [];`;
