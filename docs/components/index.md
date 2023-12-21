@@ -47,10 +47,14 @@ yarn create lyr-cli new my-app
 
 ### 路由
 
+- 默认约定规则如下，当文件名变化，触发自动更新
+
 ```jsx | pure
 src/layouts // 页面壳子
 
 src/pages/**/*.tsx // 路由文件
+
+src/pages/**/$id.tsx // 动态路由
 
 src/pages/403.tsx // 暂无权限
 
@@ -69,6 +73,20 @@ const Page = () => {
 };
 
 Page.auth = '/admin/list'; // 配置了 auth 则表示需要做鉴权，具体 auth 在下面的 getInitData 方法中返回
+
+export default Page;
+```
+
+### 路由缓存
+
+- 假设存在 /src/pages/user.tsx
+
+```jsx | pure
+const Page = () => {
+  return <div>缓存路由</div>;
+};
+
+Page.keeplive = true; // 开启缓存功能
 
 export default Page;
 ```
@@ -125,7 +143,7 @@ import { request } from 'lyr'; // 获取 request
 - 配置文件 ./lyr.config.ts
 
 ```ts | pure
-import { defineConfig } from 'lyr/app';
+import { defineConfig } from 'lyr';
 
 export default defineConfig({});
 ```
@@ -138,7 +156,7 @@ import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 
 export interface ConfigProps {
   /** 标题 */
-    /** 标题 */
+  /** 标题 */
   title?: string;
   /** icon */
   favicon?: string;
