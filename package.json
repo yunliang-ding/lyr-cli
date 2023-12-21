@@ -4,7 +4,7 @@
   "version": "0.0.17",
   "author": "yunliang-ding",
   "main": "./dist/index.js",
-  "description": "Raact开发框架",
+  "description": "轻量级 React 开发框架",
   "repository": {
     "type": "git",
     "url": "https://github.com/yunliang-ding/yld-cli"
