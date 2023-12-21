@@ -122,7 +122,7 @@ import { request } from 'lyr'; // 获取 request
 
 ## 配置
 
-- 配置文件 src/lyr-config.ts
+- 配置文件 ./lyr.config.ts
 
 ```ts | pure
 import { defineConfig } from 'lyr/app';
