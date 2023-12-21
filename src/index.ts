@@ -37,4 +37,4 @@ const run = () => {
   return _exports;
 };
 
-export { defineConfig, run, runDev, runProd };
+export { run, runDev, runProd };

@@ -7,13 +7,12 @@ import * as chalk from 'chalk';
 import * as FriendlyErrorsWebpackPlugin from 'friendly-errors-webpack-plugin';
 
 /** 编译 */
-export const runDev = (userConfig) => {
-  const mode = 'development';
-  userConfig.mode = mode;
+export const runDev = (config) => {
   const compiler = webpack(
     merge(
+      common(config),
+      config.webpackConfig?.(config.mode) || {}, // 合并 webpack
       {
-        mode,
         output: {
           path: resolve('./', './app/www/dev'),
           filename: 'app.js',
@@ -21,8 +20,6 @@ export const runDev = (userConfig) => {
         stats: 'errors-only',
         plugins: [new FriendlyErrorsWebpackPlugin()],
       },
-      common(userConfig),
-      userConfig.webpackConfig?.(mode) || {}, // 合并 webpack
     ),
   );
   console.log(
@@ -53,23 +50,17 @@ export const runDev = (userConfig) => {
 };
 
 /** 打包 */
-export const runProd = (userConfig) => {
-  const mode = 'production';
-  userConfig.mode = mode;
+export const runProd = (config) => {
   const compiler = webpack(
     merge(
+      common(config),
+      config.webpackConfig?.(config.mode) || {}, // 合并 webpack
       {
-        mode,
         output: {
           path: resolve('./', './app/www/build'),
           filename: 'app.js',
         },
       },
-      common({
-        ...userConfig,
-        mode: 'production',
-      }),
-      userConfig.webpackConfig?.(mode) || {}, // 合并 webpack
     ),
   );
   console.log(

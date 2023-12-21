@@ -12,11 +12,8 @@ export interface ConfigProps {
   buildScript?: string[];
   /** css */
   link?: string[];
-  /** 文件路由配置 */
-  fileRouter?: {
-    use?: boolean; // 是否启用
-    ignore?: string[];
-  };
+  /** 忽略路由配置 */
+  ignoreRouter?: string[];
   /** 是否开启资源包分析 */
   bundleAnalyzer?: BundleAnalyzerPlugin.Options;
   /** oss 配置 */

@@ -113,11 +113,8 @@ export default interface ConfigProps {
   buildScript?: string[];
   /** css */
   link?: string[];
-  /** 文件路由配置 */
-  fileRouter?: {
-    use?: boolean; // 是否启用
-    ignore?: string[];
-  };
+  /** 忽略路由配置 */
+  ignoreRouter?: string[];
   /** 是否开启资源包分析 */
   bundleAnalyzer?: BundleAnalyzerPlugin.Options;
   /** oss 配置 */
@@ -129,7 +126,23 @@ export default interface ConfigProps {
   };
   /** webpack 配置 */
   webpackConfig?: (mode: 'development' | 'production') => Configuration;
-  mode?: 'development' | 'production'
 }
 
 `;
+
+exports.indexHtml = ({ favicon, title, script, link }) => `<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="${favicon}" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>${title}</title>
+${link}
+</head>
+
+<body>
+  <div id="root" />
+</body>
+${script}
+</html>`;

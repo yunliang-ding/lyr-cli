@@ -2,14 +2,13 @@ import { resolve } from 'path';
 import * as MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import * as WebpackBar from 'webpackbar';
 import * as BundleAnalyzer from 'webpack-bundle-analyzer';
-import FileRouterPlugin from './file-router-plugin';
-import HtmlTemplatePlugin from './html-template-plugin';
 import * as CompressionPlugin from 'compression-webpack-plugin';
 import { ConfigProps } from './type';
 
 const _WebpackBar: any = WebpackBar;
 
 export default (config: ConfigProps) => ({
+  mode: config.mode,
   entry: './src/app.tsx',
   performance: false, // 去掉性能上的警告
   externals: {
@@ -85,15 +84,5 @@ export default (config: ConfigProps) => ({
     }),
     // 资源开启gzip
     new CompressionPlugin(),
-    // 文件路由
-    new FileRouterPlugin({
-      ignorePaths: config.fileRouter?.ignore || [
-        'schema-',
-        'component/',
-        'components/',
-      ],
-    }),
-    // 插入 cdn
-    new HtmlTemplatePlugin(config),
   ],
 });

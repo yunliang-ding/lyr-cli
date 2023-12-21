@@ -2,9 +2,7 @@
 const chalk = require('chalk');
 const { run, runDev, runProd } = require('../dist/index');
 const { version } = require('../package.json');
-const tempCode = require('./template/code');
-const { resolve } = require('path');
-const fs = require("fs-extra");
+const { createLyr, createIndexHtml } = require('./create');
 const commond = {
   dev: 'dev',
   build: 'build',
@@ -15,18 +13,17 @@ if (!env) {
   return console.log(chalk.redBright(`命令不存在: ${type}`));
 }
 console.log(chalk.green(`lyr ${version}`));
-/** 创建 /src/.lyr */
-const rootPath = '../../../';
-const output = resolve(__dirname, `${rootPath}/src/.lyr`);
-fs.outputFile(`${output}/index.tsx`, tempCode.index);
-fs.outputFile(`${output}/auth.tsx`, tempCode.auth);
-fs.outputFile(`${output}/type.tsx`, tempCode.type);
-console.log(chalk.green('=> create .lyr done.'));
 /** 解析配置文件 ./lry.config.ts */
-const userConfig = run();
-console.log(chalk.green('=> parse lry.config.ts done.'));
+const lyrConfig = run().default;
+/** 创建 /src/.lyr */
+createLyr(lyrConfig.ignoreRouter);
 /** 执行 webpack */
 if (env === 'dev') {
-  return runDev(userConfig.default);
+  lyrConfig.mode = 'development';
+  runDev(lyrConfig); // 构建
+  createIndexHtml(lyrConfig); // 创建 index.html
+} else {
+  lyrConfig.mode = 'production';
+  runProd(userConfig.default); // 打包
+  createIndexHtml(lyrConfig); // 创建 index.html
 }
-runProd(userConfig.default); // 打包
