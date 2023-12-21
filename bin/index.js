@@ -21,7 +21,6 @@ const output = resolve(__dirname, `${rootPath}/src/.lyr`);
 fs.outputFile(`${output}/index.tsx`, tempCode.index);
 fs.outputFile(`${output}/auth.tsx`, tempCode.auth);
 fs.outputFile(`${output}/type.tsx`, tempCode.type);
-fs.outputFile(`${output}/router.tsx`, tempCode.router);
 console.log(chalk.green('=> create .lyr done.'));
 /** 解析配置文件 ./lry.config.ts */
 const userConfig = run();

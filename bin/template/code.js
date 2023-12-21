@@ -133,5 +133,3 @@ export default interface ConfigProps {
 }
 
 `;
-
-exports.router = `export default [];`;
