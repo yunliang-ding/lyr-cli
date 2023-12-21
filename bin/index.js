@@ -24,6 +24,6 @@ if (env === 'dev') {
   createIndexHtml(lyrConfig); // 创建 index.html
 } else {
   lyrConfig.mode = 'production';
-  runProd(userConfig.default); // 打包
+  runProd(lyrConfig); // 打包
   createIndexHtml(lyrConfig); // 创建 index.html
 }

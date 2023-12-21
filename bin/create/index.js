@@ -53,7 +53,7 @@ const createFileRouter = async function (ignorePaths, sleep = true) {
     JSON.stringify(routes, null, 2),
   )}`;
   const content = `${importArr.join('\n')}\n\n${routerConfig}`;
-  const outputFilePath = resolve(`${output}/router.tsx`);
+  const outputFilePath = resolve(`${output}/src/.lyr/router.tsx`);
   // 为了处理文件重命名的问题，采用了先删除 -> 延迟 -> 创建的兜底方案
   fs.removeSync(outputFilePath);
   if (sleep) {
