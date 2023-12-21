@@ -20,10 +20,10 @@ createLyr(lyrConfig.ignoreRouter);
 /** 执行 webpack */
 if (env === 'dev') {
   lyrConfig.mode = 'development';
-  runDev(lyrConfig); // 构建
   createIndexHtml(lyrConfig); // 创建 index.html
+  runDev(lyrConfig); // 构建
 } else {
   lyrConfig.mode = 'production';
-  runProd(lyrConfig); // 打包
   createIndexHtml(lyrConfig); // 创建 index.html
+  runProd(lyrConfig); // 打包
 }
