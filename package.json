@@ -1,7 +1,7 @@
 {
   "private": false,
   "name": "lyr-cli",
-  "version": "0.0.20",
+  "version": "0.0.21",
   "author": "yunliang-ding",
   "main": "./dist/index.js",
   "description": "轻量级 React 开发框架",
@@ -15,7 +15,7 @@
   "scripts": {
     "start": "dumi dev",
     "docs:build": "dumi build",
-    "build": "tsc --outDir dist -d ./src/index.ts error"
+    "build": "tsc --outDir dist -d ./src/index.ts errors"
   },
   "dependencies": {
     "chalk": "^4.0.0",
@@ -45,7 +45,8 @@
     "typescript": "5.3.3",
     "@types/fs-extra": "11.0.4",
     "@types/friendly-errors-webpack-plugin": "0.1.7",
-    "@types/webpack-bundle-analyzer": "4.6.3"
+    "@types/webpack-bundle-analyzer": "4.6.3",
+    "@types/chalk": "2.2.0"
   },
   "license": "MIT"
 }

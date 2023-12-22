@@ -1,24 +1,29 @@
-const fs = require('fs-extra');
-const glob = require('glob');
-const chokidar = require('chokidar');
-const chalk = require('chalk');
-const { resolve } = require('path');
-const tempCode = require('./template/code');
-const output = resolve(__dirname, `../../../../`);
+import * as fs from 'fs-extra';
+import * as glob from 'glob';
+import * as chokidar from 'chokidar';
+import * as chalk from 'chalk';
+import { resolve } from 'path';
+import { auth, indexHtml, index, type } from './template/code';
+import { ConfigProps } from '../type';
+
 const encodeStr = (str) => `#_#${str}#_#`;
 const decodeStr = (str) => str.replaceAll('"#_#', '').replaceAll('#_#"', '');
 /** 创建文件路由 */
-const folder = `${output}/src/pages/**/*.tsx`;
-const createFileRouter = async function (ignorePaths, sleep = true) {
+const createFileRouter = async function (
+  rootPath = '',
+  ignorePaths,
+  sleep = true,
+) {
+  const folder = `${rootPath}/src/pages/**/*.tsx`;
   const files = glob.sync(folder);
-  const importArr = [];
+  const importArr: any = [];
   const routes = files
     .filter((file) => {
       return !ignorePaths.some((i) => file.includes(i));
     })
     .map((file) => {
-      let filePath = file.split('/src/pages')[1];
-      let CompName = [];
+      let filePath: any = file.split('/src/pages')[1];
+      let CompName: string[] = [];
       let path = '';
       filePath = filePath.substring(0, filePath.lastIndexOf('.'));
       if (filePath === '/index') {
@@ -53,7 +58,7 @@ const createFileRouter = async function (ignorePaths, sleep = true) {
     JSON.stringify(routes, null, 2),
   )}`;
   const content = `${importArr.join('\n')}\n\n${routerConfig}`;
-  const outputFilePath = resolve(`${output}/src/.lyr/router.tsx`);
+  const outputFilePath = resolve(`${rootPath}/src/.lyr/router.tsx`);
   // 为了处理文件重命名的问题，采用了先删除 -> 延迟 -> 创建的兜底方案
   fs.removeSync(outputFilePath);
   if (sleep) {
@@ -62,33 +67,42 @@ const createFileRouter = async function (ignorePaths, sleep = true) {
   fs.outputFile(outputFilePath, content);
 };
 /** 创建 .lyr */
-exports.createLyr = function (ignorePaths = ['component/', 'components/']) {
-  fs.outputFile(`${output}/src/.lyr/index.tsx`, tempCode.index);
-  fs.outputFile(`${output}/src/.lyr/auth.tsx`, tempCode.auth);
-  fs.outputFile(`${output}/src/.lyr/type.tsx`, tempCode.type);
+export const createLyr = function (
+  rootPath = '',
+  ignorePaths = ['component/', 'components/'],
+) {
+  fs.outputFile(`${rootPath}/src/.lyr/index.tsx`, index);
+  fs.outputFile(`${rootPath}/src/.lyr/auth.tsx`, auth);
+  fs.outputFile(`${rootPath}/src/.lyr/type.tsx`, type);
   /** 创建路由 */
-  createFileRouter(ignorePaths, false);
+  createFileRouter(rootPath, ignorePaths, false);
   /** 监听路由改动 */
-  const watcher = chokidar.watch(folder, {
+  const watcher = chokidar.watch(`${rootPath}/src/pages/**/*.tsx`, {
     ignored: /node_modules/,
     ignoreInitial: true,
   });
   watcher.on('add', async () => {
-    createFileRouter(ignorePaths);
+    createFileRouter(rootPath, ignorePaths);
   });
   watcher.on('unlink', async () => {
-    createFileRouter(ignorePaths);
+    createFileRouter(rootPath, ignorePaths);
   });
   console.log(chalk.green('=> create .lyr done.'));
 };
+
 /** 创建index.html */
-exports.createIndexHtml = async function (option) {
-  const isThinkjs = fs.existsSync(resolve(__dirname, `${output}/app/pm2.json`));
+export const createIndexHtml = async function (
+  rootPath = '',
+  option: ConfigProps,
+) {
+  const isThinkjs = fs.existsSync(
+    resolve(__dirname, `${rootPath}/app/pm2.json`),
+  );
   const script =
     option.mode === 'development'
-      ? [...option.devScript]
-      : [...option.buildScript];
-  const link = [...option.link];
+      ? [...(option.devScript || [])]
+      : [...(option.buildScript || [])];
+  const link = [...(option.link || [])];
   const mode = option.mode === 'development' ? 'dev' : 'build';
   if (isThinkjs) {
     link.push(`/${mode}/app.css`);
@@ -97,9 +111,9 @@ exports.createIndexHtml = async function (option) {
     link.push('./app.css');
     script.push('./app.js');
   }
-  const content = tempCode.indexHtml({
-    ...option,
-    mode: option.mode === 'development' ? 'dev' : 'build',
+  const content = indexHtml({
+    favicon: option.favicon,
+    title: option.title,
     link: link
       .map((i) => `<link rel="stylesheet" type="text/css" href="${i}" />`)
       .join('\n'),
@@ -107,11 +121,10 @@ exports.createIndexHtml = async function (option) {
       .map((i) => `<script crossorigin src="${i}"></script>`)
       .join('\n'),
   });
-  // 创建 index.html
   var outputFilePath =
     option.mode === 'development'
-      ? `${output}/app/www/dev/index.html`
-      : `${output}/app/www/build/index.html`;
+      ? `${rootPath}/app/www/dev/index.html`
+      : `${rootPath}/app/www/build/index.html`;
   fs.outputFile(outputFilePath, content);
   console.log(chalk.green('=> create index.html done.'));
 };

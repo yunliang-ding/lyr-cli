@@ -18,7 +18,9 @@ export const runDev = (config) => {
           filename: 'app.js',
         },
         stats: 'errors-only',
-        plugins: [new FriendlyErrorsWebpackPlugin()],
+        plugins: [
+          new FriendlyErrorsWebpackPlugin(),
+        ],
       },
     ),
   );

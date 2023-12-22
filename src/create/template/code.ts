@@ -1,4 +1,4 @@
-exports.index = `import { ReactElement } from 'react';
+export const index = `import { ReactElement } from 'react';
 import ReactDom from 'react-dom';
 import { createHashRouter, RouterProvider } from 'react-router-dom';
 import Layout from '@/layouts/index';
@@ -78,7 +78,7 @@ export const defineConfig = (props: ConfigProps) => {
 
 `;
 
-exports.auth = `import NoMatch from '@/pages/404';
+export const auth = `import NoMatch from '@/pages/404';
 import NoAuthority from '@/pages/403';
 import { initData } from './index';
 
@@ -99,7 +99,7 @@ export default ({ path, component }: { path: string; component: any }) => {
 };
 `;
 
-exports.type = `import { Configuration } from 'webpack';
+export const type = `import { Configuration } from 'webpack';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 
 export default interface ConfigProps {
@@ -130,7 +130,7 @@ export default interface ConfigProps {
 
 `;
 
-exports.indexHtml = ({ favicon, title, script, link }) => `<!DOCTYPE html>
+export const indexHtml = ({ favicon, title, script, link }) => `<!DOCTYPE html>
 <html lang="en">
 
 <head>

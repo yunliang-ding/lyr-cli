@@ -3,6 +3,7 @@ import { ConfigProps } from './type';
 import { resolve } from 'path';
 import { readFileSync } from 'fs-extra';
 import { runDev, runProd } from './webpack';
+import { createIndexHtml, createLyr } from './create';
 
 const defineConfig = (props: ConfigProps) => {
   return props;
@@ -37,4 +38,4 @@ const run = () => {
   return _exports;
 };
 
-export { run, runDev, runProd };
+export { run, runDev, runProd, createLyr, createIndexHtml };
