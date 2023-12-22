@@ -7,7 +7,7 @@ const {
   run,
   runDev,
   runWatch,
-  runProd,
+  runBuild,
   createLyr,
   createIndexHtml,
 } = require('../dist/index');
@@ -40,5 +40,5 @@ if (env === 'dev') {
 } else if (env === 'build') {
   lyrConfig.mode = 'production';
   createIndexHtml(rootPath, lyrConfig, isThinkjs); // 创建 index.html
-  runProd(lyrConfig, isThinkjs); // 打包
+  runBuild(lyrConfig, isThinkjs); // 打包
 }

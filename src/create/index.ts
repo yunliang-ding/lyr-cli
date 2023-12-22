@@ -102,7 +102,7 @@ export const createIndexHtml = async function (
       : [...(option.buildScript || [])];
   const link = [...(option.link || [])];
   var outputFilePath =
-    mode === 'dev' ? `${rootPath}/public/index.html` : `${rootPath}/dist`;
+    mode === 'dev' ? `${rootPath}/public/index.html` : `${rootPath}/build/index.html`;
   if (isThinkjs) {
     link.push(`/${mode}/app.css`);
     script.push(`/${mode}/app.js`);

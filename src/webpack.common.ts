@@ -10,6 +10,7 @@ export default (config: ConfigProps) => ({
   mode: config.mode,
   entry: './src/app.tsx',
   performance: false, // 去掉性能上的警告
+  stats: 'errors-only',
   externals: {
     axios: 'axios',
     react: 'React',

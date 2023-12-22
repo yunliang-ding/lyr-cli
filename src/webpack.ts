@@ -17,7 +17,6 @@ export const runDev = async (config: ConfigProps) => {
         output: {
           filename: 'app.js',
         },
-        stats: 'errors-only',
       } as any,
     ),
   );
@@ -59,7 +58,6 @@ export const runWatch = (config: ConfigProps) => {
           path: resolve('./', './app/www/dev'),
           filename: 'app.js',
         },
-        stats: 'errors-only',
       } as any,
     ),
   );
@@ -91,14 +89,14 @@ export const runWatch = (config: ConfigProps) => {
 };
 
 /** build 打包 */
-export const runProd = (config: ConfigProps, isThinkjs = false) => {
+export const runBuild = (config: ConfigProps, isThinkjs = false) => {
   const compiler = webpack(
     merge(
       common(config),
       config.webpackConfig?.(config.mode) || {}, // 合并 webpack
       {
         output: {
-          path: resolve('./', isThinkjs ? './app/www/build' : './dist'),
+          path: resolve('./', isThinkjs ? './app/www/build' : './build'),
           filename: 'app.js',
         },
       } as any,
