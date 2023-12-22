@@ -93,14 +93,14 @@ export const runWatch = (config: ConfigProps) => {
 };
 
 /** build 打包 */
-export const runProd = (config: ConfigProps) => {
+export const runProd = (config: ConfigProps, isThinkjs) => {
   const compiler = webpack(
     merge(
       common(config),
       config.webpackConfig?.(config.mode) || {}, // 合并 webpack
       {
         output: {
-          path: resolve('./', './app/www/build'),
+          path: resolve('./', isThinkjs ? './app/www/build' : './dist'),
           filename: 'app.js',
         },
       } as any,

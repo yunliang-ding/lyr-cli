@@ -89,24 +89,24 @@ export const createLyr = function (
   });
   console.log(chalk.green('=> create .lyr done.'));
 };
-
 /** 创建index.html */
 export const createIndexHtml = async function (
   rootPath = '',
   option: ConfigProps,
+  isThinkjs = false,
 ) {
-  const isThinkjs = fs.existsSync(
-    resolve(__dirname, `${rootPath}/app/pm2.json`),
-  );
+  const mode = option.mode === 'development' ? 'dev' : 'build';
   const script =
-    option.mode === 'development'
+    mode === 'dev'
       ? [...(option.devScript || [])]
       : [...(option.buildScript || [])];
   const link = [...(option.link || [])];
-  const mode = option.mode === 'development' ? 'dev' : 'build';
+  var outputFilePath =
+    mode === 'dev' ? `${rootPath}/public/index.html` : `${rootPath}/dist`;
   if (isThinkjs) {
     link.push(`/${mode}/app.css`);
     script.push(`/${mode}/app.js`);
+    outputFilePath = `${rootPath}/app/www/${mode}/index.html`;
   } else {
     link.push('/app.css');
     script.push('/app.js');
@@ -121,13 +121,6 @@ export const createIndexHtml = async function (
       .map((i) => `<script crossorigin src="${i}"></script>`)
       .join('\n'),
   });
-  var outputFilePath = `${rootPath}/public/index.html`;
-  if (isThinkjs) {
-    outputFilePath =
-      option.mode === 'development'
-        ? `${rootPath}/app/www/dev/index.html`
-        : `${rootPath}/app/www/build/index.html`;
-  }
   fs.outputFile(outputFilePath, content);
   console.log(chalk.green('=> create index.html done.'));
 };
