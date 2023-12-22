@@ -2,7 +2,6 @@ import { resolve } from 'path';
 import * as MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import * as WebpackBar from 'webpackbar';
 import * as BundleAnalyzer from 'webpack-bundle-analyzer';
-import * as CompressionPlugin from 'compression-webpack-plugin';
 import { ConfigProps } from './type';
 
 const _WebpackBar: any = WebpackBar;
@@ -82,7 +81,5 @@ export default (config: ConfigProps) => ({
       basic: false, // 默认true，启用一个简单的日志报告器
       profile: false, // 默认false，启用探查器。
     }),
-    // 资源开启gzip
-    new CompressionPlugin(),
   ],
 });

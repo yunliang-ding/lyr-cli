@@ -152,10 +152,10 @@ export default defineConfig({});
 
 ```ts | pure
 import { Configuration } from 'webpack';
+import { Configuration as DevServerConfiguration } from 'webpack-dev-server';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 
 export interface ConfigProps {
-  /** 标题 */
   /** 标题 */
   title?: string;
   /** icon */
@@ -177,30 +177,63 @@ export interface ConfigProps {
     accessKeyId: string;
     accessKeySecret: string;
   };
+  /** dev-server 配置 */
+  devServer?: DevServerConfiguration;
   /** webpack 配置 */
-  webpackConfig?: (mode: 'development' | 'production') => Configuration;
+  webpackConfig?: (
+    mode: 'development' | 'production' | undefined,
+  ) => Configuration;
+  mode?: 'development' | 'production';
 }
 ```
 
-## 开发环境
+## 单一应用 base 模版
+
+### 开发
 
 ```shell
 npm start
 ```
 
+- 基于 webpack-dev-server 自动生成 /public/index.html
+
 ![dev](http://react-core-form.oss-cn-beijing.aliyuncs.com/assets/dev.png)
 
-- 持续监听
+### 发布
 
-```jsx | pure
-./app/www/dev // 输出位置
-
-app.css
-app.js
-index.html
+```shell
+npm run build
 ```
 
-## 部署发布
+- 构建之后生成如下文件
+
+```jsx | pure
+/dist/app.css
+/dist/app.js
+/dist/index.html
+```
+
+![dev](http://react-core-form.oss-cn-beijing.aliyuncs.com/assets/build.png)
+
+## 全栈应用 pro 模版
+
+## 开发
+
+```shell
+npm run watch
+```
+
+![dev](http://react-core-form.oss-cn-beijing.aliyuncs.com/assets/watch.png)
+
+- 生成如下文件并持续监听文件改动
+
+```jsx | pure
+/app/www/dev/app.css
+/app/www/dev/app.js
+/app/www/dev/index.html
+```
+
+## 发布
 
 ```shell
 npm run build
@@ -208,13 +241,10 @@ npm run build
 
 ![dev](http://react-core-form.oss-cn-beijing.aliyuncs.com/assets/build.png)
 
-- 会输出如下结构的资源文件到
+- 构建之后生成如下文件
 
 ```jsx | pure
-
-./app/www/build // 输出位置
-
-app.css
-app.js
-index.html
+/app/www/build/app.css
+/app/www/build/app.js
+/app/www/build/index.html
 ```

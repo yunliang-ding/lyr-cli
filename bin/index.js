@@ -1,10 +1,12 @@
 #!/usr/bin/env node
 const chalk = require('chalk');
+const { resolve } = require('path');
 const fs = require('fs-extra');
 const { version } = require('../package.json');
 const {
   run,
   runDev,
+  runWatch,
   runProd,
   createLyr,
   createIndexHtml,
@@ -35,7 +37,7 @@ if (env === 'dev') {
 } else if (env === 'watch') {
   createIndexHtml(rootPath, lyrConfig, isThinkjs); // 创建 index.html
   runWatch(lyrConfig); // 构建
-} else {
+} else if (env === 'build') {
   lyrConfig.mode = 'production';
   createIndexHtml(rootPath, lyrConfig, isThinkjs); // 创建 index.html
   runProd(lyrConfig, isThinkjs); // 打包

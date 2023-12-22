@@ -18,6 +18,8 @@
     "build": "tsc --outDir dist -d ./src/index.ts errors"
   },
   "dependencies": {
+    "@babel/core": "7.23.5",
+   
     "chalk": "^4.0.0",
     "glob": "10.3.10",
     "chokidar": "3.5.3",
@@ -33,22 +35,18 @@
     "webpack-dev-server": "4.15.1",
     "webpack-cli": "5.1.4",
     "webpackbar": "5.0.2",
+    "babel-preset-env": "1.7.0",
     "webpack-bundle-analyzer": "4.10.1",
-    "mini-css-extract-plugin": "2.7.6",
-    "compression-webpack-plugin": "10.0.0",
-    "friendly-errors-webpack-plugin": "1.7.0",
-    "@babel/core": "7.23.5",
-    "babel-preset-env": "1.7.0"
+    "mini-css-extract-plugin": "2.7.6"
   },
   "devDependencies": {
     "dumi": "^1.0.14",
     "prettier": "^2.2.1",
     "typescript": "5.3.3",
-    "@types/fs-extra": "11.0.4",
-    "@types/friendly-errors-webpack-plugin": "0.1.7",
-    "@types/webpack-bundle-analyzer": "4.6.3",
     "@types/chalk": "2.2.0",
-    "@types/webpack-dev-server": "4.7.2"
+    "@types/fs-extra": "11.0.4",
+    "@types/webpack-dev-server": "4.7.2",
+    "@types/webpack-bundle-analyzer": "4.6.3"
   },
   "license": "MIT"
 }

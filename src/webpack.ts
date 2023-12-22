@@ -2,11 +2,10 @@
 import { resolve } from 'path';
 import { merge } from 'webpack-merge';
 import common from './webpack.common';
+import { ConfigProps } from './type';
 import * as webpack from 'webpack';
 import * as WebpackDevServer from 'webpack-dev-server';
 import * as chalk from 'chalk';
-import * as FriendlyErrorsWebpackPlugin from 'friendly-errors-webpack-plugin';
-import { ConfigProps } from './type';
 
 /** dev 本地开发 */
 export const runDev = async (config: ConfigProps) => {
@@ -19,7 +18,6 @@ export const runDev = async (config: ConfigProps) => {
           filename: 'app.js',
         },
         stats: 'errors-only',
-        plugins: [new FriendlyErrorsWebpackPlugin()],
       } as any,
     ),
   );
@@ -36,16 +34,17 @@ export const runDev = async (config: ConfigProps) => {
     {
       ...config.devServer,
       compress: true,
+      hot: false,
+      allowedHosts: 'all',
       liveReload: true,
       port,
     },
     compiler,
   );
-  server.listen(port, IP, (err) => {
+  server.startCallback((err) => {
     if (err) {
       console.log(err);
     }
-    console.log(chalk.green(`=> server is running at http://${IP}:${port}`));
   });
 };
 
@@ -61,7 +60,6 @@ export const runWatch = (config: ConfigProps) => {
           filename: 'app.js',
         },
         stats: 'errors-only',
-        plugins: [new FriendlyErrorsWebpackPlugin()],
       } as any,
     ),
   );
@@ -93,7 +91,7 @@ export const runWatch = (config: ConfigProps) => {
 };
 
 /** build 打包 */
-export const runProd = (config: ConfigProps, isThinkjs) => {
+export const runProd = (config: ConfigProps, isThinkjs = false) => {
   const compiler = webpack(
     merge(
       common(config),
@@ -128,7 +126,7 @@ export const runProd = (config: ConfigProps, isThinkjs) => {
       process.exit(0); // 退出
     } else {
       // 构建失败，输出错误信息
-      console.log(chalk.red(String(stats?.compilation.errors)));
+      console.log(err, chalk.red(String(stats?.compilation.errors)));
       // 以非零状态码结束进程
       process.exit(1);
     }

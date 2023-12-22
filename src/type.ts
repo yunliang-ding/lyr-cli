@@ -1,6 +1,6 @@
 import { Configuration } from 'webpack';
-import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import { Configuration as DevServerConfiguration } from 'webpack-dev-server';
+import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 
 export interface ConfigProps {
   /** 标题 */
