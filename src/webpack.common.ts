@@ -3,6 +3,7 @@ import * as MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import * as WebpackBar from 'webpackbar';
 import * as BundleAnalyzer from 'webpack-bundle-analyzer';
 import { ConfigProps } from './type';
+import { Configuration } from 'webpack';
 
 const _WebpackBar: any = WebpackBar;
 
@@ -11,6 +12,7 @@ export default (config: ConfigProps) => ({
   entry: './src/app.tsx',
   performance: false, // 去掉性能上的警告
   stats: 'errors-only',
+  infrastructureLogging: { level: 'error' },
   externals: {
     axios: 'axios',
     react: 'React',
@@ -83,4 +85,4 @@ export default (config: ConfigProps) => ({
       profile: false, // 默认false，启用探查器。
     }),
   ],
-});
+} as Configuration);

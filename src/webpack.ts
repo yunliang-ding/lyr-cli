@@ -21,8 +21,8 @@ export const runDev = async (config: ConfigProps) => {
     ),
   );
   console.log(
-    chalk.green('=> externals'),
-    chalk.gray(JSON.stringify(compiler.options.externals, null, 2)),
+    chalk.green('=> externals include '),
+    chalk.gray(JSON.stringify(compiler.options.externals)),
   );
   const IP = (await WebpackDevServer.internalIP('v4')) || 'localhost'; // 获取ip地址
   const port = await WebpackDevServer.getFreePort(
@@ -32,6 +32,9 @@ export const runDev = async (config: ConfigProps) => {
   const server = new WebpackDevServer(
     {
       ...config.devServer,
+      devMiddleware: {
+        writeToDisk: false
+      },
       compress: true,
       hot: false,
       allowedHosts: 'all',
@@ -62,8 +65,8 @@ export const runWatch = (config: ConfigProps) => {
     ),
   );
   console.log(
-    chalk.green('=> externals'),
-    chalk.gray(JSON.stringify(compiler.options.externals, null, 2)),
+    chalk.green('=> externals include '),
+    chalk.gray(JSON.stringify(compiler.options.externals)),
   );
   compiler.watch(
     {
@@ -103,8 +106,8 @@ export const runBuild = (config: ConfigProps, isThinkjs = false) => {
     ),
   );
   console.log(
-    chalk.green('=> externals'),
-    chalk.gray(JSON.stringify(compiler.options.externals, null, 2)),
+    chalk.green('=> externals include '),
+    chalk.gray(JSON.stringify(compiler.options.externals)),
   );
   compiler.run((err, stats: any) => {
     if (!err && !stats?.hasErrors()) {
