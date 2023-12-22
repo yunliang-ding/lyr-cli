@@ -91,11 +91,11 @@ Page.keeplive = true; // 开启缓存功能
 export default Page;
 ```
 
-### 样式
+## 全局样式
 
 - 默认引入 src/global.less
 
-### 入口
+## 入口文件
 
 - 入口文件 src/app.tsx
 
@@ -131,7 +131,7 @@ runApp({
 });
 ```
 
-## 业务使用
+### 业务使用
 
 ```jsx | pure
 import { initData } from 'lyr'; // 获取 initData
@@ -195,29 +195,29 @@ export interface ConfigProps {
 npm start
 ```
 
-- 基于 webpack-dev-server 自动生成 /public/index.html
-
 ![dev](http://react-core-form.oss-cn-beijing.aliyuncs.com/assets/dev.png)
 
-### 发布
+- 基于 webpack-dev-server 自动生成 /public/index.html
+
+### 打包
 
 ```shell
 npm run build
 ```
 
+![dev](http://react-core-form.oss-cn-beijing.aliyuncs.com/assets/build.png)
+
 - 构建之后生成如下文件
 
 ```jsx | pure
-/dist/app.css
-/dist/app.js
-/dist/index.html
+/build/app.css
+/build/app.js
+/build/index.html
 ```
-
-![dev](http://react-core-form.oss-cn-beijing.aliyuncs.com/assets/build.png)
 
 ## 全栈应用 pro 模版
 
-## 开发
+### 开发
 
 ```shell
 npm run watch
@@ -233,13 +233,21 @@ npm run watch
 /app/www/dev/index.html
 ```
 
-## 发布
+```shell
+cd app & npm start;
+```
+
+![dev](http://react-core-form.oss-cn-beijing.aliyuncs.com/assets/pro-build2.png)
+
+- 访问上面服务地址即可[基于 thinkjs3.x](https://thinkjs.org/doc/index.html)
+
+### 打包
 
 ```shell
 npm run build
 ```
 
-![dev](http://react-core-form.oss-cn-beijing.aliyuncs.com/assets/build.png)
+![dev](http://react-core-form.oss-cn-beijing.aliyuncs.com/assets/pro-build.png)
 
 - 构建之后生成如下文件
 
@@ -248,3 +256,7 @@ npm run build
 /app/www/build/app.js
 /app/www/build/index.html
 ```
+
+### pm2 部署
+
+- 安装 pm2 之后，项目根目录运行 ./deploy.sh，完成部署

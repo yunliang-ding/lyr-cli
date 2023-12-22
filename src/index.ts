@@ -2,8 +2,10 @@ import { transform } from '@babel/core';
 import { ConfigProps } from './type';
 import { resolve } from 'path';
 import { readFileSync } from 'fs-extra';
-import { runDev, runBuild, runWatch } from './webpack';
 import { createIndexHtml, createLyr } from './create';
+import runDev from './webpack.dev';
+import runWatch from './webpack.watch';
+import runBuild from './webpack.build';
 
 const defineConfig = (props: ConfigProps) => {
   return props;
