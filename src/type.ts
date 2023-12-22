@@ -1,5 +1,6 @@
 import { Configuration } from 'webpack';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
+import { Configuration as DevServerConfiguration } from 'webpack-dev-server';
 
 export interface ConfigProps {
   /** 标题 */
@@ -23,7 +24,11 @@ export interface ConfigProps {
     accessKeyId: string;
     accessKeySecret: string;
   };
+  /** dev-server 配置 */
+  devServer?: DevServerConfiguration;
   /** webpack 配置 */
-  webpackConfig?: (mode: 'development' | 'production') => Configuration;
-  mode?: 'development' | 'production'
+  webpackConfig?: (
+    mode: 'development' | 'production' | undefined,
+  ) => Configuration;
+  mode?: 'development' | 'production';
 }

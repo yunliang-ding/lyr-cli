@@ -3,11 +3,54 @@ import { resolve } from 'path';
 import { merge } from 'webpack-merge';
 import common from './webpack.common';
 import * as webpack from 'webpack';
+import * as WebpackDevServer from 'webpack-dev-server';
 import * as chalk from 'chalk';
 import * as FriendlyErrorsWebpackPlugin from 'friendly-errors-webpack-plugin';
+import { ConfigProps } from './type';
 
-/** 编译 */
-export const runDev = (config) => {
+/** dev 本地开发 */
+export const runDev = async (config: ConfigProps) => {
+  const compiler = webpack(
+    merge(
+      common(config),
+      config.webpackConfig?.(config.mode) || {}, // 合并 webpack
+      {
+        output: {
+          filename: 'app.js',
+        },
+        stats: 'errors-only',
+        plugins: [new FriendlyErrorsWebpackPlugin()],
+      } as any,
+    ),
+  );
+  console.log(
+    chalk.green('=> externals'),
+    chalk.gray(JSON.stringify(compiler.options.externals, null, 2)),
+  );
+  const IP = (await WebpackDevServer.internalIP('v4')) || 'localhost'; // 获取ip地址
+  const port = await WebpackDevServer.getFreePort(
+    config.devServer?.port || 3000,
+    IP,
+  ); // 获取可用的 port
+  const server = new WebpackDevServer(
+    {
+      ...config.devServer,
+      compress: true,
+      liveReload: true,
+      port,
+    },
+    compiler,
+  );
+  server.listen(port, IP, (err) => {
+    if (err) {
+      console.log(err);
+    }
+    console.log(chalk.green(`=> server is running at http://${IP}:${port}`));
+  });
+};
+
+/** watch 持续监听 */
+export const runWatch = (config: ConfigProps) => {
   const compiler = webpack(
     merge(
       common(config),
@@ -18,10 +61,8 @@ export const runDev = (config) => {
           filename: 'app.js',
         },
         stats: 'errors-only',
-        plugins: [
-          new FriendlyErrorsWebpackPlugin(),
-        ],
-      },
+        plugins: [new FriendlyErrorsWebpackPlugin()],
+      } as any,
     ),
   );
   console.log(
@@ -51,8 +92,8 @@ export const runDev = (config) => {
   );
 };
 
-/** 打包 */
-export const runProd = (config) => {
+/** build 打包 */
+export const runProd = (config: ConfigProps) => {
   const compiler = webpack(
     merge(
       common(config),
@@ -62,7 +103,7 @@ export const runProd = (config) => {
           path: resolve('./', './app/www/build'),
           filename: 'app.js',
         },
-      },
+      } as any,
     ),
   );
   console.log(

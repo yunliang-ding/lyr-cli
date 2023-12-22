@@ -108,8 +108,8 @@ export const createIndexHtml = async function (
     link.push(`/${mode}/app.css`);
     script.push(`/${mode}/app.js`);
   } else {
-    link.push('./app.css');
-    script.push('./app.js');
+    link.push('/app.css');
+    script.push('/app.js');
   }
   const content = indexHtml({
     favicon: option.favicon,
@@ -121,10 +121,13 @@ export const createIndexHtml = async function (
       .map((i) => `<script crossorigin src="${i}"></script>`)
       .join('\n'),
   });
-  var outputFilePath =
-    option.mode === 'development'
-      ? `${rootPath}/app/www/dev/index.html`
-      : `${rootPath}/app/www/build/index.html`;
+  var outputFilePath = `${rootPath}/public/index.html`;
+  if (isThinkjs) {
+    outputFilePath =
+      option.mode === 'development'
+        ? `${rootPath}/app/www/dev/index.html`
+        : `${rootPath}/app/www/build/index.html`;
+  }
   fs.outputFile(outputFilePath, content);
   console.log(chalk.green('=> create index.html done.'));
 };
