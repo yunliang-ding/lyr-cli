@@ -5,8 +5,8 @@ export default defineConfig({
   title: 'lyr-cli',
   outputPath: 'docs-dist',
   favicon:
-    'https://unpkg.byted-static.com/latest/byted/arco-config/assets/favicon.ico',
-  logo: 'https://unpkg.byted-static.com/latest/byted/arco-config/assets/favicon.ico',
+    'https://react-core-form.oss-cn-beijing.aliyuncs.com/assets/favicon.ico',
+  logo: 'https://react-core-form.oss-cn-beijing.aliyuncs.com/assets/favicon.ico',
   metas: [
     {
       name: 'keywords',

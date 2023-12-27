@@ -22,8 +22,6 @@ if (!env) {
   return console.log(chalk.redBright(`命令不存在: ${type}`));
 }
 const rootPath = __dirname.split('/node_modules')[0];
-// 是否是全栈项目
-const isThinkjs = fs.existsSync(resolve(__dirname, `${rootPath}/app/pm2.json`));
 console.log(chalk.green(`lyr ${version}`));
 /** 解析配置文件 ./lry.config.ts */
 const lyrConfig = run().default;
@@ -36,10 +34,10 @@ if (env === 'dev') {
   runDev(lyrConfig); // 构建
 } else if (env === 'watch') {
   lyrConfig.wsPort = lyrConfig.wsPort || 3003; // 默认 3003
-  createIndexHtml(rootPath, lyrConfig, isThinkjs); // 创建 index.html
+  createIndexHtml(rootPath, lyrConfig); // 创建 index.html
   runWatch(lyrConfig); // 构建
 } else if (env === 'build') {
   lyrConfig.mode = 'production';
-  createIndexHtml(rootPath, lyrConfig, isThinkjs); // 创建 index.html
-  runBuild(lyrConfig, isThinkjs); // 打包
+  createIndexHtml(rootPath, lyrConfig); // 创建 index.html
+  runBuild(lyrConfig); // 打包
 }

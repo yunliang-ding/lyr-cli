@@ -25,5 +25,7 @@ export interface ConfigProps {
   ) => Configuration;
   /** 设置 liveReload 的 ws端口 默认 3003, 仅针对 watch 模式*/
   wsPort?: number;
+  /** 是否是全栈项目，默认false */
+  fullStack?: boolean;
   mode?: 'development' | 'production';
 }

@@ -6,14 +6,14 @@ import * as webpack from 'webpack';
 import * as chalk from 'chalk';
 
 /** build 打包 */
-export default (config: ConfigProps, isThinkjs = false) => {
+export default (config: ConfigProps) => {
   const compiler = webpack(
     merge(
       common(config),
       config.webpackConfig?.(config.mode) || {}, // 合并 webpack
       {
         output: {
-          path: resolve('./', isThinkjs ? './app/www/build' : './build'),
+          path: resolve('./', config.fullStack ? './app/www/build' : './build'),
           filename: 'app.js',
         },
       } as any,

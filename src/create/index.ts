@@ -92,20 +92,19 @@ export const createLyr = function (
 /** 创建index.html */
 export const createIndexHtml = async function (
   rootPath = '',
-  option: ConfigProps,
-  isThinkjs = false,
+  config: ConfigProps,
 ) {
-  const mode = option.mode === 'development' ? 'dev' : 'build';
+  const mode = config.mode === 'development' ? 'dev' : 'build';
   const script =
     mode === 'dev'
-      ? [...(option.devScript || [])]
-      : [...(option.buildScript || [])];
-  const link = [...(option.link || [])];
+      ? [...(config.devScript || [])]
+      : [...(config.buildScript || [])];
+  const link = [...(config.link || [])];
   var outputFilePath =
     mode === 'dev'
       ? `${rootPath}/public/index.html`
       : `${rootPath}/build/index.html`;
-  if (isThinkjs) {
+  if (config.fullStack) {
     link.push(`/${mode}/app.css`);
     script.push(`/${mode}/app.js`);
     outputFilePath = `${rootPath}/app/www/${mode}/index.html`;
@@ -115,11 +114,11 @@ export const createIndexHtml = async function (
   }
   // 全栈开发开启 liveReload
   let liveReload = '';
-  if (mode === 'dev' && isThinkjs) {
+  if (mode === 'dev' && config.fullStack) {
     liveReload = `<script>
   window.onload = () => {
     if ('WebSocket' in window) {
-      let ws = new WebSocket(\`ws://$\{location.hostname\}:${option.wsPort}/websocket\`);
+      let ws = new WebSocket(\`ws://$\{location.hostname\}:${config.wsPort}/websocket\`);
       ws.onopen = () => {
         ws.send('开启 liveReload.');
       };
@@ -132,8 +131,8 @@ export const createIndexHtml = async function (
 </script>`;
   }
   const content = indexHtml({
-    favicon: option.favicon,
-    title: option.title,
+    favicon: config.favicon,
+    title: config.title,
     link: link
       .map((i) => `<link rel="stylesheet" type="text/css" href="${i}" />`)
       .join('\n'),
