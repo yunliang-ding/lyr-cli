@@ -176,7 +176,8 @@ export interface ConfigProps {
   webpackConfig?: (
     mode: 'development' | 'production' | undefined,
   ) => Configuration;
-  mode?: 'development' | 'production';
+  /** 设置 liveReload 的 ws端口 默认 3003, 仅针对 watch 模式*/
+  wsPort?: number;
 }
 ```
 
@@ -213,7 +214,7 @@ npm run build
 ### 开发
 
 ```shell
-npm run watch
+npm start
 ```
 
 ![dev](http://react-core-form.oss-cn-beijing.aliyuncs.com/assets/watch.png)

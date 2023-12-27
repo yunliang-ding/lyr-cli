@@ -35,6 +35,7 @@ if (env === 'dev') {
   createIndexHtml(rootPath, lyrConfig); // 创建 index.html
   runDev(lyrConfig); // 构建
 } else if (env === 'watch') {
+  lyrConfig.wsPort = lyrConfig.wsPort || 3003; // 默认 3003
   createIndexHtml(rootPath, lyrConfig, isThinkjs); // 创建 index.html
   runWatch(lyrConfig); // 构建
 } else if (env === 'build') {

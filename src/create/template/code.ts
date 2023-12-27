@@ -119,11 +119,13 @@ export default interface ConfigProps {
   bundleAnalyzer?: BundleAnalyzerPlugin.Options;
   /** webpack 配置 */
   webpackConfig?: (mode: 'development' | 'production') => Configuration;
+  /** 设置 liveReload 的 ws端口 默认 3003, 仅针对 watch 模式*/
+  wsPort?: number;
 }
 
 `;
 
-export const indexHtml = ({ favicon, title, script, link }) => `<!DOCTYPE html>
+export const indexHtml = ({ favicon, title, script, link, liveReload }) => `<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -138,4 +140,5 @@ ${link}
   <div id="root" />
 </body>
 ${script}
+${liveReload}
 </html>`;

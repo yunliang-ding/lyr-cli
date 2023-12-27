@@ -102,7 +102,9 @@ export const createIndexHtml = async function (
       : [...(option.buildScript || [])];
   const link = [...(option.link || [])];
   var outputFilePath =
-    mode === 'dev' ? `${rootPath}/public/index.html` : `${rootPath}/build/index.html`;
+    mode === 'dev'
+      ? `${rootPath}/public/index.html`
+      : `${rootPath}/build/index.html`;
   if (isThinkjs) {
     link.push(`/${mode}/app.css`);
     script.push(`/${mode}/app.js`);
@@ -110,6 +112,23 @@ export const createIndexHtml = async function (
   } else {
     link.push('/app.css');
     script.push('/app.js');
+  }
+  // 全栈开发开启 liveReload
+  let liveReload = '';
+  if (mode === 'dev' && isThinkjs) {
+    liveReload = `<script>
+  window.onload = () => {
+    if ('WebSocket' in window) {
+      let ws = new WebSocket(\`ws://$\{location.hostname\}:${option.wsPort}/websocket\`);
+      ws.onopen = () => {
+        ws.send('开启 liveReload.');
+      };
+      ws.onmessage = (message) => {
+        console.log(\`%c $\{message.data\}\`, 'color:green;');
+      };
+    }
+  };
+</script>`;
   }
   const content = indexHtml({
     favicon: option.favicon,
@@ -120,6 +139,7 @@ export const createIndexHtml = async function (
     script: script
       .map((i) => `<script crossorigin src="${i}"></script>`)
       .join('\n'),
+    liveReload,
   });
   fs.outputFile(outputFilePath, content);
   console.log(chalk.green('=> create index.html done.'));
