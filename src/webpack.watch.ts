@@ -28,7 +28,7 @@ export default async (config: ConfigProps) => {
   );
   // 创建ws
   const host = await WebpackDevServer.internalIP('v4')
-  const wss = new WebSocketServer({ host: `http://${host}`, port: config.wsPort });
+  const wss = new WebSocketServer({ host, port: config.wsPort });
   let myWs;
   wss.on('connection', function connection(ws) {
     myWs = ws; // 赋值
