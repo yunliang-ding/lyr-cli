@@ -17,13 +17,6 @@ export interface ConfigProps {
   ignoreRouter?: string[];
   /** 是否开启资源包分析 */
   bundleAnalyzer?: BundleAnalyzerPlugin.Options;
-  /** oss 配置 */
-  ossConfig?: {
-    bucket: string;
-    region: string;
-    accessKeyId: string;
-    accessKeySecret: string;
-  };
   /** dev-server 配置 */
   devServer?: DevServerConfiguration;
   /** webpack 配置 */

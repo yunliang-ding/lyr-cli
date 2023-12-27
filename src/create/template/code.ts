@@ -117,13 +117,6 @@ export default interface ConfigProps {
   ignoreRouter?: string[];
   /** 是否开启资源包分析 */
   bundleAnalyzer?: BundleAnalyzerPlugin.Options;
-  /** oss 配置 */
-  ossConfig?: {
-    bucket: string;
-    region: string;
-    accessKeyId: string;
-    accessKeySecret: string;
-  };
   /** webpack 配置 */
   webpackConfig?: (mode: 'development' | 'production') => Configuration;
 }
