@@ -41,6 +41,11 @@ export default async (config: ConfigProps) => {
   server.startCallback((err) => {
     if (err) {
       console.log(err);
+    } else {
+      console.log(
+        chalk.green('=> 🚀 Server on'),
+        chalk.bgMagenta(` http://${IP}:${port} `),
+      );
     }
   });
 };
