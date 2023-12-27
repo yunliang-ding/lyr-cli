@@ -125,6 +125,7 @@ export const createIndexHtml = async function (
       };
       ws.onmessage = (message) => {
         console.log(\`%c $\{message.data\}\`, 'color:green;');
+        location.reload();
       };
     }
   };
