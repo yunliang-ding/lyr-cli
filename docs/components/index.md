@@ -176,8 +176,10 @@ export interface ConfigProps {
   webpackConfig?: (
     mode: 'development' | 'production' | undefined,
   ) => Configuration;
-  /** 设置 liveReload 的 ws端口 默认 3003, 仅针对 watch 模式*/
+  /** 设置 liveReload 的 ws端口 默认 3003, 仅针对 fullStack 模式*/
   wsPort?: number;
+  /** 是否全栈模式, 默认 false **/
+  fullStack?: boolean;
 }
 ```
 

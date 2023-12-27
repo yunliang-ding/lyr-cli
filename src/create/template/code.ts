@@ -119,8 +119,10 @@ export default interface ConfigProps {
   bundleAnalyzer?: BundleAnalyzerPlugin.Options;
   /** webpack 配置 */
   webpackConfig?: (mode: 'development' | 'production') => Configuration;
-  /** 设置 liveReload 的 ws端口 默认 3003, 仅针对 watch 模式*/
+  /** 设置 liveReload 的 ws端口 默认 3003, 仅针对 fullStack 模式*/
   wsPort?: number;
+  /** 是否全栈模式, 默认 false **/
+  fullStack?: boolean;
 }
 
 `;

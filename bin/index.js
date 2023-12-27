@@ -14,7 +14,6 @@ const {
 const commond = {
   dev: 'dev',
   build: 'build',
-  watch: 'watch',
 };
 const type = process.argv.pop();
 const env = commond[type];
@@ -30,12 +29,14 @@ lyrConfig.mode = 'development'; // 默认开发环境
 createLyr(rootPath, lyrConfig.ignoreRouter);
 /** 执行 webpack */
 if (env === 'dev') {
-  createIndexHtml(rootPath, lyrConfig); // 创建 index.html
-  runDev(lyrConfig); // 构建
-} else if (env === 'watch') {
-  lyrConfig.wsPort = lyrConfig.wsPort || 3003; // 默认 3003
-  createIndexHtml(rootPath, lyrConfig); // 创建 index.html
-  runWatch(lyrConfig); // 构建
+  if (!lyrConfig.fullStack) {
+    createIndexHtml(rootPath, lyrConfig); // 创建 index.html
+    runDev(lyrConfig); // 构建
+  } else {
+    lyrConfig.wsPort = lyrConfig.wsPort || 3003; // 默认 3003
+    createIndexHtml(rootPath, lyrConfig); // 创建 index.html
+    runWatch(lyrConfig); // 构建
+  }
 } else if (env === 'build') {
   lyrConfig.mode = 'production';
   createIndexHtml(rootPath, lyrConfig); // 创建 index.html
