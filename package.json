@@ -13,8 +13,7 @@
     "lyr": "./bin/index.js"
   },
   "scripts": {
-    "start": "node development.js",
-    "docs:start": "dumi dev",
+    "start": "dumi dev",
     "docs:build": "dumi build",
     "build": "tsc --outDir dist -d ./src/index.ts errors"
   },
