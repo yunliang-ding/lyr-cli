@@ -5,8 +5,8 @@ node_modules/
 /node_modules
 /npm-debug.log*
 /yarn-error.log
-/yarn.lock
-
+yarn.lock
+/runtime
 # production
 /dist
 /docs-dist

@@ -1,6 +1,9 @@
 #npmignore
 yarn.lock
 src
+!src/bootstrap
+!src/config
+!src/controller
 !/dist
 /src
 /docs

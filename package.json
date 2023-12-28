@@ -4,7 +4,7 @@
   "version": "0.0.24",
   "author": "yunliang-ding",
   "main": "./dist/index.js",
-  "description": "轻量级 React 开发框架",
+  "description": "轻量级 React 全栈开发框架",
   "repository": {
     "type": "git",
     "url": "https://github.com/yunliang-ding/yld-cli"
@@ -13,7 +13,8 @@
     "lyr": "./bin/index.js"
   },
   "scripts": {
-    "start": "dumi dev",
+    "start": "node development.js",
+    "docs:start": "dumi dev",
     "docs:build": "dumi build",
     "build": "tsc --outDir dist -d ./src/index.ts errors"
   },
@@ -37,7 +38,21 @@
     "webpackbar": "5.0.2",
     "babel-preset-env": "1.7.0",
     "webpack-bundle-analyzer": "4.10.1",
-    "mini-css-extract-plugin": "2.7.6"
+    "mini-css-extract-plugin": "2.7.6",
+    "think-cache": "^1.0.0",
+    "think-session": "^1.0.0",
+    "think-cache-file": "^1.0.8",
+    "think-model": "^1.0.0",
+    "think-session-file": "^1.0.5",
+    "think-view": "^1.0.0",
+    "think-view-nunjucks": "^1.0.1",
+    "think-model-mysql": "^1.0.0",
+    "think-logger3": "^1.0.0",
+    "think-websocket": "1.0.8",
+    "think-websocket-socket.io": "1.0.13",
+    "@koa/cors": "4.0.0",
+    "thinkjs": "^3.0.0",
+    "axios": "1.5.1"
   },
   "devDependencies": {
     "dumi": "^1.0.14",
@@ -46,7 +61,12 @@
     "@types/chalk": "2.2.0",
     "@types/fs-extra": "11.0.4",
     "@types/webpack-dev-server": "4.7.2",
-    "@types/webpack-bundle-analyzer": "4.6.3"
+    "@types/webpack-bundle-analyzer": "4.6.3",
+    "think-watcher": "^3.0.0",
+    "eslint": "^4.2.0",
+    "eslint-config-think": "^1.0.0",
+    "ava": "^0.18.0",
+    "nyc": "^7.0.0"
   },
   "license": "MIT"
 }
