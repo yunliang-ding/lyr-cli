@@ -21,7 +21,7 @@ nav:
 
 ## 设计初衷
 
-- 实现一个更加适合团队开发习惯的一款轻量、高效、可定制化 `React全栈` 开发框架
+- 实现一个更加适合团队开发习惯的一款轻量、高效、可定制化 `React` 全栈开发框架
 
 ## 快速开始
 
@@ -31,15 +31,15 @@ nav:
 yarn create lyr-cli new my-app
 ```
 
-- 选择 base 模版
+- 选择 react 模版
 
 ![demo](http://react-core-form.oss-cn-beijing.aliyuncs.com/assets/base1.png)
 
 - 按照 README.md 启动服务如下、支持暗黑主题和主题切换
 
-![demo](http://react-core-form.oss-cn-beijing.aliyuncs.com/assets/mode1.png)
+![demo](http://react-core-form.oss-cn-beijing.aliyuncs.com/assets/mode3.png)
 
-![demo](http://react-core-form.oss-cn-beijing.aliyuncs.com/assets/mode2.png)
+![demo](http://react-core-form.oss-cn-beijing.aliyuncs.com/assets/mode4.png)
 
 ## 约定规范
 
