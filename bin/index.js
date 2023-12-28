@@ -3,7 +3,6 @@ const chalk = require('chalk');
 const { version } = require('../package.json');
 const {
   run,
-  runDev,
   runWatch,
   runBuild,
   createLyr,
@@ -25,16 +24,10 @@ const lyrConfig = run().default;
 /** 运行 */
 if (env === 'dev') {
   lyrConfig.mode = 'development';
-  if (!lyrConfig.fullStack) {
-    createLyr(rootPath, lyrConfig.ignoreRouter); // 创建 src/.lyr
-    createIndexHtml(rootPath, lyrConfig); // 创建 index.html
-    runDev(lyrConfig); // 构建
-  } else {
-    lyrConfig.wsPort = lyrConfig.wsPort || 3003; // 默认 3003
-    createLyr(rootPath, lyrConfig.ignoreRouter); // 创建 src/.lyr
-    createIndexHtml(rootPath, lyrConfig); // 创建 index.html
-    runWatch(lyrConfig); // 构建
-  }
+  lyrConfig.wsPort = lyrConfig.wsPort || 3003; // 默认 3003
+  createLyr(rootPath, lyrConfig.ignoreRouter); // 创建 src/.lyr
+  createIndexHtml(rootPath, lyrConfig); // 创建 index.html
+  runWatch(lyrConfig); // 构建
 } else if (env === 'build') {
   lyrConfig.mode = 'production';
   createLyr(rootPath, lyrConfig.ignoreRouter); // 创建 src/.lyr

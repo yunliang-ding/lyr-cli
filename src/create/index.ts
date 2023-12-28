@@ -95,26 +95,12 @@ export const createIndexHtml = async function (
   config: ConfigProps,
 ) {
   const mode = config.mode === 'development' ? 'dev' : 'build';
-  const script =
-    mode === 'dev'
-      ? [...(config.devScript || [])]
-      : [...(config.buildScript || [])];
-  const link = [...(config.link || [])];
-  var outputFilePath =
-    mode === 'dev'
-      ? `${rootPath}/public/index.html`
-      : `${rootPath}/build/index.html`;
-  if (config.fullStack) {
-    link.push(`/${mode}/app.css`);
-    script.push(`/${mode}/app.js`);
-    outputFilePath = `${rootPath}/www/${mode}/index.html`;
-  } else {
-    link.push('/app.css');
-    script.push('/app.js');
-  }
+  const cdn = mode === 'dev' ? config.devScript : config.buildScript;
+  const script = [...(cdn || []), `/${mode}/app.js`];
+  const link = [...(config.link || []), `/${mode}/app.css`];
   // 全栈开发开启 liveReload
   let liveReload = '';
-  if (mode === 'dev' && config.fullStack) {
+  if (mode === 'dev') {
     liveReload = `<script>
   window.onload = () => {
     if ('WebSocket' in window) {
@@ -141,6 +127,6 @@ export const createIndexHtml = async function (
       .join('\n'),
     liveReload,
   });
-  fs.outputFile(outputFilePath, content);
+  fs.outputFile(`${rootPath}/www/${mode}/index.html`, content);
   console.log(chalk.green('=> create index.html done.'));
 };

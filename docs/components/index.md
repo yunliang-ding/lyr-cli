@@ -182,44 +182,12 @@ export interface ConfigProps {
   webpackConfig?: (
     mode: 'development' | 'production' | undefined,
   ) => Configuration;
-  /** 设置 liveReload 的 ws端口 默认 3003, 仅针对 fullStack 模式*/
+  /** 设置 liveReload 的 ws端口 默认 3003 */
   wsPort?: number;
-  /** 是否全栈模式, 默认 false **/
-  fullStack?: boolean;
 }
 ```
 
-## 单一应用 base 模版
-
-### 开发
-
-```shell
-npm start
-```
-
-![dev](http://react-core-form.oss-cn-beijing.aliyuncs.com/assets/dev.png)
-
-- 基于 webpack-dev-server 自动生成 /public/index.html
-
-### 打包
-
-```shell
-npm run build
-```
-
-![dev](http://react-core-form.oss-cn-beijing.aliyuncs.com/assets/build.png)
-
-- 构建之后生成如下文件
-
-```jsx | pure
-/build/app.css
-/build/app.js
-/build/index.html
-```
-
-## 全栈应用 pro 模版
-
-### 开发
+## 开发
 
 ```shell
 npm start
@@ -227,7 +195,7 @@ npm start
 
 ![dev](http://react-core-form.oss-cn-beijing.aliyuncs.com/assets/watch.png)
 
-- 生成如下文件并持续监听文件改动
+- 生成如下文件，默认端口 8361
 
 ```jsx | pure
 /www/dev/app.css
@@ -235,7 +203,7 @@ npm start
 /www/dev/index.html
 ```
 
-### 打包
+## 打包
 
 ```shell
 npm run build
@@ -251,6 +219,6 @@ npm run build
 /www/build/index.html
 ```
 
-### pm2 部署
+## 使用 pm2 部署
 
 - 安装 pm2 之后，项目根目录运行 ./deploy.sh，完成部署

@@ -3,7 +3,6 @@ import { ConfigProps } from './type';
 import { resolve } from 'path';
 import { readFileSync } from 'fs-extra';
 import { createIndexHtml, createLyr } from './create';
-import runDev from './webpack.dev';
 import runWatch from './webpack.watch';
 import runBuild from './webpack.build';
 
@@ -40,4 +39,4 @@ const run = () => {
   return _exports;
 };
 
-export { run, runDev, runBuild, createLyr, runWatch, createIndexHtml };
+export { run, runBuild, createLyr, runWatch, createIndexHtml };
