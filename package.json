@@ -1,7 +1,7 @@
 {
   "private": false,
   "name": "lyr-cli",
-  "version": "0.0.28",
+  "version": "0.0.29",
   "author": "yunliang-ding",
   "main": "./dist/index.js",
   "description": "轻量级 React 全栈开发框架",
@@ -49,6 +49,7 @@
     "think-model-mysql": "^1.0.0",
     "think-logger3": "^1.0.0",
     "think-websocket": "1.0.8",
+    "think-watcher": "^3.0.0",
     "think-websocket-socket.io": "1.0.13",
     "@koa/cors": "4.0.0",
     "thinkjs": "^3.0.0",
@@ -61,12 +62,7 @@
     "@types/chalk": "2.2.0",
     "@types/fs-extra": "11.0.4",
     "@types/webpack-dev-server": "4.7.2",
-    "@types/webpack-bundle-analyzer": "4.6.3",
-    "think-watcher": "^3.0.0",
-    "eslint": "^4.2.0",
-    "eslint-config-think": "^1.0.0",
-    "ava": "^0.18.0",
-    "nyc": "^7.0.0"
+    "@types/webpack-bundle-analyzer": "4.6.3"
   },
   "license": "MIT"
 }

@@ -1,7 +1,5 @@
 #!/usr/bin/env node
 const chalk = require('chalk');
-const { resolve } = require('path');
-const fs = require('fs-extra');
 const { version } = require('../package.json');
 const {
   run,
@@ -21,24 +19,25 @@ if (!env) {
   return console.log(chalk.redBright(`命令不存在: ${type}`));
 }
 const rootPath = __dirname.split('/node_modules')[0];
-console.log(chalk.green(`lyr ${version}`));
+console.log(chalk.green(`=> lyr ${version}`));
 /** 解析配置文件 ./lry.config.ts */
 const lyrConfig = run().default;
-lyrConfig.mode = 'development'; // 默认开发环境
-/** 创建 /src/.lyr */
-createLyr(rootPath, lyrConfig.ignoreRouter);
-/** 执行 webpack */
+/** 运行 */
 if (env === 'dev') {
+  lyrConfig.mode = 'development';
   if (!lyrConfig.fullStack) {
+    createLyr(rootPath, lyrConfig.ignoreRouter); // 创建 src/.lyr
     createIndexHtml(rootPath, lyrConfig); // 创建 index.html
     runDev(lyrConfig); // 构建
   } else {
     lyrConfig.wsPort = lyrConfig.wsPort || 3003; // 默认 3003
+    createLyr(rootPath, lyrConfig.ignoreRouter); // 创建 src/.lyr
     createIndexHtml(rootPath, lyrConfig); // 创建 index.html
     runWatch(lyrConfig); // 构建
   }
 } else if (env === 'build') {
   lyrConfig.mode = 'production';
+  createLyr(rootPath, lyrConfig.ignoreRouter); // 创建 src/.lyr
   createIndexHtml(rootPath, lyrConfig); // 创建 index.html
   runBuild(lyrConfig); // 打包
 }
