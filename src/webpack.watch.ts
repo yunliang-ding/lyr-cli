@@ -16,7 +16,7 @@ export default async (config: ConfigProps) => {
       config.webpackConfig?.(config.mode) || {}, // 合并 webpack
       {
         output: {
-          path: resolve('./', './app/www/dev'),
+          path: resolve('./', './www/dev'),
           filename: 'app.js',
         },
       } as any,

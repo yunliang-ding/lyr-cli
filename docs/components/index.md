@@ -21,9 +21,7 @@ nav:
 
 ## 设计初衷
 
-- 提供一个高效的 `React` 开发框架，轻量化为主
-
-- 实现一个更加适合团队开发习惯的一款定制化 `React` 框架
+- 实现一个更加适合团队开发习惯的一款轻量、高效、可定制化 `React全栈` 开发框架
 
 ## 快速开始
 
@@ -45,7 +43,7 @@ yarn create lyr-cli new my-app
 
 ## 约定规范
 
-### 路由
+### 页面路由
 
 - 默认约定规则如下，当文件名变化，触发自动更新
 
@@ -61,6 +59,14 @@ src/pages/403.tsx // 暂无权限
 src/pages/404.tsx // 不存在
 
 src/pages/error-boundary.tsx // 错误边界
+```
+
+### 接口路由
+
+- 默认约定参看 [基于 thinkjs3.x](https://thinkjs.org/zh-cn/doc/3.0/controller.html) 的路由规则
+
+```jsx | pure
+src / controller; // 定义接口
 ```
 
 ### 路由鉴权
@@ -224,18 +230,10 @@ npm start
 - 生成如下文件并持续监听文件改动
 
 ```jsx | pure
-/app/www/dev/app.css
-/app/www/dev/app.js
-/app/www/dev/index.html
+/www/dev/app.css
+/www/dev/app.js
+/www/dev/index.html
 ```
-
-```shell
-cd app & npm start;
-```
-
-![dev](http://react-core-form.oss-cn-beijing.aliyuncs.com/assets/pro-build2.png)
-
-- 访问上面服务地址即可[基于 thinkjs3.x](https://thinkjs.org/doc/index.html)
 
 ### 打包
 
@@ -248,9 +246,9 @@ npm run build
 - 构建之后生成如下文件
 
 ```jsx | pure
-/app/www/build/app.css
-/app/www/build/app.js
-/app/www/build/index.html
+/www/build/app.css
+/www/build/app.js
+/www/build/index.html
 ```
 
 ### pm2 部署

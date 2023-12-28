@@ -13,7 +13,7 @@ export default (config: ConfigProps) => {
       config.webpackConfig?.(config.mode) || {}, // 合并 webpack
       {
         output: {
-          path: resolve('./', config.fullStack ? './app/www/build' : './build'),
+          path: resolve('./', config.fullStack ? './www/build' : './build'),
           filename: 'app.js',
         },
       } as any,

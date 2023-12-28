@@ -107,7 +107,7 @@ export const createIndexHtml = async function (
   if (config.fullStack) {
     link.push(`/${mode}/app.css`);
     script.push(`/${mode}/app.js`);
-    outputFilePath = `${rootPath}/app/www/${mode}/index.html`;
+    outputFilePath = `${rootPath}/www/${mode}/index.html`;
   } else {
     link.push('/app.css');
     script.push('/app.js');
