@@ -1,7 +1,7 @@
 {
   "private": false,
   "name": "lyr-cli",
-  "version": "0.0.31",
+  "version": "0.0.32",
   "author": "yunliang-ding",
   "main": "./dist/index.js",
   "description": "轻量级 React 全栈开发框架",
@@ -52,7 +52,9 @@
     "think-websocket-socket.io": "1.0.13",
     "@koa/cors": "4.0.0",
     "thinkjs": "^3.0.0",
-    "axios": "1.5.1"
+    "axios": "1.6.3",
+    "ali-oss": "6.18.1",
+    "jsonwebtoken": "9.0.2"
   },
   "devDependencies": {
     "dumi": "^1.0.14",
