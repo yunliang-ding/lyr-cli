@@ -1,13 +1,12 @@
 #npmignore
 yarn.lock
-src
-!src/bootstrap
-!src/config
-!src/controller
 !/dist
-/src
 /docs
+/runtime
+.logs
 /.dumi
+.umi
+.umi-production
 /.github
 /docs-dist
 /.editorconfig                          
