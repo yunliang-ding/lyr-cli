@@ -50,7 +50,7 @@
     "think-logger3": "^1.0.0",
     "think-websocket": "1.0.8",
     "think-websocket-socket.io": "1.0.13",
-    "@koa/cors": "4.0.0",
+    "@koa/cors": "5.0.0",
     "thinkjs": "^3.0.0",
     "axios": "1.5.1"
   },
