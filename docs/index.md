@@ -2,7 +2,7 @@
 title: lyr-cli
 hero:
   title: lyr-cli
-  desc: 轻量级 React 开发框架
+  desc: 轻量级 React 全栈开发框架
   actions:
     - text: 开始使用
       link: /components

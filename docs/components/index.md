@@ -37,9 +37,9 @@ yarn create lyr-cli new my-app
 
 - 按照 README.md 启动服务如下、支持暗黑主题和主题切换
 
-![demo](http://react-core-form.oss-cn-beijing.aliyuncs.com/assets/base2.png)
+![demo](http://react-core-form.oss-cn-beijing.aliyuncs.com/assets/mode1.png)
 
-![demo](http://react-core-form.oss-cn-beijing.aliyuncs.com/assets/base3.png)
+![demo](http://react-core-form.oss-cn-beijing.aliyuncs.com/assets/mode2.png)
 
 ## 约定规范
 
@@ -63,11 +63,7 @@ src/pages/error-boundary.tsx // 错误边界
 
 ### 接口路由
 
-- 默认约定参看 [基于 thinkjs3.x](https://thinkjs.org/zh-cn/doc/3.0/controller.html) 的路由规则
-
-```jsx | pure
-src / controller; // 定义接口
-```
+- src 下面的 controller 约定参看 [基于 thinkjs3.x](https://thinkjs.org/zh-cn/doc/3.0/controller.html) 的路由规则
 
 ### 路由鉴权
 
@@ -209,7 +205,7 @@ npm start
 npm run build
 ```
 
-![dev](http://react-core-form.oss-cn-beijing.aliyuncs.com/assets/pro-build.png)
+![build](http://react-core-form.oss-cn-beijing.aliyuncs.com/assets/build.png)
 
 - 构建之后生成如下文件
 
@@ -222,3 +218,5 @@ npm run build
 ## 使用 pm2 部署
 
 - 安装 pm2 之后，项目根目录运行 ./deploy.sh，完成部署
+
+![deploy](http://react-core-form.oss-cn-beijing.aliyuncs.com/assets/deploy.png)
