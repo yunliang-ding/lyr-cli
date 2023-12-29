@@ -25,5 +25,7 @@ export interface ConfigProps {
   ) => Configuration;
   /** 设置 liveReload 的 ws端口 默认 3003 */
   wsPort?: number;
+  /** 服务端入口，默认 ./src/apis */
+  serverPath?: string;
   mode?: 'development' | 'production';
 }
