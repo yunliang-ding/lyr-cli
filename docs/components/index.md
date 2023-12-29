@@ -63,7 +63,7 @@ src/pages/error-boundary.tsx // 错误边界
 
 ### 接口路由
 
-- src 下面的 controller 约定参看 [基于 thinkjs3.x](https://thinkjs.org/zh-cn/doc/3.0/controller.html) 的路由规则
+- src/apis/controller 约定参看 [基于 thinkjs3.x](https://thinkjs.org/zh-cn/doc/3.0/controller.html) 的路由规则
 
 ### 路由鉴权
 
