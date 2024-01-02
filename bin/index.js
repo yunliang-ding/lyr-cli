@@ -15,6 +15,7 @@ const lyrConfig = run().default;
 const type = process.argv.pop();
 const rootPath = __dirname.split('/node_modules')[0];
 if (type !== 'build') {
+  console.log(chalk.green(`=> watch by thinkjs.`))
   // 在这里启动 thinkjs 服务
   const APP_PATH = `${rootPath}/${lyrConfig.serverPath || 'src/apis'}`;
   const instance = new Application({
@@ -32,15 +33,16 @@ if (type !== 'build') {
   ).watch();
   instance.run(); // 启动 node 服务
 }
-console.log(chalk.green(`=> lyr-cli ${version}`));
 /** 运行 */
 if (type === 'dev') {
+  console.log(chalk.green(`=> use lyr-cli ${version}`));
   lyrConfig.mode = 'development';
   lyrConfig.wsPort = lyrConfig.wsPort || 3003; // 默认 3003
   createLyr(rootPath, lyrConfig.ignoreRouter); // 创建 src/.lyr
   createIndexHtml(rootPath, lyrConfig); // 创建 index.html
   runWatch(lyrConfig); // 构建
 } else if (type === 'build') {
+  console.log(chalk.green(`=> use lyr-cli ${version}`));
   lyrConfig.mode = 'production';
   createLyr(rootPath, lyrConfig.ignoreRouter); // 创建 src/.lyr
   createIndexHtml(rootPath, lyrConfig); // 创建 index.html
