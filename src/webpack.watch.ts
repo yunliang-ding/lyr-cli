@@ -52,7 +52,7 @@ export default async (config: ConfigProps) => {
         chalk.bgMagenta(' Wait '),
         chalk.green('⌛️ Compiling...'),
       );
-      myWs?.send?.("构建完成");
+      myWs?.send?.('构建完成');
     },
   );
 };
