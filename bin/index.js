@@ -5,16 +5,16 @@ const WebpackDevServer = require('webpack-dev-server')
 const chalk = require('chalk');
 const { version } = require('../package.json');
 const {
-  run,
   runWatch,
   runBuild,
   createLyr,
   createIndexHtml,
+  getUserConfig,
 } = require('../dist/index');
 /** 解析配置文件 ./lry.config.ts */
-const lyrConfig = run().default;
+const rootPath = process.cwd();
+const lyrConfig = getUserConfig().default;
 const type = process.argv.pop();
-const rootPath = __dirname.split('/node_modules')[0];
 if (type !== 'build') {
   console.log(chalk.green(`=> watch by thinkjs.`))
   // 在这里启动 thinkjs 服务

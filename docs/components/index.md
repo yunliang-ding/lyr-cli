@@ -217,6 +217,6 @@ npm run build
 
 ## 使用 pm2 部署
 
-- 安装 pm2 之后，项目根目录运行 ./deploy.sh，完成部署
+- 安装 pm2 之后，运行 npm run deploy，完成部署
 
 ![deploy](http://react-core-form.oss-cn-beijing.aliyuncs.com/assets/deploy.png)

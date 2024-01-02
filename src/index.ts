@@ -24,8 +24,8 @@ const parseDefineConfig = () => {
   }
 };
 
-// 运行，类似反编译，最终的目的是获取用户在 defineConfig函数中 定义的参数
-const run = () => {
+// 运行，类似反编译，最终的目的是获取用户配置
+const getUserConfig = () => {
   const _exports = {};
   const _require = (key: string) => {
     if (key === 'lyr') {
@@ -39,4 +39,4 @@ const run = () => {
   return _exports;
 };
 
-export { run, runBuild, createLyr, runWatch, createIndexHtml };
+export { runBuild, runWatch, createLyr, getUserConfig, createIndexHtml };
