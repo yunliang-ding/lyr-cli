@@ -15,7 +15,7 @@
   "scripts": {
     "start": "dumi dev",
     "docs:build": "dumi build",
-    "build": "tsc -d"
+    "build": "node build.js"
   },
   "dependencies": {
     "@babel/core": "7.23.5",
