@@ -27,7 +27,7 @@ export default async (config: ConfigProps) => {
     chalk.gray(JSON.stringify(compiler.options.externals)),
   );
   // 创建ws
-  const host = await WebpackDevServer.internalIP('v4')
+  const host = await WebpackDevServer.internalIP('v4');
   const wss = new WebSocketServer({ host, port: config.wsPort });
   let myWs;
   wss.on('connection', function connection(ws) {
@@ -38,21 +38,19 @@ export default async (config: ConfigProps) => {
       ignored: /node_modules/,
     },
     (err, result: any) => {
-      let fileInfo = '';
-      Object.keys(result.compilation.assets).forEach(function (key) {
-        if (key === 'app.js') {
-          fileInfo = `${key}: ${Number(
-            result.compilation.assets[key].size() / 1024,
-          ).toFixed(1)} kb`;
-        }
-      });
-      console.log(
-        chalk.green('构建完成'),
-        chalk.gray(fileInfo),
-        chalk.bgMagenta(' Wait '),
-        chalk.green('⌛️ Compiling...'),
-      );
-      myWs?.send?.('构建完成');
+      const { errors, assets } = result.compilation;
+      if (errors?.length > 0) {
+        console.log(chalk.bgRed(' error '), chalk.red(errors.toString()));
+      } else {
+        const size = assets['app.js'].size();
+        console.log(
+          chalk.green('构建完成'),
+          chalk.gray(`app.js ${Number(size / 1024).toFixed(1)} kb`),
+          chalk.bgMagenta(' Wait '),
+          chalk.green('⌛️ Compiling...'),
+        );
+        myWs?.send?.('构建完成');
+      }
     },
   );
 };
