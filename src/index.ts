@@ -24,7 +24,7 @@ const parseDefineConfig = () => {
   }
 };
 
-// 运行，类似反编译，最终的目的是获取用户配置
+// 获取用户配置
 const getUserConfig = () => {
   const _exports = {};
   const _require = (key: string) => {

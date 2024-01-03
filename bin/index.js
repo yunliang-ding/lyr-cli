@@ -14,6 +14,7 @@ const {
 /** 解析配置文件 ./lry.config.ts */
 const rootPath = process.cwd();
 const lyrConfig = getUserConfig().default;
+lyrConfig.version = version;
 const type = process.argv.pop();
 if (type !== 'build') {
   console.log(chalk.green(`=> watch by thinkjs.`))

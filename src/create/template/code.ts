@@ -125,7 +125,7 @@ export default interface ConfigProps {
 
 `;
 
-export const indexHtml = ({ favicon, title, script, link, liveReload }) => `<!DOCTYPE html>
+export const getIndexHtml = ({ favicon, title, script, link, liveReload, version }) => `<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -140,5 +140,8 @@ ${link}
   <div id="root" />
 </body>
 ${script}
+<script>
+  window.__lyrcli_version__ = ${version}
+</script>
 ${liveReload}
 </html>`;

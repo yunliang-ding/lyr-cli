@@ -3,7 +3,7 @@ import * as glob from 'glob';
 import * as chokidar from 'chokidar';
 import * as chalk from 'chalk';
 import { resolve } from 'path';
-import { auth, indexHtml, index, type } from './template/code';
+import { auth, getIndexHtml, index, type } from './template/code';
 import { ConfigProps } from '../type';
 
 const encodeStr = (str) => `#_#${str}#_#`;
@@ -116,9 +116,10 @@ export const createIndexHtml = async function (
   };
 </script>`;
   }
-  const content = indexHtml({
+  const content = getIndexHtml({
     favicon: config.favicon,
     title: config.title,
+    version: config.version,
     link: link
       .map((i) => `<link rel="stylesheet" type="text/css" href="${i}" />`)
       .join('\n'),
