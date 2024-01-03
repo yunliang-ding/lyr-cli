@@ -7,7 +7,7 @@
   "description": "轻量级 React 全栈开发框架",
   "repository": {
     "type": "git",
-    "url": "https://github.com/yunliang-ding/yld-cli"
+    "url": "https://github.com/yunliang-ding/lyr-cli"
   },
   "bin": {
     "lyr": "./bin/index.js"
@@ -15,7 +15,7 @@
   "scripts": {
     "start": "dumi dev",
     "docs:build": "dumi build",
-    "build": "tsc --outDir dist -d ./src/index.ts errors"
+    "build": "tsc -d"
   },
   "dependencies": {
     "@babel/core": "7.23.5",

@@ -141,7 +141,7 @@ ${link}
 </body>
 ${script}
 <script>
-  window.__lyrcli_version__ = ${version}
+  window.__lyrcli_version__ = "${version}";
 </script>
 ${liveReload}
 </html>`;

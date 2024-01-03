@@ -1,7 +1,7 @@
 import { resolve } from 'path';
-import * as MiniCssExtractPlugin from 'mini-css-extract-plugin';
-import * as WebpackBar from 'webpackbar';
-import * as BundleAnalyzer from 'webpack-bundle-analyzer';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import WebpackBar from 'webpackbar';
+import BundleAnalyzer from 'webpack-bundle-analyzer';
 import { ConfigProps } from './type';
 import { Configuration } from 'webpack';
 

@@ -1,7 +1,7 @@
 import * as fs from 'fs-extra';
 import * as glob from 'glob';
 import * as chokidar from 'chokidar';
-import * as chalk from 'chalk';
+import chalk from 'chalk';
 import { resolve } from 'path';
 import { auth, getIndexHtml, index, type } from './template/code';
 import { ConfigProps } from '../type';

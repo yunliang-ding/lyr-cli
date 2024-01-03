@@ -3,9 +3,9 @@ import { resolve } from 'path';
 import { merge } from 'webpack-merge';
 import common from './common';
 import { ConfigProps } from './type';
-import * as WebpackDevServer from 'webpack-dev-server';
-import * as webpack from 'webpack';
-import * as chalk from 'chalk';
+import WebpackDevServer from 'webpack-dev-server';
+import webpack from 'webpack';
+import chalk from 'chalk';
 import { WebSocketServer } from 'ws';
 
 /** watch 持续监听 */

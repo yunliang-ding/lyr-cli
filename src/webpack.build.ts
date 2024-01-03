@@ -2,8 +2,8 @@ import { resolve } from 'path';
 import { merge } from 'webpack-merge';
 import common from './common';
 import { ConfigProps } from './type';
-import * as webpack from 'webpack';
-import * as chalk from 'chalk';
+import webpack from 'webpack';
+import chalk from 'chalk';
 
 /** build 打包 */
 export default (config: ConfigProps) => {
