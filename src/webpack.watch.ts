@@ -41,7 +41,9 @@ export default async (config: ConfigProps) => {
       const { errors, assets } = result.compilation;
       if (errors?.length > 0) {
         console.log(chalk.bgRed(' error '), chalk.red(errors.toString()));
+        myWs?.send?.(errors.toString());
       } else {
+        myWs?.send?.(1);
         const size = assets['app.js'].size();
         console.log(
           chalk.green('构建完成'),
@@ -49,7 +51,6 @@ export default async (config: ConfigProps) => {
           chalk.bgMagenta(' Wait '),
           chalk.green('⌛️ Compiling...'),
         );
-        myWs?.send?.('构建完成');
       }
     },
   );
