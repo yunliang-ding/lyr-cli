@@ -1,10 +1,13 @@
 import { transform } from '@babel/core';
 import { ConfigProps } from './type';
 import { resolve } from 'path';
-import { readFileSync } from 'fs-extra';
+import { readFileSync, outputFileSync } from 'fs-extra';
 import { createIndexHtml, createLyr } from './create';
+import chalk from 'chalk';
 import runWatch from './webpack.watch';
 import runBuild from './webpack.build';
+
+const { exec } = require('child_process');
 
 const defineConfig = (props: ConfigProps) => {
   return props;
@@ -39,4 +42,48 @@ const getUserConfig = () => {
   return _exports;
 };
 
-export { runBuild, runWatch, createLyr, getUserConfig, createIndexHtml };
+// pm2 部署
+const runDeploy = ({
+  name,
+  pm2Path,
+  scriptPath,
+  rootPath,
+  APP_PATH
+}) => {
+  outputFileSync(pm2Path,
+    `{
+"apps": [
+  {
+    "name": "${name}",
+    "cwd": "${rootPath}",
+    "err_file": "${rootPath}/logs/err.log",
+    "out_file": "${rootPath}/logs/out.log",
+    "exec_mode": "fork",
+    "script": "${scriptPath}",
+    "max_memory_restart": "1G",
+    "autorestart": true
+  }
+]
+}`,
+  );
+  outputFileSync(scriptPath,
+    `const Application = require('thinkjs');
+
+new Application({
+ROOT_PATH: "${rootPath}",
+APP_PATH: "${APP_PATH}",
+proxy: true, // use proxy
+env: 'production'
+}).run();
+`,
+  );
+  exec(`pm2 startOrReload ${pm2Path}`, (err, stdout) => {
+    if(err){
+      console.log(chalk.red(stdout));
+    } else {
+      console.log(chalk.cyan(stdout));
+    }
+  })
+}
+
+export { runBuild, runWatch, runDeploy, createLyr, getUserConfig, createIndexHtml };
