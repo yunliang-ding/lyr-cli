@@ -81,7 +81,8 @@ env: 'production'
     if(err){
       console.log(chalk.red(stdout));
     } else {
-      console.log(chalk.cyan(stdout));
+      console.log(chalk.gray(stdout));
+      console.log(chalk.green("=> deploy done."));
     }
   })
 }
