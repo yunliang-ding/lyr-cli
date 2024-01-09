@@ -5,8 +5,8 @@ export default defineConfig({
   title: 'lyr-cli',
   outputPath: 'docs-dist',
   favicon:
-    'https://react-core-form.oss-cn-beijing.aliyuncs.com/assets/favicon.ico',
-  logo: 'https://react-core-form.oss-cn-beijing.aliyuncs.com/assets/favicon.ico',
+    'https://lyr-cli-oss.oss-cn-beijing.aliyuncs.com/assets/favicon.ico',
+  logo: 'https://lyr-cli-oss.oss-cn-beijing.aliyuncs.com/assets/favicon.ico',
   metas: [
     {
       name: 'keywords',
@@ -25,8 +25,8 @@ export default defineConfig({
   navs: [
     null, // null 值代表保留约定式生成的导航，只做增量配置
     {
-      title: '🔥 react-core-form 2.x',
-      path: 'http://dev-ops.yunliang.cloud/website/react-core-form',
+      title: '🔥 lyr-design',
+      path: 'http://dev-ops.yunliang.cloud/website/lyr-design',
     },
     {
       title: 'GitHub',

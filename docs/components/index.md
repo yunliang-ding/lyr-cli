@@ -33,13 +33,13 @@ yarn create lyr-cli new my-app
 
 - 选择 react 模版
 
-![demo](http://react-core-form.oss-cn-beijing.aliyuncs.com/assets/base1.png)
+![demo](http://lyr-cli-oss.oss-cn-beijing.aliyuncs.com/assets/base1.png)
 
 - 按照 README.md 启动服务如下、支持暗黑主题和主题切换
 
-![demo](http://react-core-form.oss-cn-beijing.aliyuncs.com/assets/mode3.png)
+![demo](http://lyr-cli-oss.oss-cn-beijing.aliyuncs.com/assets/mode3.png)
 
-![demo](http://react-core-form.oss-cn-beijing.aliyuncs.com/assets/mode4.png)
+![demo](http://lyr-cli-oss.oss-cn-beijing.aliyuncs.com/assets/mode4.png)
 
 ## 约定规范
 
@@ -189,7 +189,7 @@ export interface ConfigProps {
 npm start
 ```
 
-![dev](http://react-core-form.oss-cn-beijing.aliyuncs.com/assets/watch.png)
+![dev](http://lyr-cli-oss.oss-cn-beijing.aliyuncs.com/assets/watch.png)
 
 - 生成如下文件，默认端口 8361
 
@@ -205,7 +205,7 @@ npm start
 npm run build
 ```
 
-![build](http://react-core-form.oss-cn-beijing.aliyuncs.com/assets/build.png)
+![build](http://lyr-cli-oss.oss-cn-beijing.aliyuncs.com/assets/build.png)
 
 - 构建之后生成如下文件
 
@@ -219,4 +219,4 @@ npm run build
 
 - 安装 pm2 之后，运行 npm run deploy，完成部署
 
-![deploy](http://react-core-form.oss-cn-beijing.aliyuncs.com/assets/deploy.png)
+![deploy](http://lyr-cli-oss.oss-cn-beijing.aliyuncs.com/assets/deploy.png)
