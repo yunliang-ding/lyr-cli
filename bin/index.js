@@ -52,7 +52,7 @@ if (type !== 'build' && type !== 'deploy') {
     createIndexHtml(rootPath, lyrConfig); // 创建 index.html
     runBuild(lyrConfig); // 打包
   } else if (type === 'deploy') {
-    console.log(chalk.green(`=> use pm2.json deploy.`));
+    console.log(chalk.green(`=> use pm2 deploy.`));
     const { name } = require(`${rootPath}/package.json`);
     const pm2Path = `${__dirname}/pm2.json`;
     const scriptPath = `${__dirname}/script.js`;
