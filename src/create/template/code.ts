@@ -121,6 +121,8 @@ export default interface ConfigProps {
   webpackConfig?: (mode: 'development' | 'production') => Configuration;
   /** 服务端入口，默认 ./src/apis */
   serverPath?: string;
+  /** 阿里云 armsPid */
+  armsPid?: string;
 }
 
 `;
@@ -131,6 +133,7 @@ export const getIndexHtml = ({
   script,
   link,
   liveReload,
+  pid,
 }) => `<!DOCTYPE html>
 <html lang="en">
 
@@ -140,7 +143,8 @@ export const getIndexHtml = ({
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>${title}</title>
   ${liveReload}
-${link}
+  ${link}
+  ${pid}
 </head>
 
 <body>

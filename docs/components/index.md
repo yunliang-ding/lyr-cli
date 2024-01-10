@@ -180,6 +180,8 @@ export interface ConfigProps {
   ) => Configuration;
   /** 服务端入口，默认 ./src/apis */
   serverPath?: string;
+   /** 阿里云 armsPid */
+  armsPid?: string;
 }
 ```
 
