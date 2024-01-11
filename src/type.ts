@@ -1,5 +1,4 @@
 import { Configuration } from 'webpack';
-import { Configuration as DevServerConfiguration } from 'webpack-dev-server';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 
 export interface ConfigProps {
@@ -17,8 +16,6 @@ export interface ConfigProps {
   ignoreRouter?: string[];
   /** 是否开启资源包分析 */
   bundleAnalyzer?: BundleAnalyzerPlugin.Options;
-  /** dev-server 配置 */
-  devServer?: DevServerConfiguration;
   /** webpack 配置 */
   webpackConfig?: (
     mode: 'development' | 'production' | undefined,
