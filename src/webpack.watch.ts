@@ -7,9 +7,13 @@ import WebpackDevServer from 'webpack-dev-server';
 import webpack from 'webpack';
 import chalk from 'chalk';
 import { WebSocketServer } from 'ws';
+import * as chokidar from 'chokidar';
+import { getUserConfig, createLyr, createIndexHtml } from '.';
 
 /** watch 持续监听 */
-export default async (config: ConfigProps) => {
+export default async (rootPath: string, config: ConfigProps) => {
+  createLyr(rootPath, config.ignoreRouter); // 创建 src/.lyr
+  createIndexHtml(rootPath, config); // 创建 index.html
   const compiler = webpack(
     merge(
       common(config),
@@ -32,6 +36,21 @@ export default async (config: ConfigProps) => {
   let myWs;
   wss.on('connection', function connection(ws) {
     myWs = ws; // 赋值
+  });
+  /** 监听配置文件的改动 */
+  const chokidarWatcher = chokidar.watch(`${rootPath}/lyr.config.ts`, {
+    ignored: /node_modules/,
+    ignoreInitial: true,
+  });
+  chokidarWatcher.on('change', () => {
+    const config: any = getUserConfig().default;
+    if (config) {
+      console.log(chalk.magentaBright(`=> 配置文件改动，正在重新编译.`));
+      config.mode = 'development';
+      createLyr(rootPath, config.ignoreRouter); // 创建 src/.lyr
+      createIndexHtml(rootPath, config); // 创建 index.html
+      myWs?.send?.(1);
+    }
   });
   compiler.watch(
     {

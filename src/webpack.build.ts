@@ -4,9 +4,12 @@ import common from './common';
 import { ConfigProps } from './type';
 import webpack from 'webpack';
 import chalk from 'chalk';
+import { createLyr, createIndexHtml } from '.';
 
 /** build 打包 */
-export default (config: ConfigProps) => {
+export default (rootPath: string, config: ConfigProps) => {
+  createLyr(rootPath, config.ignoreRouter); // 创建 src/.lyr
+  createIndexHtml(rootPath, config); // 创建 index.html
   const compiler = webpack(
     merge(
       common(config),

@@ -16,7 +16,11 @@ const defineConfig = (props: ConfigProps) => {
 // 解析配置文件
 const parseDefineConfig = () => {
   const configPath = resolve('./', './lyr.config.ts');
-  const content = readFileSync(configPath);
+  let content = readFileSync(configPath);
+  // 有时候读取不到?
+  while (!content.toString()) {
+    content = readFileSync(configPath);
+  }
   const result = transform(content.toString(), {
     presets: ['env'],
   });
@@ -28,7 +32,7 @@ const parseDefineConfig = () => {
 };
 
 // 获取用户配置
-const getUserConfig = () => {
+const getUserConfig = (): any => {
   const _exports = {};
   const _require = (key: string) => {
     if (key === 'lyr') {
@@ -43,14 +47,9 @@ const getUserConfig = () => {
 };
 
 // pm2 部署
-const runDeploy = ({
-  name,
-  pm2Path,
-  scriptPath,
-  rootPath,
-  APP_PATH
-}) => {
-  outputFileSync(pm2Path,
+const runDeploy = ({ name, pm2Path, scriptPath, rootPath, APP_PATH }) => {
+  outputFileSync(
+    pm2Path,
     `{
 "apps": [
   {
@@ -66,7 +65,8 @@ const runDeploy = ({
 ]
 }`,
   );
-  outputFileSync(scriptPath,
+  outputFileSync(
+    scriptPath,
     `const Application = require('thinkjs');
 
 new Application({
@@ -78,13 +78,20 @@ env: 'production'
 `,
   );
   exec(`pm2 startOrReload ${pm2Path}`, (err, stdout) => {
-    if(err){
+    if (err) {
       console.log(chalk.red(stdout));
     } else {
       console.log(chalk.gray(stdout));
-      console.log(chalk.green("=> deploy success."));
+      console.log(chalk.green('=> deploy success.'));
     }
-  })
-}
+  });
+};
 
-export { runBuild, runWatch, runDeploy, createLyr, getUserConfig, createIndexHtml };
+export {
+  runBuild,
+  runWatch,
+  runDeploy,
+  createLyr,
+  getUserConfig,
+  createIndexHtml,
+};

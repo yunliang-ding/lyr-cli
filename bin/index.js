@@ -8,8 +8,6 @@ const {
   runWatch,
   runBuild,
   runDeploy,
-  createLyr,
-  createIndexHtml,
   getUserConfig,
 } = require('../dist/index');
 /** 解析配置文件 ./lry.config.ts */
@@ -42,15 +40,11 @@ if (type !== 'build' && type !== 'deploy') {
     console.log(chalk.green(`=> use lyr-cli ${version}`));
     lyrConfig.mode = 'development';
     lyrConfig.wsPort = await WebpackDevServer.getFreePort(); // 可用的 wsPort
-    createLyr(rootPath, lyrConfig.ignoreRouter); // 创建 src/.lyr
-    createIndexHtml(rootPath, lyrConfig); // 创建 index.html
-    runWatch(lyrConfig);
+    runWatch(rootPath, lyrConfig);
   } else if (type === 'build') {
     console.log(chalk.green(`=> use lyr-cli ${version}`));
     lyrConfig.mode = 'production';
-    createLyr(rootPath, lyrConfig.ignoreRouter); // 创建 src/.lyr
-    createIndexHtml(rootPath, lyrConfig); // 创建 index.html
-    runBuild(lyrConfig); // 打包
+    runBuild(rootPath, lyrConfig); // 打包
   } else if (type === 'deploy') {
     console.log(chalk.green(`=> use pm2 deploy.`));
     const { name } = require(`${rootPath}/package.json`);
@@ -61,7 +55,7 @@ if (type !== 'build' && type !== 'deploy') {
       pm2Path,
       scriptPath,
       rootPath,
-      APP_PATH
+      APP_PATH,
     });
   }
 })();
