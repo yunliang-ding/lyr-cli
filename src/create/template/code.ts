@@ -81,6 +81,36 @@ export const defineConfig = (props: ConfigProps) => {
 export const auth = `import NoMatch from '@/pages/404';
 import NoAuthority from '@/pages/403';
 import { initData } from './index';
+import { useEffect } from 'react';
+import breadcrumbStore from '@/store/breadcrumb';
+import { PageHeaderProps } from '@arco-design/web-react';
+
+const useBreadCrumb = () => {
+  useEffect(() => {
+    return () => {
+      Object.assign(breadcrumbStore, {
+        title: '',
+        breadcrumb: undefined,
+        extra: [],
+      });
+    };
+  }, []);
+  return {
+    update: (options: PageHeaderProps) => {
+      setTimeout(() => {
+        Object.assign(breadcrumbStore, options);
+      }, 10);
+    },
+  };
+};
+
+const BreadCrumbRouter = ({ component }) => {
+  const breadCrumb = useBreadCrumb();
+  breadCrumb?.update({
+    ...(component.type.breadCrumb || {}),
+  });
+  return component;
+};
 
 export default ({ path, component }: { path: string; component: any }) => {
   if (path === '/404') {
@@ -94,7 +124,11 @@ export default ({ path, component }: { path: string; component: any }) => {
     component.type.auth === undefined;
   return {
     path,
-    element: hasAuth ? component : <NoAuthority />,
+    element: hasAuth ? (
+      <BreadCrumbRouter component={component} />
+    ) : (
+      <NoAuthority />
+    ),
   };
 };
 `;

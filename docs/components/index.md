@@ -93,6 +93,33 @@ Page.keeplive = true; // 开启缓存功能
 export default Page;
 ```
 
+### 设置面包屑
+
+- 假设存在 /src/pages/user.tsx
+
+```jsx | pure
+const Page = () => {
+  return <div>面包屑配置</div>;
+};
+
+Page.breadCrumb = {
+  title: '自定义标题',
+  breadcrumb: [
+    {
+      path: '/custom',
+      breadcrumbName: '一级标题',
+    },
+    {
+      path: '/custom/xxx',
+      breadcrumbName: '二级标题',
+    },
+  ],
+  extra: <Button type="primary">自定义</Button>,
+};
+
+export default Page;
+```
+
 ## 全局样式
 
 - 默认引入 src/global.less
@@ -177,7 +204,7 @@ export interface ConfigProps {
   ) => Configuration;
   /** 服务端入口，默认 ./src/apis */
   serverPath?: string;
-   /** 阿里云 armsPid */
+  /** 阿里云 armsPid */
   armsPid?: string;
 }
 ```
