@@ -1,4 +1,4 @@
-export const index = `import { ReactElement } from 'react';
+export const index = `import { ReactElement, useEffect } from 'react';
 import ReactDom from 'react-dom';
 import { createHashRouter, RouterProvider } from 'react-router-dom';
 import Layout from '@/layouts/index';
@@ -7,6 +7,9 @@ import router from './router';
 import AuthRouter from './auth';
 import ConfigProps from './type';
 import axios, { AxiosRequestConfig } from 'axios';
+import breadcrumbStore from '@/store/breadcrumb';
+import { PageHeaderProps } from '@arco-design/web-react';
+
 import '@/global.less';
 
 const store = {
@@ -76,16 +79,7 @@ export const defineConfig = (props: ConfigProps) => {
   return props;
 };
 
-`;
-
-export const auth = `import NoMatch from '@/pages/404';
-import NoAuthority from '@/pages/403';
-import { initData } from './index';
-import { useEffect } from 'react';
-import breadcrumbStore from '@/store/breadcrumb';
-import { PageHeaderProps } from '@arco-design/web-react';
-
-const useBreadCrumb = () => {
+export const useBreadCrumb = () => {
   useEffect(() => {
     return () => {
       Object.assign(breadcrumbStore, {
@@ -103,6 +97,12 @@ const useBreadCrumb = () => {
     },
   };
 };
+
+`;
+
+export const auth = `import NoMatch from '@/pages/404';
+import NoAuthority from '@/pages/403';
+import { initData, useBreadCrumb } from './index';
 
 const BreadCrumbRouter = ({ component }) => {
   const breadCrumb = useBreadCrumb();
