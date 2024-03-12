@@ -106,7 +106,7 @@ export const createIndexHtml = async function (
     window.__lyrcli_version__ = "${config.version}";
     window.onload = () => {
       if ('WebSocket' in window) {
-        let ws = new WebSocket(\`ws://$\{location.hostname\}:8081/websocket\`);
+        let ws = new WebSocket(\`ws://$\{location.hostname\}:${config.wsPort}/websocket\`);
         ws.onmessage = (message) => {
           if (message.data === "1") {
             location.reload();
