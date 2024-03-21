@@ -98,26 +98,29 @@ export default Page;
 - 假设存在 /src/pages/user.tsx
 
 ```jsx | pure
-const Page = () => {
+import { useEffect } from 'react';
+import { useBreadCrumb } from 'lyr';
+
+export default () => {
+  const breadCrumb = useBreadCrumb();
+  useEffect(() => {
+    breadCrumb.update({
+      title: '自定义标题',
+      breadcrumb: [
+        {
+          path: '/custom',
+          breadcrumbName: '一级标题',
+        },
+        {
+          path: '/custom/xxx',
+          breadcrumbName: '二级标题',
+        },
+      ],
+      extra: <Button type="primary">自定义</Button>,
+    });
+  }, []);
   return <div>面包屑配置</div>;
 };
-
-Page.breadCrumb = {
-  title: '自定义标题',
-  breadcrumb: [
-    {
-      path: '/custom',
-      breadcrumbName: '一级标题',
-    },
-    {
-      path: '/custom/xxx',
-      breadcrumbName: '二级标题',
-    },
-  ],
-  extra: <Button type="primary">自定义</Button>,
-};
-
-export default Page;
 ```
 
 ## 全局样式

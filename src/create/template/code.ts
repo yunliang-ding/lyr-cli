@@ -102,15 +102,7 @@ export const useBreadCrumb = () => {
 
 export const auth = `import NoMatch from '@/pages/404';
 import NoAuthority from '@/pages/403';
-import { initData, useBreadCrumb } from './index';
-
-const BreadCrumbRouter = ({ component }) => {
-  const breadCrumb = useBreadCrumb();
-  breadCrumb?.update({
-    ...(component.type.breadCrumb || {}),
-  });
-  return component;
-};
+import { initData } from './index';
 
 export default ({ path, component }: { path: string; component: any }) => {
   if (path === '/404') {
@@ -125,7 +117,7 @@ export default ({ path, component }: { path: string; component: any }) => {
   return {
     path,
     element: hasAuth ? (
-      <BreadCrumbRouter component={component} />
+      component
     ) : (
       <NoAuthority />
     ),
