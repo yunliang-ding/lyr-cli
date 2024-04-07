@@ -44,12 +44,17 @@ export default (config: ConfigProps) =>
           },
         },
         {
-          test: /\.less$/,
-          use: [MiniCssExtractPlugin.loader, 'css-loader', 'less-loader'],
-        },
-        {
-          test: /\.css$/,
-          use: [MiniCssExtractPlugin.loader, 'css-loader', 'less-loader'],
+          test: /\.(css|less)$/,
+          use: [
+            MiniCssExtractPlugin.loader,
+            {
+              loader: 'css-loader',
+              options: {
+                modules: true, // 启用 CSS 模块
+              },
+            },
+            'less-loader',
+          ],
         },
         {
           test: /\.(svg|png|jpe?g|gif)$/,
