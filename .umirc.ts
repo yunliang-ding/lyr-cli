@@ -25,10 +25,6 @@ export default defineConfig({
   navs: [
     null, // null 值代表保留约定式生成的导航，只做增量配置
     {
-      title: '🔥 lyr-design',
-      path: 'http://dev-ops.yunliang.cloud/website/lyr-design',
-    },
-    {
       title: 'GitHub',
       path: 'https://github.com/yunliang-ding/lyr-cli',
     },
