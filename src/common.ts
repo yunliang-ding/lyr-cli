@@ -50,7 +50,7 @@ export default (config: ConfigProps) =>
             {
               loader: 'css-loader',
               options: {
-                modules: true, // 启用 CSS 模块
+                // modules: true, // 启用 CSS 模块
               },
             },
             'less-loader',
