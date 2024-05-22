@@ -96,8 +96,8 @@ export const createIndexHtml = async function (
 ) {
   const mode = config.mode === 'development' ? 'dev' : 'build';
   const cdn = mode === 'dev' ? config.devScript : config.buildScript;
-  const script = [...(cdn || []), `/${mode}/app.js`];
-  const link = [...(config.link || []), `/${mode}/app.css`];
+  const script = [...(cdn || []), `/${mode}/index.js`];
+  const link = [...(config.link || []), `/${mode}/index.css`];
   // 开启 liveReload
   let liveReload = '';
   if (mode === 'dev') {
@@ -139,21 +139,6 @@ export const createIndexHtml = async function (
       .map((i) => `<script crossorigin src="${i}"></script>`)
       .join('\n'),
     liveReload,
-    pid: config.armsPid
-      ? `<script>
-    window.__bl = {
-      config: {
-        pid: "${config.armsPid}",
-        appType: "web",
-        imgUrl: "https://arms-retcode.aliyuncs.com/r.png?",
-        sendResource: true,
-        enableLinkTrace: true,
-        behavior: true
-      }
-    }
-  </script>
-  <script type="text/javascript" src="https://sdk.rum.aliyuncs.com/v1/bl.js" crossorigin></script>`
-      : '',
   });
   fs.outputFile(`${rootPath}/www/${mode}/index.html`, content);
   console.log(chalk.green('=> create index.html done.'));

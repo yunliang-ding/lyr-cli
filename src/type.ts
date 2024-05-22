@@ -26,5 +26,6 @@ export interface ConfigProps {
   armsPid?: string;
   mode?: 'development' | 'production';
   wsPort?: number;
+  wsHost?: string;
   version?: string;
 }

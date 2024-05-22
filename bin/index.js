@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 const Application = require('thinkjs');
 const watcher = require('think-watcher');
-const WebpackDevServer = require('webpack-dev-server');
 const chalk = require('chalk');
 const { version } = require('../package.json');
+const { getIPAddress, getAvailablePort } = require('./util');
 const {
   runWatch,
   runBuild,
@@ -39,7 +39,8 @@ if (type !== 'build' && type !== 'deploy') {
   if (type === 'dev') {
     console.log(chalk.green(`=> use lyr-cli ${version}`));
     lyrConfig.mode = 'development';
-    lyrConfig.wsPort = await WebpackDevServer.getFreePort(); // 可用的 wsPort
+    lyrConfig.wsPort = await getAvailablePort(4000); // 可用的 wsPort
+    lyrConfig.wsHost = await getIPAddress() // 解析 host
     runWatch(rootPath, lyrConfig);
   } else if (type === 'build') {
     console.log(chalk.green(`=> use lyr-cli ${version}`));

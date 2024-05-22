@@ -17,7 +17,7 @@ export default (rootPath: string, config: ConfigProps) => {
       {
         output: {
           path: resolve('./', './www/build'),
-          filename: 'app.js',
+          filename: 'index.js',
         },
       } as any,
     ),
@@ -31,7 +31,7 @@ export default (rootPath: string, config: ConfigProps) => {
       // 构建成功，手动结束进程
       console.log(chalk.green('👏 👏 👏 打包完成...'));
       Object.keys(stats.compilation.assets).forEach((key) => {
-        if (key === 'app.js' || key === 'app.css') {
+        if (key === 'index.js' || key === 'index.css') {
           console.log(
             chalk.gray(
               `${key}: ${Number(

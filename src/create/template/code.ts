@@ -159,7 +159,6 @@ export const getIndexHtml = ({
   script,
   link,
   liveReload,
-  pid,
 }) => `<!DOCTYPE html>
 <html lang="en">
 
@@ -170,7 +169,6 @@ export const getIndexHtml = ({
   <title>${title}</title>
   ${liveReload}
   ${link}
-  ${pid}
 </head>
 
 <body>

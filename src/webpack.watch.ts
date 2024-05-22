@@ -3,7 +3,6 @@ import { resolve } from 'path';
 import { merge } from 'webpack-merge';
 import common from './common';
 import { ConfigProps } from './type';
-import WebpackDevServer from 'webpack-dev-server';
 import webpack from 'webpack';
 import chalk from 'chalk';
 import { WebSocketServer } from 'ws';
@@ -21,7 +20,7 @@ export default async (rootPath: string, config: ConfigProps) => {
       {
         output: {
           path: resolve('./', './www/dev'),
-          filename: 'app.js',
+          filename: 'index.js',
         },
       } as any,
     ),
@@ -31,8 +30,7 @@ export default async (rootPath: string, config: ConfigProps) => {
     chalk.gray(JSON.stringify(compiler.options.externals)),
   );
   // 创建ws
-  const host = await WebpackDevServer.internalIP('v4');
-  const wss = new WebSocketServer({ host, port: config.wsPort });
+  const wss = new WebSocketServer({ host: config.wsHost, port: config.wsPort });
   let myWs;
   wss.on('connection', function connection(ws) {
     myWs = ws; // 赋值
@@ -63,10 +61,10 @@ export default async (rootPath: string, config: ConfigProps) => {
         myWs?.send?.(errors.toString());
       } else {
         myWs?.send?.(1);
-        const size = assets['app.js'].size();
+        const size = assets['index.js'].size();
         console.log(
           chalk.green('构建完成'),
-          chalk.gray(`app.js ${Number(size / 1024).toFixed(1)} kb`),
+          chalk.gray(`index.js ${Number(size / 1024).toFixed(1)} kb`),
           chalk.bgMagenta(' Wait '),
           chalk.green('⌛️ Compiling...'),
         );

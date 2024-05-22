@@ -13,8 +13,8 @@
     "lyr": "./bin/index.js"
   },
   "scripts": {
-    "start": "dumi dev",
-    "docs:build": "dumi build",
+    "start": "lyr-docs dev",
+    "docs:build": "lyr-docs build",
     "build": "node build.js"
   },
   "dependencies": {
@@ -32,7 +32,6 @@
     "url-loader": "4.1.1",
     "ws": "8.16.0",
     "webpack": "5.89.0",
-    "webpack-dev-server": "4.15.1",
     "webpack-cli": "5.1.4",
     "webpackbar": "5.0.2",
     "babel-preset-env": "1.7.0",
@@ -52,13 +51,17 @@
     "ali-oss": "6.18.1",
     "jsonwebtoken": "9.0.2"
   },
+  "resolutions": {
+    "webpack": "5.89.0"
+  },
   "devDependencies": {
-    "dumi": "^1.0.14",
+    "react": "17.0.2",
+    "lyr-extra": "0.0.6",
+    "lyr-docs": "0.0.25",
     "prettier": "^2.2.1",
     "typescript": "5.3.3",
     "@types/chalk": "2.2.0",
     "@types/fs-extra": "11.0.4",
-    "@types/webpack-dev-server": "4.7.2",
     "@types/webpack-bundle-analyzer": "4.6.3"
   },
   "license": "MIT"
