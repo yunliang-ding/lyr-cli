@@ -57,7 +57,7 @@
   "devDependencies": {
     "react": "17.0.2",
     "lyr-extra": "0.0.6",
-    "lyr-docs": "0.0.25",
+    "lyr-docs": "0.0.26",
     "prettier": "^2.2.1",
     "typescript": "5.3.3",
     "@types/chalk": "2.2.0",
