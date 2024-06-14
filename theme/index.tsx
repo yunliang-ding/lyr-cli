@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/restrict-plus-operands */
 import { useEffect } from 'react';
 import Layout from './layout';
-import Loading from '../components/loading';
+import Loading from './loading';
 import uiStore from '@/store/ui';
 import userStore from '@/store/user';
 import { generate, getRgbStr } from '@arco-design/color';

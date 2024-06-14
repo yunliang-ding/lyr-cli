@@ -1,8 +1,8 @@
 export const index = ({ version, noticeInfo, logo }) => `import { ReactElement, useEffect } from 'react';
 import ReactDom from 'react-dom';
 import { createHashRouter, RouterProvider } from 'react-router-dom';
-import Layout from '@/.theme/layouts/index';
-import ErrorBoundary from '@/.theme/components/error-boundary';
+import Layout from '@/.theme/index';
+import ErrorBoundary from '@/.theme/error-boundary';
 import router from './router';
 import AuthRouter from './auth';
 import ConfigProps from './type';

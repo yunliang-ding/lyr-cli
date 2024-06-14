@@ -12,7 +12,11 @@ export default () => {
       />
       <div style={{ width: 'calc(100% - 100px)', fontWeight: 'bold' }}>
         <Marquee pauseOnHover gradient={false} delay={2}>
-          {noticeInfo}
+          <div
+            dangerouslySetInnerHTML={{
+              __html: noticeInfo,
+            }}
+          />
         </Marquee>
       </div>
       <Button size="small" type="text">

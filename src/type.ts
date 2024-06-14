@@ -6,6 +6,10 @@ export interface ConfigProps {
   title?: string;
   /** icon */
   favicon?: string;
+  /** logo **/
+  logo?: string;
+  /** 描述信息 */
+  noticeInfo?: string;
   /** 开发环境 script */
   devScript?: string[];
   /** 生产环境 script */
@@ -27,4 +31,5 @@ export interface ConfigProps {
   mode?: 'development' | 'production';
   wsPort?: number;
   wsHost?: string;
+  version?: string;
 }
