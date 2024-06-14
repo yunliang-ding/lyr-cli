@@ -5,13 +5,14 @@ import chalk from 'chalk';
 import { resolve } from 'path';
 import { auth, getIndexHtml, index, type } from './template/code';
 import { ConfigProps } from '../type';
+import * as path from 'path';
 
 const encodeStr = (str) => `#_#${str}#_#`;
 const decodeStr = (str) => str.replaceAll('"#_#', '').replaceAll('#_#"', '');
 /** 创建文件路由 */
 const createFileRouter = async function (
   rootPath = '',
-  ignorePaths,
+  ignorePaths = [],
   sleep = true,
 ) {
   const folder = `${rootPath}/src/pages/**/*.tsx`;
@@ -69,23 +70,27 @@ const createFileRouter = async function (
 /** 创建 .lyr */
 export const createLyr = function (
   rootPath = '',
-  ignorePaths = ['component/', 'components/'],
+  config,
 ) {
-  fs.outputFile(`${rootPath}/src/.lyr/index.tsx`, index);
+  const { version } = require(`${rootPath}/package.json`);
+  fs.outputFile(`${rootPath}/src/.lyr/index.tsx`, index({ version, ...config }));
   fs.outputFile(`${rootPath}/src/.lyr/auth.tsx`, auth);
   fs.outputFile(`${rootPath}/src/.lyr/type.tsx`, type);
   /** 创建路由 */
-  createFileRouter(rootPath, ignorePaths, false);
+  createFileRouter(rootPath, config.ignorePaths, false);
+  /** 同步主题 */
+  fs.copySync(path.resolve(__dirname, '../../theme'), `${rootPath}/src/.theme`);
+  console.log(chalk.green('=> create .theme done.'));
   /** 监听路由改动 */
   const watcher = chokidar.watch(`${rootPath}/src/pages/**/*.tsx`, {
     ignored: /node_modules/,
     ignoreInitial: true,
   });
   watcher.on('add', async () => {
-    createFileRouter(rootPath, ignorePaths);
+    createFileRouter(rootPath, config.ignorePaths);
   });
   watcher.on('unlink', async () => {
-    createFileRouter(rootPath, ignorePaths);
+    createFileRouter(rootPath, config.ignorePaths);
   });
   console.log(chalk.green('=> create .lyr done.'));
 };
@@ -94,6 +99,7 @@ export const createIndexHtml = async function (
   rootPath = '',
   config: ConfigProps,
 ) {
+  const { version } = require(`${rootPath}/package.json`);
   const mode = config.mode === 'development' ? 'dev' : 'build';
   const cdn = mode === 'dev' ? config.devScript : config.buildScript;
   const script = [...(cdn || []), `/${mode}/index.js`];
@@ -103,7 +109,7 @@ export const createIndexHtml = async function (
   if (mode === 'dev') {
     liveReload = `<script>
     // 由 lyr-cli 在开发环境所创建
-    window.__lyrcli_version__ = "${config.version}";
+    window.__lyrcli_version__ = "${version}";
     window.onload = () => {
       if ('WebSocket' in window) {
         let ws = new WebSocket(\`ws://$\{location.hostname\}:${config.wsPort}/websocket\`);

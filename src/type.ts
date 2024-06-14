@@ -27,5 +27,4 @@ export interface ConfigProps {
   mode?: 'development' | 'production';
   wsPort?: number;
   wsHost?: string;
-  version?: string;
 }

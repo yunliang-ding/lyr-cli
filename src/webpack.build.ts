@@ -8,7 +8,7 @@ import { createLyr, createIndexHtml } from '.';
 
 /** build 打包 */
 export default (rootPath: string, config: ConfigProps) => {
-  createLyr(rootPath, config.ignoreRouter); // 创建 src/.lyr
+  createLyr(rootPath, config); // 创建 src/.lyr
   createIndexHtml(rootPath, config); // 创建 index.html
   const compiler = webpack(
     merge(

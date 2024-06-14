@@ -11,7 +11,7 @@ import { getUserConfig, createLyr, createIndexHtml } from '.';
 
 /** watch 持续监听 */
 export default async (rootPath: string, config: ConfigProps) => {
-  createLyr(rootPath, config.ignoreRouter); // 创建 src/.lyr
+  createLyr(rootPath, config); // 创建 src/.lyr
   createIndexHtml(rootPath, config); // 创建 index.html
   const compiler = webpack(
     merge(
@@ -45,7 +45,7 @@ export default async (rootPath: string, config: ConfigProps) => {
     if (config) {
       console.log(chalk.magentaBright(`=> 配置文件改动，正在重新编译.`));
       config.mode = 'development';
-      createLyr(rootPath, config.ignoreRouter); // 创建 src/.lyr
+      createLyr(rootPath, config); // 创建 src/.lyr
       createIndexHtml(rootPath, config); // 创建 index.html
       myWs?.send?.(1);
     }

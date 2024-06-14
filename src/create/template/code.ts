@@ -1,8 +1,8 @@
-export const index = `import { ReactElement, useEffect } from 'react';
+export const index = ({ version, noticeInfo, logo }) => `import { ReactElement, useEffect } from 'react';
 import ReactDom from 'react-dom';
 import { createHashRouter, RouterProvider } from 'react-router-dom';
-import Layout from '@/layouts/index';
-import ErrorBoundary from '@/pages/error-boundary';
+import Layout from '@/.theme/layouts/index';
+import ErrorBoundary from '@/.theme/components/error-boundary';
 import router from './router';
 import AuthRouter from './auth';
 import ConfigProps from './type';
@@ -30,10 +30,17 @@ const App = () => {
       path: '/',
       element: <Layout />,
       errorElement: <ErrorBoundary />,
-      children: router.map((item) => ({
-        ...AuthRouter(item),
-        errorElement: <ErrorBoundary />,
-      })),
+      children: router
+        .map((item) => ({
+          ...AuthRouter(item),
+          errorElement: <ErrorBoundary />,
+        }))
+        .concat([
+          {
+            path: '*',
+            element: <h3>您访问的页面不存在!</h3>,
+          },
+        ] as any),
     },
   ]);
   return <RouterProvider router={element} />;
@@ -56,7 +63,7 @@ export const runApp = async ({
   element = '#root',
   getInitData = async () => ({
     auth: [''],
-    userInfo: {}
+    userInfo: {},
   }),
   loading = () => <span>加载中...</span>,
   axiosConfig = {},
@@ -98,19 +105,16 @@ export const useBreadCrumb = () => {
   };
 };
 
+export const version = "${version}";
+
+export const noticeInfo = "${noticeInfo}";
+
+export const logo = "${logo}";
 `;
 
-export const auth = `import NoMatch from '@/pages/404';
-import NoAuthority from '@/pages/403';
-import { initData } from './index';
+export const auth = `import { initData } from './index';
 
 export default ({ path, component }: { path: string; component: any }) => {
-  if (path === '/404') {
-    return {
-      path: '*',
-      element: <NoMatch />,
-    };
-  }
   const hasAuth =
     initData.auth.includes(component.type.auth) ||
     component.type.auth === undefined;
@@ -118,9 +122,7 @@ export default ({ path, component }: { path: string; component: any }) => {
     path,
     element: hasAuth ? (
       component
-    ) : (
-      <NoAuthority />
-    ),
+    ) : <h3>您暂无权限访问该页面!</h3>,
   };
 };
 `;
@@ -133,6 +135,10 @@ export default interface ConfigProps {
   title?: string;
   /** icon */
   favicon?: string;
+  /** logo **/
+  logo?: string;
+  /** 描述信息 */
+  noticeInfo?: string;
   /** 开发环境 script */
   devScript?: string[];
   /** 生产环境 script */
@@ -147,8 +153,6 @@ export default interface ConfigProps {
   webpackConfig?: (mode: 'development' | 'production') => Configuration;
   /** 服务端入口，默认 ./src/apis */
   serverPath?: string;
-  /** 阿里云 armsPid */
-  armsPid?: string;
 }
 
 `;
