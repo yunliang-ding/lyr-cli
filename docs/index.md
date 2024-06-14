@@ -10,7 +10,7 @@
 yarn create lyr-cli new my-app
 ```
 
-- 选择 react 模版
+- 选择 `lyr-react-web` 模版
 
 ![demo](http://lyr-cli-oss.oss-cn-beijing.aliyuncs.com/assets/base1.png)
 
@@ -54,20 +54,6 @@ const Page = () => {
 };
 
 Page.auth = '/admin/list'; // 配置了 auth 则表示需要做鉴权，具体 auth 在下面的 getInitData 方法中返回
-
-export default Page;
-```
-
-### 路由缓存
-
-- 假设存在 /src/pages/user.tsx
-
-```jsx
-const Page = () => {
-  return <div>缓存路由</div>;
-};
-
-Page.keeplive = true; // 开启缓存功能
 
 export default Page;
 ```
