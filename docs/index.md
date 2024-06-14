@@ -156,6 +156,10 @@ export interface ConfigProps {
   title?: string;
   /** icon */
   favicon?: string;
+  /** logo **/
+  logo?: string;
+  /** 底部描述信息 */
+  noticeInfo?: string;
   /** 开发环境 script */
   devScript?: string[];
   /** 生产环境 script */
@@ -172,8 +176,6 @@ export interface ConfigProps {
   ) => Configuration;
   /** 服务端入口，默认 ./src/apis */
   serverPath?: string;
-  /** 阿里云 armsPid */
-  armsPid?: string;
 }
 ```
 
