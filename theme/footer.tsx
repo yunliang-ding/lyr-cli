@@ -1,3 +1,4 @@
+import React from 'react';
 import { Button } from '@arco-design/web-react';
 import Marquee from 'react-fast-marquee';
 import { Icon } from '@/util';

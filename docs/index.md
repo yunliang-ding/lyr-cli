@@ -125,6 +125,10 @@ runApp({
       return response.data;
     },
   },
+  /** 路由拦截 **/
+  routerInterceptors(){
+    console.log("路由切换正在渲染.")
+  }
 });
 ```
 

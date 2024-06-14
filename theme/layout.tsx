@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/restrict-plus-operands */
+import React from 'react';
 import { AppLayout } from 'lyr-component';
 import { Menu } from '@arco-design/web-react';
 import uiStore from '@/store/ui';
@@ -10,7 +10,7 @@ import { useEffect, useRef } from 'react';
 import { Outlet } from 'react-router-dom';
 import { logo } from 'lyr';
 
-export default () => {
+export default ({ routerInterceptors }) => {
   const layoutRef: any = useRef({});
   const breadcrumb = breadcrumbStore.useSnapshot();
   const { dark, title, collapsed, primaryColor, layout } = uiStore.useSnapshot();
@@ -29,6 +29,7 @@ export default () => {
     );
     return removeListener;
   }, []);
+  const VNode = routerInterceptors?.();
   return (
     <AppLayout
       layoutRef={layoutRef}
@@ -75,7 +76,7 @@ export default () => {
       footerRender={() => <Footer />}
       siderFooterRender={() => null}
     >
-      <Outlet />
+      {VNode ? VNode : <Outlet />}
     </AppLayout>
   );
 };

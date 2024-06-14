@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/restrict-plus-operands */
+import React from 'react';
 import { useEffect } from 'react';
 import Layout from './layout';
 import Loading from './loading';
@@ -6,7 +7,7 @@ import uiStore from '@/store/ui';
 import userStore from '@/store/user';
 import { generate, getRgbStr } from '@arco-design/color';
 
-export default () => {
+export default ({ routerInterceptors }) => {
   const { fetchUserInfo } = userStore.useSnapshot();
   const { dark, status } = uiStore.useSnapshot();
   useEffect(() => {
@@ -40,9 +41,9 @@ export default () => {
   if (status === 'loading') {
     Vnode = <Loading />;
   } else if (status === 'error') {
-    Vnode = <h3>系统异常，请稍后重试!</h3>;
+    Vnode = <h1 className='app-notice-h1'>系统异常，请稍后重试!</h1>;
   } else {
-    Vnode = <Layout />;
+    Vnode = <Layout routerInterceptors={routerInterceptors} />;
   }
   return Vnode;
 };

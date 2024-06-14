@@ -24,11 +24,11 @@ export const request = store.request;
 
 export const initData = store.initData;
 
-const App = () => {
+const App = ({ routerInterceptors }) => {
   const element = createHashRouter([
     {
       path: '/',
-      element: <Layout />,
+      element: <Layout routerInterceptors={routerInterceptors} />,
       errorElement: <ErrorBoundary />,
       children: router
         .map((item) => ({
@@ -57,6 +57,7 @@ interface AppProps {
     requestInterceptors?: any;
     responseInterceptors?: any;
   };
+  routerInterceptors?: () => void | ReactNode;
 }
 
 export const runApp = async ({
@@ -67,6 +68,7 @@ export const runApp = async ({
   }),
   loading = () => <span>加载中...</span>,
   axiosConfig = {},
+  routerInterceptors
 }: AppProps) => {
   /** 创建 axios 实例 */
   const axiosinstance = axios.create(axiosConfig);
@@ -79,7 +81,7 @@ export const runApp = async ({
   Object.assign(store.request, axiosinstance); // 覆盖下
   ReactDom.render(loading(), document.querySelector(element));
   Object.assign(store.initData, await getInitData()); // 覆盖下
-  ReactDom.render(<App />, document.querySelector(element));
+  ReactDom.render(<App routerInterceptors={routerInterceptors} />, document.querySelector(element));
 };
 
 export const defineConfig = (props: ConfigProps) => {
