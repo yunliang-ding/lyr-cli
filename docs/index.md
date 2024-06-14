@@ -20,31 +20,31 @@ yarn create lyr-cli new my-app
 
 ![demo](http://lyr-cli-oss.oss-cn-beijing.aliyuncs.com/assets/mode4.png)
 
-## 约定规范
+## 内置主题
 
-### 页面路由
+- 系统在启动之后，会自动生成 `src/.theme` 默认主题
+
+- 即业务不需要关心 layout 布局，只需要关心具体的 pages 即可
+
+- 暂时不支持定制主题，后续需要开发主题插件，定制化主题
+
+## 页面路由
 
 - 默认约定规则如下，当文件名变化，触发自动更新
 
 ```jsx
-src/layouts // 页面壳子
 
 src/pages/**/*.tsx // 路由文件
 
 src/pages/**/$id.tsx // 动态路由
 
-src/pages/403.tsx // 暂无权限
-
-src/pages/404.tsx // 不存在
-
-src/pages/error-boundary.tsx // 错误边界
 ```
 
-### 接口路由
+## 接口路由
 
 - src/apis/controller 约定参看 [基于 thinkjs3.x](https://thinkjs.org/zh-cn/doc/3.0/controller.html) 的路由规则
 
-### 路由鉴权
+## 路由鉴权
 
 - 假设存在 /src/pages/admin.tsx
 
@@ -58,7 +58,7 @@ Page.auth = '/admin/list'; // 配置了 auth 则表示需要做鉴权，具体 a
 export default Page;
 ```
 
-### 设置面包屑
+## 设置面包屑
 
 - 假设存在 /src/pages/user.tsx
 
@@ -126,13 +126,13 @@ runApp({
     },
   },
   /** 路由拦截 **/
-  routerInterceptors(){
-    console.log("路由切换正在渲染.")
-  }
+  routerInterceptors() {
+    console.log('路由切换正在渲染.');
+  },
 });
 ```
 
-### 业务使用
+## 业务使用
 
 ```jsx | pure
 import { initData } from 'lyr'; // 获取 initData
