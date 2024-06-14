@@ -80,9 +80,12 @@ export const createLyr = function (rootPath = '', config: ConfigProps) {
   createFileRouter(rootPath, config.ignoreRouter, false);
   /** 同步主题 */
   fs.copySync(path.resolve(__dirname, '../../theme'), `${rootPath}/src/.theme`);
-  // 优先定制主题
-  fs.copySync(`${rootPath}/.theme`, `${rootPath}/src/.theme`);
   console.log(chalk.green('=> create .theme done.'));
+  // 是否存在定制主题
+  if (fs.existsSync(`${rootPath}/.theme`)) {
+    fs.copySync(`${rootPath}/.theme`, `${rootPath}/src/.theme`);
+    console.log(chalk.bgBlue('=> update .theme by customization.'));
+  }
   /** 监听路由改动 */
   const watcher = chokidar.watch(`${rootPath}/src/pages/**/*.tsx`, {
     ignored: /node_modules/,
