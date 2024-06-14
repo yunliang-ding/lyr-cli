@@ -22,11 +22,9 @@ yarn create lyr-cli new my-app
 
 ## 内置主题
 
-- 系统在启动之后，会自动生成 `src/.theme` 默认主题
+- 系统在启动之后，会自动生成 `src/.theme` 默认主题，如需定制 [参看这里](https://github.com/yunliang-ding/my-music/tree/master/.theme)
 
 - 即业务不需要关心 layout 布局，只需要关心具体的 pages 即可
-
-- 暂时不支持定制主题，后续需要开发主题插件，定制化主题
 
 ## 页面路由
 
@@ -220,3 +218,11 @@ npm run build
 - 安装 pm2 之后，运行 npm run deploy，完成部署
 
 ![deploy](http://lyr-cli-oss.oss-cn-beijing.aliyuncs.com/assets/deploy.png)
+
+## 为什么不用 ice、umi
+
+- 舍弃 [ice](https://v3.ice.work/)、[umi](https://umijs.org) 多余的特性、仅保留基本的使用习惯
+- 文件路由、接口路由、封装主题
+- 启动打包速度明显提升
+- 底层代码完全 cover、可定制化
+- 无法满足自己的喜好和习惯做一些轻量化配置

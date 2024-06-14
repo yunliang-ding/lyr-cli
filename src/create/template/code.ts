@@ -1,4 +1,4 @@
-export const index = ({ version, noticeInfo, logo }) => `import { ReactElement, useEffect } from 'react';
+export const index = ({ version, noticeInfo, logo }) => `import { ReactElement, ReactNode, useEffect } from 'react';
 import ReactDom from 'react-dom';
 import { createHashRouter, RouterProvider } from 'react-router-dom';
 import Layout from '@/.theme/index';

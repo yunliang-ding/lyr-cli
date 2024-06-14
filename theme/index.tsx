@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/restrict-plus-operands */
 import React from 'react';
 import { useEffect } from 'react';
 import Layout from './layout';
@@ -41,7 +40,18 @@ export default ({ routerInterceptors }) => {
   if (status === 'loading') {
     Vnode = <Loading />;
   } else if (status === 'error') {
-    Vnode = <h1 className='app-notice-h1'>系统异常，请稍后重试!</h1>;
+    Vnode = (
+      <h1
+        style={{
+          position: 'absolute',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+        }}
+      >
+        系统异常，请稍后重试!
+      </h1>
+    );
   } else {
     Vnode = <Layout routerInterceptors={routerInterceptors} />;
   }
