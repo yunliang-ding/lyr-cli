@@ -4,7 +4,7 @@ import * as chokidar from 'chokidar';
 import chalk from 'chalk';
 import { resolve } from 'path';
 import { auth, getIndexHtml, index, type } from './template/code';
-import { ConfigProps } from '../type';
+import { ConfigProps } from './type';
 import * as path from 'path';
 
 const encodeStr = (str) => `#_#${str}#_#`;
