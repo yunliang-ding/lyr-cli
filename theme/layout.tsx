@@ -34,6 +34,14 @@ export default ({ routerInterceptors }) => {
     <AppLayout
       layoutRef={layoutRef}
       layout={layout}
+      themeColor={primaryColor}
+      onSetting={(value: any) => {
+        if (value.themeColor) {
+          uiStore.primaryColor = value.themeColor;
+        } else if (value.layout) {
+          uiStore.layout = value.layout
+        };
+      }}
       waterMarkProps={{
         gap: [200, 200],
         content: `welcome-${name}`,
@@ -48,6 +56,9 @@ export default ({ routerInterceptors }) => {
       onCollapse={setCollapsed}
       title={title}
       dark={dark}
+      onDarkChange={(dark) => {
+        uiStore.dark = dark;
+      }}
       menu={{
         items: menus,
         onClick: ({ path }: any) => {
@@ -64,13 +75,6 @@ export default ({ routerInterceptors }) => {
           </Menu>
         ),
         avatarUrl,
-        themeColor: primaryColor,
-        onThemeColorChange: (newColor) => {
-          uiStore.primaryColor = newColor;
-        },
-        onDarkChange: (dark) => {
-          uiStore.dark = dark;
-        },
       }}
       pageHeaderProps={breadcrumb}
       footerRender={() => <Footer />}
