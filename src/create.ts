@@ -79,7 +79,7 @@ export const createLyr = function (rootPath = '', config: ConfigProps) {
   /** 创建路由 */
   createFileRouter(rootPath, config.ignoreRouter, false);
   /** 同步主题 */
-  fs.copySync(path.resolve(__dirname, '../../theme'), `${rootPath}/src/.theme`);
+  fs.copySync(path.resolve(__dirname, '../theme'), `${rootPath}/src/.theme`);
   console.log(chalk.green('=> create .theme done.'));
   // 是否存在定制主题
   if (fs.existsSync(`${rootPath}/.theme`)) {

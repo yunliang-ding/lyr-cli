@@ -1,7 +1,7 @@
 {
   "private": false,
   "name": "lyr-cli",
-  "version": "1.0.21",
+  "version": "1.0.22",
   "author": "yunliang-ding",
   "main": "./dist/index.js",
   "description": "轻量级 React 全栈开发框架",

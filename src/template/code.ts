@@ -88,6 +88,14 @@ export const defineConfig = (props: ConfigProps) => {
   return props;
 };
 
+interface BreadCrumbHeaderProps extends Omit<PageHeaderProps, "breadcrumb">{
+  breadcrumb?: {
+    icon?: ReactNode;
+    path?: string;
+    breadcrumbName?: string;
+  }[]
+}
+
 export const useBreadCrumb = () => {
   useEffect(() => {
     return () => {
@@ -99,7 +107,7 @@ export const useBreadCrumb = () => {
     };
   }, []);
   return {
-    update: (options: PageHeaderProps) => {
+    update: (options: BreadCrumbHeaderProps) => {
       setTimeout(() => {
         Object.assign(breadcrumbStore, options);
       }, 10);
