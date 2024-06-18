@@ -1,11 +1,12 @@
 import { transform } from '@babel/core';
 import { ConfigProps } from './type';
 import { resolve } from 'path';
-import { readFileSync, outputFileSync } from 'fs-extra';
+import { readFileSync, outputFileSync, existsSync, writeFileSync } from 'fs-extra';
 import { createIndexHtml, createLyr } from './create';
 import chalk from 'chalk';
 import runWatch from './webpack.watch';
 import runBuild from './webpack.build';
+import { getLyrConfig } from './template/code';
 
 const { exec } = require('child_process');
 
@@ -16,6 +17,10 @@ const defineConfig = (props: ConfigProps) => {
 // 解析配置文件
 const parseDefineConfig = () => {
   const configPath = resolve('./', './lyr.config.ts');
+  if(!existsSync(configPath)){
+    const { name } = require(resolve('./', './package.json'));
+    writeFileSync(configPath, getLyrConfig({ packageName: name }))
+  }
   let content = readFileSync(configPath);
   // 有时候读取不到?
   while (!content.toString()) {

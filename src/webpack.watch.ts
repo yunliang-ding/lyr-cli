@@ -27,7 +27,7 @@ export default async (rootPath: string, config: ConfigProps) => {
   );
   console.log(
     chalk.green('=> externals include '),
-    chalk.gray(JSON.stringify(compiler.options.externals)),
+    chalk.gray(JSON.stringify(compiler.options.externals, null, 2)),
   );
   // 创建ws
   const wss = new WebSocketServer({ host: config.wsHost, port: config.wsPort });
