@@ -24,7 +24,7 @@ export default (rootPath: string, config: ConfigProps) => {
   );
   console.log(
     chalk.green('=> externals include '),
-    chalk.gray(JSON.stringify(compiler.options.externals)),
+    chalk.gray(JSON.stringify(compiler.options.externals, null, 2)),
   );
   compiler.run((err, stats: any) => {
     if (!err && !stats?.hasErrors()) {
