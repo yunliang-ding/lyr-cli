@@ -19,6 +19,15 @@ const type = process.argv.pop();
 // 在这里启动 thinkjs 服务
 if (type !== 'build' && type !== 'deploy') {
   console.log(chalk.green(`=> watch by thinkjs.`));
+  think.beforeStartServer(async () => {
+    await new Promise(res => setTimeout(res)); // 在异步之后才可以获取设置的端口
+    const configPort = think.config("port");
+    const port = await getAvailablePort(configPort);
+    if (port !== configPort) {
+      console.log(chalk.yellowBright(`${configPort} 端口已被占用，已启用 ${port} 端口`));
+    }
+    think.config("port", port);
+  })
   const appServer = new Application({
     ROOT_PATH: rootPath,
     APP_PATH,
