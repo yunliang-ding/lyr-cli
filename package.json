@@ -1,7 +1,7 @@
 {
   "private": false,
   "name": "lyr-cli",
-  "version": "1.0.23",
+  "version": "1.0.24",
   "author": "yunliang-ding",
   "main": "./dist/index.js",
   "description": "轻量级 React 全栈开发框架",
@@ -63,10 +63,7 @@
     "webpack": "5.89.0"
   },
   "devDependencies": {
-    "react": "17.0.2",
-    "lyr-docs": "0.0.61",
-    "prettier": "^2.2.1",
-    "typescript": "5.3.3",
+    "lyr-docs": "0.0.64",
     "@types/chalk": "2.2.0",
     "@types/fs-extra": "11.0.4",
     "@types/webpack-bundle-analyzer": "4.6.3"

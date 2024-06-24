@@ -47,10 +47,15 @@ export default async (rootPath: string, config: ConfigProps) => {
       const mergeConfig = {
         ...config,
         ...newConfig,
-      }
+      };
       createLyr(rootPath, mergeConfig); // 创建 src/.lyr
       createIndexHtml(rootPath, mergeConfig); // 创建 index.html
-      myWs?.send?.(1);
+      wss.clients.forEach(function each(client: any) {
+        // 通知所有的 tab
+        if (client.readyState === WebSocketServer.OPEN) {
+          client.send(1);
+        }
+      });
     }
   });
   compiler.watch(
