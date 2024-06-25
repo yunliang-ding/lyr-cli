@@ -1,11 +1,15 @@
-export const index = ({ version, noticeInfo, logo }) => `import { ReactElement, ReactNode, useEffect } from 'react';
+export const index = ({
+  version,
+  noticeInfo,
+  logo,
+}) => `import { ReactElement, ReactNode, useEffect } from 'react';
 import ReactDom from 'react-dom';
 import { createHashRouter, RouterProvider } from 'react-router-dom';
 import Layout from '@/.theme/index';
 import ErrorBoundary from '@/.theme/error-boundary';
 import router from './router';
 import AuthRouter from './auth';
-import ConfigProps from './type';
+import { ConfigProps } from './type';
 import axios, { AxiosRequestConfig } from 'axios';
 import breadcrumbStore from '@/store/breadcrumb';
 import { PageHeaderProps } from '@arco-design/web-react';
@@ -137,37 +141,9 @@ export default ({ path, component }: { path: string; component: any }) => {
 };
 `;
 
-export const type = `import { Configuration } from 'webpack';
-import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
-
-export default interface ConfigProps {
-  /** 标题 */
-  title?: string;
-  /** icon */
-  favicon?: string;
-  /** logo **/
-  logo?: string;
-  /** 描述信息 */
-  noticeInfo?: string;
-  /** 开发环境 script */
-  devScript?: string[];
-  /** 生产环境 script */
-  buildScript?: string[];
-  /** css */
-  link?: string[];
-  /** 忽略路由配置 */
-  ignoreRouter?: string[];
-  /** 是否开启资源包分析 */
-  bundleAnalyzer?: BundleAnalyzerPlugin.Options;
-  /** webpack 配置 */
-  webpackConfig?: (mode: 'development' | 'production') => Configuration;
-  /** 服务端入口，默认 ./src/apis */
-  serverPath?: string;
-}
-
-`;
-
-export const getLyrConfig = ({ packageName }) => `import { defineConfig } from 'lyr';
+export const getLyrConfig = ({
+  packageName,
+}) => `import { defineConfig } from 'lyr';
 
 export default defineConfig({
   title: '${packageName}',
@@ -203,27 +179,4 @@ export default defineConfig({
     'https://lyr-cli-oss.oss-cn-beijing.aliyuncs.com/cdn/lyr-component.min.js',
   ],
 });
-`
-export const getIndexHtml = ({
-  favicon,
-  title,
-  script,
-  link,
-  liveReload,
-}) => `<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="${favicon}" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>${title}</title>
-  ${liveReload}
-  ${link}
-</head>
-
-<body>
-  <div id="root" />
-</body>
-${script}
-</html>`;
+`;

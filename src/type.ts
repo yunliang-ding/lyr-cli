@@ -6,6 +6,8 @@ export interface ConfigProps {
   title?: string;
   /** icon */
   favicon?: string;
+  /** spin */
+  spin?: string;
   /** logo **/
   logo?: string;
   /** 描述信息 */

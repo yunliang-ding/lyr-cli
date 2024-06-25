@@ -3,10 +3,36 @@ import * as glob from 'glob';
 import * as chokidar from 'chokidar';
 import chalk from 'chalk';
 import { resolve } from 'path';
-import { auth, getIndexHtml, index, type } from './template/code';
+import { auth, index } from './template/code';
 import { ConfigProps } from './type';
 import * as path from 'path';
 
+const getIndexHtml = ({
+  favicon,
+  title,
+  spin = '<div style="display:flex;align-items:center;height:100vh;width:100vw;justify-content:center;font-size: 18px !important;">loading...</div>',
+  script,
+  link,
+  liveReload,
+}) => `<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="${favicon}" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>${title}</title>
+  ${liveReload}
+  ${link}
+</head>
+
+<body>
+  <div id="root">
+    ${spin}
+  <div>
+</body>
+${script}
+</html>`;
 const encodeStr = (str) => `#_#${str}#_#`;
 const decodeStr = (str) => str.replaceAll('"#_#', '').replaceAll('#_#"', '');
 /** 创建文件路由 */
@@ -75,7 +101,8 @@ export const createLyr = function (rootPath = '', config: ConfigProps) {
     index({ logo: config.logo, noticeInfo: config.noticeInfo, version }),
   );
   fs.outputFile(`${rootPath}/src/.lyr/auth.tsx`, auth);
-  fs.outputFile(`${rootPath}/src/.lyr/type.tsx`, type);
+  const typePropsString = fs.readFileSync(`${__dirname}/type.d.ts`);
+  fs.outputFile(`${rootPath}/src/.lyr/type.tsx`, typePropsString.toString());
   /** 创建路由 */
   createFileRouter(rootPath, config.ignoreRouter, false);
   /** 同步主题 */
@@ -142,6 +169,7 @@ export const createIndexHtml = async function (
   const content = getIndexHtml({
     favicon: config.favicon,
     title: config.title,
+    spin: config.spin,
     link: link
       .map((i) => `<link rel="stylesheet" type="text/css" href="${i}" />`)
       .join('\n'),
