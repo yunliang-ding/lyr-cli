@@ -148,6 +148,7 @@ export const createIndexHtml = async function (
           if (message.data === "1") {
             location.reload();
           } else {
+            document.querySelector("#lyr-cli-client-overlay")?.remove();
             const iframe = document.createElement('iframe');
             iframe.id = "lyr-cli-client-overlay"
             iframe.style = "padding: 20px;background: #222;opacity: .9;position: fixed; inset: 0px; width: 100vw; height: 100vh; border: none; z-index: 2147483647;"

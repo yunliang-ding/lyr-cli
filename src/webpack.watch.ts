@@ -31,7 +31,7 @@ export default async (rootPath: string, config: ConfigProps) => {
   );
   // 创建ws
   const wss = new WebSocketServer({ host: config.wsHost, port: config.wsPort });
-  let myWs;
+  let myWs: any;
   wss.on('connection', function connection(ws) {
     myWs = ws; // 赋值
   });
@@ -50,12 +50,6 @@ export default async (rootPath: string, config: ConfigProps) => {
       };
       createLyr(rootPath, mergeConfig); // 创建 src/.lyr
       createIndexHtml(rootPath, mergeConfig); // 创建 index.html
-      wss.clients.forEach(function each(client: any) {
-        // 通知所有的 tab
-        if (client.readyState === WebSocketServer.OPEN) {
-          client.send(1);
-        }
-      });
     }
   });
   compiler.watch(
@@ -64,11 +58,12 @@ export default async (rootPath: string, config: ConfigProps) => {
     },
     (err, result: any) => {
       const { errors, assets } = result.compilation;
+      wss.clients.forEach((client: any) => {
+        client.send(errors?.length > 0 ? errors.toString() : 1);
+      });
       if (errors?.length > 0) {
         console.log(chalk.bgRed(' error '), chalk.red(errors.toString()));
-        myWs?.send?.(errors.toString());
       } else {
-        myWs?.send?.(1);
         const size = assets['index.js'].size();
         console.log(
           chalk.green('构建完成'),
