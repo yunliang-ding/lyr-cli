@@ -10,40 +10,24 @@ import * as path from 'path';
 const getIndexHtml = ({
   favicon,
   title,
-  spin = `<div style="display:flex;align-items:center;height:100vh;width:100vw;justify-content:center;">
-  <div class="loading" />
+  spin = `<div
+  style="display:flex;align-items:center;height:100vh;width:100vw;justify-content:center;background-color: #eee;">
+  <svg class="loading" viewBox="0 0 1024 1024" width="44" height="44">
+    <path d="M512 96a416 416 0 0 0 0 832v-104A312 312 0 1 1 824 512H928A416 416 0 0 0 512 96z" fill="#165dff" />
+  </svg>
 </div>
 <style>
   .loading {
-    position: relative;
-    width: 50px;
-    perspective: 200px;
+    animation: spin 0.5s infinite linear;
   }
-  .loading:before,
-  .loading:after {
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    content: "";
-    animation: jumping 0.5s infinite alternate;
-    background: rgba(0, 0, 0, 0);
-  }
-  .loading:before {
-    left: 0;
-  }
-  .loading:after {
-    right: 0;
-    animation-delay: 0.15s;
-  }
-  @keyframes jumping {
+
+  @keyframes spin {
     0% {
-      transform: scale(1) translateY(0px) rotateX(0deg);
-      box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+      transform: rotate(0);
     }
+
     100% {
-      transform: scale(1.2) translateY(-25px) rotateX(45deg);
-      background: #000;
-      box-shadow: 0 25px 40px #000;
+      transform: rotate(360deg);
     }
   }
 </style>`,
