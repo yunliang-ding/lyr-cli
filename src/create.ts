@@ -10,7 +10,43 @@ import * as path from 'path';
 const getIndexHtml = ({
   favicon,
   title,
-  spin = '<div style="display:flex;align-items:center;height:100vh;width:100vw;justify-content:center;font-size: 18px !important;">loading...</div>',
+  spin = `<div style="display:flex;align-items:center;height:100vh;width:100vw;justify-content:center;">
+  <div class="loading" />
+</div>
+<style>
+  .loading {
+    position: relative;
+    width: 50px;
+    perspective: 200px;
+  }
+  .loading:before,
+  .loading:after {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    content: "";
+    animation: jumping 0.5s infinite alternate;
+    background: rgba(0, 0, 0, 0);
+  }
+  .loading:before {
+    left: 0;
+  }
+  .loading:after {
+    right: 0;
+    animation-delay: 0.15s;
+  }
+  @keyframes jumping {
+    0% {
+      transform: scale(1) translateY(0px) rotateX(0deg);
+      box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+    }
+    100% {
+      transform: scale(1.2) translateY(-25px) rotateX(45deg);
+      background: #000;
+      box-shadow: 0 25px 40px #000;
+    }
+  }
+</style>`,
   script,
   link,
   liveReload,
