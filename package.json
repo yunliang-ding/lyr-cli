@@ -63,7 +63,7 @@
     "webpack": "5.89.0"
   },
   "devDependencies": {
-    "lyr-docs": "0.0.67",
+    "lyr-docs": "0.0.77",
     "@types/chalk": "2.2.0",
     "@types/fs-extra": "11.0.4",
     "@types/webpack-bundle-analyzer": "4.6.3"
